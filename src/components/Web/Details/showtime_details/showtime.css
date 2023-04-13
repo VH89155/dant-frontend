@@ -1,0 +1,32 @@
+.showtimes{
+    margin-top: 50px;
+    background-color: #fff;
+    width: 100%;
+    min-height: 300px;
+    border-radius: 20px ;
+    overflow: hidden;
+    border: 1px solid #1413133b;
+}
+.showtimes .label{
+    text-align: center;
+    font-size: 24px;
+    color: #fff;
+    height: 60px;
+    line-height: 60px;
+    background-color: #e71a0f;
+    
+}
+.showtimes .label img{
+    width: 24px;
+    margin-right: 5px;
+}
+
+.date_show{
+    padding: 10px 40px;
+}
+
+.times .btn{
+    margin-right: 20px;
+    margin-top: 15px;
+    width: 70px;
+}

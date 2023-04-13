@@ -1,0 +1,15 @@
+.slider{
+    margin-top: 30px;
+    width: 100%;
+    min-height: 100px;
+    /* background-color: aqua; */
+}
+.slider p{
+    text-align: right;
+    font-size: 14px;
+    padding-right: 20px;
+}
+
+.slider-img{
+    padding: 20px;
+}

@@ -1,0 +1,70 @@
+
+.page-title{
+    width: 100%;
+    align-items: center; 
+    text-align: center;
+}
+.title {
+    padding-top: 20px;
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+    color: #212529;
+}
+.page-title img{
+    width: 20%;
+    text-align: center;
+}
+
+.tab-date{
+    margin-top: 20px;
+}
+.date-show{
+    font-size: 20px;
+    color: #FFC000;;
+    margin-bottom: 40px;
+}
+ .item-moive{
+    width: 100%;
+    display: flex;
+    position: relative;
+    margin-bottom: 50px;
+}
+ .item-moive img{
+    width: 20%;
+    height: 300px;
+} 
+.item-moive .detail-group-shop{
+    width: 30%;
+}
+.detail-group-shop .label{
+    font-size: 14px;
+}
+ .detail-group-shop .name{
+    font-size: 20px;
+    
+    border-bottom: 2px solid #dbe6d0d7;
+}
+ .span{
+    background: #808080;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    position: absolute;
+    right: 0;
+    top:0;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 5px;
+   
+}
+.times{
+    width: 50%;
+    padding-left: 30px;
+    padding-top: 16px;
+}
+.times .btn{
+    background-color: #fff;
+}

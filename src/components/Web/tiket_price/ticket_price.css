@@ -1,0 +1,33 @@
+.page-title{
+    width: 100%;
+    align-items: center;
+    
+    text-align: center;
+}
+.title {
+    padding-top: 20px;
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+    color: #212529;
+}
+.page-title img{
+    width: 20%;
+    text-align: center;
+}
+.down-title-page{
+    margin-top: 20px;
+}
+.down-title-page p {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 400;
+    color: #8a8a8a;
+
+}
+
+.title-page-2{
+    margin: 20px 0;
+    font-size: 20px;
+    
+}

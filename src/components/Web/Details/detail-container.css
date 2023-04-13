@@ -1,0 +1,79 @@
+
+
+.page-title {
+    width: 100%;
+   font-size: 30px;
+   font-weight: 400;
+    border-bottom: 2px solid #dbe6d0d7;
+    padding-bottom: 4px;
+    margin-top: 20px;
+    /* text-align: center; */
+}
+.detail-group{
+    padding: 0;
+    margin-top: 15px;
+    display: flex;
+    margin-bottom: 10px;
+    
+}
+.detail-group--img{
+    position: relative;
+    width: 20%;
+}
+.detail-group-shop{
+    width: 80%;
+    margin-left: 40px;
+    padding: 0;
+}
+.name-movie{
+    margin: -10px 0 10px 0;
+
+    font-size: 30px;
+   font-weight: 400;
+   padding-bottom: 15px;
+    border-bottom: 1px solid #6459638e;
+}   
+
+
+/* // img zoom */
+
+.img-zoom-lens {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    /*set the size of the lens:*/
+    width: 40px;
+    height: 40px;
+  }
+  
+  .img-zoom-result {
+    border: 1px solid #d4d4d4;
+    /*set the size of the result div:*/
+    width: 300px;
+    height: 300px;
+    display: none;
+  }
+  .label{
+    font-weight:600;
+    line-height: 30px;
+    color:#040404dd;
+  }
+
+.label span{
+    margin-left: 4px;
+    font-weight: 400;
+}
+
+.group_button  button{
+    flex:1;
+    margin: 10px;
+}
+
+iframe {
+    display: none;
+}
+
+/* .description{
+    display: none;
+} */
+
+

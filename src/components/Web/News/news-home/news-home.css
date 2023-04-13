@@ -1,0 +1,49 @@
+
+.page-title{
+    width: 100%;
+    align-items: center;
+    
+    text-align: center;
+}
+.title {
+    padding-top: 20px;
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+    color: #212529;
+}
+.page-title img{
+    width: 20%;
+    text-align: center;
+}
+
+.item-news{
+   
+    min-height: 250px;
+    display: flex;
+    overflow: hidden;
+    margin-top: 20px;
+}
+.item-news img{
+    width: 30%;
+}
+.tx-moive{
+    width: 70%;
+    padding-left: 10px;
+}
+.tx-moive-title{
+    font-weight: 450;
+    font-size: 18px;
+    border-bottom:1px solid #cacbc2 ;
+    padding-bottom: 20px;
+}
+.tx-moive-time{
+margin-top: 20px;
+}
+
+.tx-moive .btn{
+ margin-top: 50px;
+ width: 200px;
+ height: 50px;
+}
+
