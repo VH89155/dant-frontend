@@ -1,0 +1,46 @@
+.content-pay {
+    width: 100%;
+    min-height: 400px;
+    text-align: center;
+}
+
+.content-pay__left{
+    /* float: left; */
+    width: 60%;
+    padding-left: 0;
+    margin: auto !important;
+}
+
+/* .content-pay__right{
+    float: right;
+    width: 30%;
+    padding-right: 0;
+} */
+
+.opc1 .opc2{
+    width: 100%;
+}
+.opc1 p{
+    color: black;
+}
+
+
+.opc1__label {    
+    background: #bcbdc0;
+    border: 2px solid #9d9fa2;
+    font-size: 20px;
+    font-weight: 550;
+
+}
+
+p.opc1-notice{
+    margin-top: 10px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.check-out-step{
+    margin-top: 10px;
+    background: #fff1ce;
+    padding: 10px;
+}

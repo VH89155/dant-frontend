@@ -1,24 +1,5 @@
 /*
 
-TemplateMo 579 Cyborg Gaming
-
-https://templatemo.com/tm-579-cyborg-gaming
-
-*/
-
-/* ---------------------------------------------
-Table of contents
-------------------------------------------------
-01. font & reset css
-02. reset
-03. global styles
-04. header
-05. banner
-06. features
-07. testimonials
-08. contact
-09. footer
-
 --------------------------------------------- */
 /* 
 ---------------------------------------------
@@ -155,32 +136,86 @@ Header Style
 }
 .header-home{
   position: absolute;
-  top:-45px;
-  right: 100px;
+  top:-90px;
+  /* right: 100px; */
+  width: 100%;
+  height: 90px;
+  background-color: #fff;
 }
 .right{
-  color: #B1B1B1;
+  position: absolute;
+  right: 100px;
+  top: 20px;
+  color: #b1b1b1;
   font-size: 14px;
   margin-top: -10px;
   margin-bottom: 10px;
-  background-color: #fff;
+  font-weight: 450;
+  /* background-color: #fff; */
+}
+.label-dn{
+  color: #b1b1b1;
+  font-size: 14px;
+  margin-right: 20px;
+  /* margin-top: -10px;
+  margin-bottom: 10px; */
+  font-weight: 450;
 }
 .right span{
   margin-right: 16px;
+  
 }
+.header-home .logo{
+  position: absolute;
+  left: 70px;
+  width: 275px;
+  height: 80px;
+  top: -65px;
+}
+.logo-img{
+  transform-style: preserve-3d; /* to tranform with 3d effect */
+    animation: flip 3s linear infinite;
+    transition: transform 2s;
+}
+/* .logo-img:hover{
+  transform:rotateY(180deg);
+} */
+
+@keyframes flip {
+  30%, 70% {
+    transform: rotateY(0);
+  }
+  45%, 55% {
+    transform: rotateY(180deg);
+  }
+}
+.banner-qc{
+  
+  position: absolute;
+  left: 400px;
+  width: 700px;
+  height: 70px;
+   
+}
+
 .hotline{
+  top: 60px;
+  position: absolute;
+  right: 100px;
   font-weight: 500;
   color: red;
   font-size: 20px;
+  margin-top: -5px;
 }
 .hotline span{
   color: #1e1e1e;
+ 
 }
 .header-area {
   background: url(https://chieuphimquocgia.com.vn/Themes/RapChieuPhim/Content/content.v2/images/bg_menu.png);
   position: absolute;
   height: 60px;
-  top: 60px;
+  top: 90px;
   left: 0;
   right: 0;
   z-index: 100;
@@ -230,33 +265,11 @@ Header Style
   font-size: 16px;
 }
 
-.header-area .main-nav .logo {
-  /* border-right: 1px solid #2a2727; */
-  flex-basis: 10%;
-  margin-right: 5%;
-  -webkit-transition: all 0.3s ease 0s;
-  -moz-transition: all 0.3s ease 0s;
-  -o-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
-}
 
-.header-area .main-nav .logo img {
-  width: 120px;
-  margin-top: -12px;
-
-}
-
-.background-header .main-nav .logo {
-  margin-top: 8px;
-}
-
-.background-header .main-nav .logo img {
-  width: 180px;
-}
 
 .header-area .main-nav .nav {
   display: inline-flex;
-  flex-basis: 90%;
+  flex-basis: 85%;
   justify-content: flex-end;
   vertical-align: middle;
   text-align: right;
@@ -470,21 +483,6 @@ Header Style
 .header-area.header-sticky .nav li a.active {
   color: #fff;
 }
-@media (min-width: 1400px){
-  .container{
-    width: 1200px;
-  }
-}
-
-@media (max-width: 1200px) {
-  .header-area .main-nav .nav li {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-  .header-area .main-nav:before {
-    display: none;
-  }
-}
 
 @media (max-width: 992px) {
   .header-area {
@@ -544,7 +542,7 @@ Header Style
   .header-area .main-nav .nav {
     float: none;
     width: 100%;
-    display: none;
+    /* display: none; */
     -webkit-transition: all 0s ease 0s;
     -moz-transition: all 0s ease 0s;
     -o-transition: all 0s ease 0s;
@@ -666,4 +664,32 @@ footer p a:hover {
   color: #ec6090;
 }
 
+.avatar{
+  display: flex;
+  margin-right: 30px;
+}
 
+.avatar img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-top: 5px;
+}
+.label-avatar{
+  height: 40px;
+  line-height: 40px;
+  font-size: 20px;
+  color: #f10909;
+  font-weight: 550;
+  padding-left: 20px;
+}
+.label-avatar:hover{
+  color: hwb(339 42% 45%);
+}
+
+@media (max-width: 992px) {
+  img.ticket{
+    display: none;
+  }
+ 
+}

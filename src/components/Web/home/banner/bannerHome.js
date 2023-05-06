@@ -24,17 +24,17 @@ const BannerHome = () => {
       <div class="carousel-inner">
         <div class="carousel-item active">
           
-          <img class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="970px" height="500px"  src="https://d1hjkbq40fs2x4.cloudfront.net/2017-08-21/files/landscape-photography_1645.jpg"></img>
+          <img class="bd-placeholder-img bd-placeholder-img-lg img-back d-block w-100"   src="https://d1hjkbq40fs2x4.cloudfront.net/2017-08-21/files/landscape-photography_1645.jpg"></img>
         
         </div>
         <div class="carousel-item active">
           
-          <img class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="970px" height="500px"  src="https://www.cgv.vn/media/banner/cache/1/b58515f018eb873dafa430b6f9ae0c1e/9/8/980x448_203.jpg"></img>
+          <img class="bd-placeholder-img bd-placeholder-img-lg img-back d-block w-100"   src="https://www.cgv.vn/media/banner/cache/1/b58515f018eb873dafa430b6f9ae0c1e/9/8/980x448_203.jpg"></img>
         
         </div>
         <div class="carousel-item active">
           
-          <img class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="970px" height="500px"  src="https://www.cgv.vn/media/banner/cache/1/b58515f018eb873dafa430b6f9ae0c1e/9/8/980x448_-min_5.jpg"></img>
+          <img class="bd-placeholder-img bd-placeholder-img-lg img-back d-block w-100"   src="https://www.cgv.vn/media/banner/cache/1/b58515f018eb873dafa430b6f9ae0c1e/9/8/980x448_-min_5.jpg"></img>
         
         </div>
       </div>

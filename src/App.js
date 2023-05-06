@@ -2,22 +2,26 @@
 import { Input } from 'antd';
 import { publicRoutes } from "./routes/index";
 import './App.css';
-import DashBoardPage from './components/Layout/DashBoardPage/DashBoardPage';
+import LayoutDefault from './components/Layout/LayoutDefault/Layout';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Fragment } from 'react';
-
+import { Fragment, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { getAllMoive } from "../src/redux/apiRequest";
 
 
 
 function App() {
- 
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    getAllMoive(dispatch)
+  },[])
  return (
     <Router>
     <>
         <Routes>
         
             {publicRoutes.map((route, index) => {
-                let Layout= DashBoardPage ;
+                let Layout= LayoutDefault ;
                 if(route.layout){
                     Layout = route.layout
                 }

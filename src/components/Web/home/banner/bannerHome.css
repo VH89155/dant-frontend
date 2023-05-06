@@ -35,6 +35,10 @@
   }
 
 
+  .img-back{
+    width: 970px;
+    height: 500px;
+  }
 
 
 
@@ -48,12 +52,21 @@
     width: 120px;
     height: 550px;
     left: 20px;
-    top: 122px;
+    top: 155px;
   }
   .img-qc2 {
     position: fixed;
     width: 120px;
     height: 550px;
     right: 20px;
-    top: 122px;
+    top: 155px;
+  }
+
+  @media (max-width: 992px) {
+    .img-qc2 , .img-qc1{
+      display: none;
+    }
+    .img-back{
+      height: 200px;
+    }
   }

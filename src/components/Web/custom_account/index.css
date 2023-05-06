@@ -1,0 +1,177 @@
+
+.custom_account{
+    width: 980px;
+    margin-top: 50px;
+    min-height: 500px;
+}
+.sidebar-left{
+   
+    float: left;
+    width: 25%;
+    padding-left: 0;
+    clear: left;
+
+}
+
+.block-title span{
+    color: #e71a0f;
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.block-content{
+    margin-top: 5px;
+}
+
+.block-account .block-content li {
+    background: url("https://www.cgv.vn/skin/frontend/cgv/default/images/bg-cgv/ribon_left-ccc.png") no-repeat scroll left center #ccc;
+    color: #fff;
+    height: 34px;
+    padding-left: 20px;
+    float: left;
+    width: 100%;
+    margin-top: 6px;
+    font-size: 16px;
+    padding-top:4px;
+}
+.block-content li  a{
+    padding-top: 2px;
+}
+.block-content li.current a {
+    color: #fff !important;
+   
+}
+.block-content li.current {
+    background: url("https://www.cgv.vn/skin/frontend/cgv/default/images/bg-cgv/ribon_left.png") no-repeat scroll left center #e71a0f;
+    color: #fff;
+    padding-left: 20px;
+}
+.logout{
+    text-align: center;
+    color: #fff;
+    font-weight: 500px;
+}
+
+
+
+    /* main_default */
+.main-default_acc{
+    float: right;
+    padding-right: 0;
+    width: 75%;
+    padding-left: 30px;
+    
+}
+.page-title-df-acc{
+    background-color: black;
+    height: 35px;
+    line-height: 35px;
+   text-align: center;
+  
+}
+.page-title-df-acc h3{
+    color: #fff;
+}
+.my_profile{
+    margin-top: 20px;
+    padding-left: 20px;
+    height: 180px;
+}
+.my_profile .image-profile{
+    
+    width: 30%;
+    float: left;
+}
+.my_profile .image-profile img{
+    border-radius: 50%;
+    width: 60%;
+}
+
+.chose-avatar{
+    background: #9d9b9b;
+    padding: 5px 15px;
+    border-radius: 3px;
+    border: none;
+    color: #222;
+    font-size: 14px;
+    margin: 20px 0 0 20px;
+}
+.chose-avatar:hover{
+    background-color: #ccc;
+}
+
+.info-profile{
+    width: 40%;
+    float: right;
+    margin-left: 200px;
+    /* text-align: right; */
+}
+.box-title span{
+    color: #333333;
+    font-size: 18px;
+    font-weight: 500;
+    margin-right: 20px;
+}
+.box-title a{
+    background: #9d9b9b;
+    padding: 5px 15px;
+    border-radius: 3px;
+    border: none;
+    color: #222;
+    font-size: 14px;
+    margin: 20px 0 0 20px;
+}
+
+.box-content{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 10px;
+    color: #7f7f7f;
+    font-size: 13;
+    margin-top: 20px;
+}
+.box-content span{
+    margin-bottom: 10px;
+}
+
+.welcome-msg{
+    margin-top: -50px;
+
+}
+.welcome-msg p.hello{
+    color: #222;
+    font-weight: 500;
+}
+
+@media (max-width: 992px) {
+    .sidebar-left{
+        width: 100%;
+    }
+    .custom_account{
+        margin-top: 0;
+    }
+    .main-default_acc{
+        float: left;
+        width: 100%;
+        margin-top: 20px;
+    }
+    .my_profile .image-profile{
+        width: 100%;
+    }
+    .info-profile{
+        /* float: left; */
+        width: 100%;
+    }
+    .block-title{
+        text-align: center;
+    }
+    .welcome-msg{
+        margin-top: 10px;
+        margin-left: 20px;
+    }
+  }
+
+  .block-content a{
+    color: #fff;
+  }
