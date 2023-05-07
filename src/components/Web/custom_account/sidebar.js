@@ -1,5 +1,5 @@
 import "./index.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../../redux/apiRequest";
 const Sidebar = (props) => {
@@ -38,13 +38,19 @@ const Sidebar = (props) => {
                 <a href="/default/custom-account/edit">CHI TIẾT TÀI KHOẢN</a>
               </li>
             )}
-
+              {namePage === "ticket" ? (
+              <li className="current">
+                <a href="/default/ticket">VÉ CỦA BẠN</a>
+              </li>
+            ) : (
+              <li>
+                <a href="/default/ticket">VÉ CỦA BẠN</a>
+              </li>
+            )}
             <li>
               <a>KHUYẾN MÃI CỦA BẠN</a>
             </li>
-            <li>
-              <a>VÉ CỦA BẠN</a>
-            </li>
+           
             <li>
               <a className="logout" onClick={Click}>
                 THOÁT

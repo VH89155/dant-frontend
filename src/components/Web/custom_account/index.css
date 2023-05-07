@@ -175,3 +175,29 @@
   .block-content a{
     color: #fff;
   }
+
+  /* //////////////  ticket  ------------ */
+
+  .item-ticket {
+    width: 100%;
+    display:  flex;
+    padding: 10px;
+    height: 300px;
+    background-color: #fff;
+    color: #222;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 20px;
+  }
+  .item-ticket img{
+    width: 20%;
+  }
+  .title-ticket-acc{
+    font-size: 22px;
+    text-align: center;
+  }
+  .block-moive-ticket{
+    width: 40%;
+    padding-left: 20px;
+    padding-top: 20px;
+  }

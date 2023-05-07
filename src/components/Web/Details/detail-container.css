@@ -62,7 +62,10 @@
     margin-left: 4px;
     font-weight: 400;
 }
-
+.group_button{
+    display: flex;
+    justify-content: center;
+}
 .group_button  button{
     flex:1;
     margin: 10px;

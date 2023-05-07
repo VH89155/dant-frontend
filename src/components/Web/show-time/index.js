@@ -1,5 +1,5 @@
 import "./index.css";
-
+import { Link } from 'react-router-dom';
 const App = (props) => {
     const {data} = props;
     console.log("data", data);
@@ -29,11 +29,13 @@ const App = (props) => {
                         if(item.time.length >0){
                           return (
                             <div className="item-moive" key={index}>
+                              <Link to={`/details/${item.moive._id}`}>
                             <img
                               id="myimage"
                               src={item.moive.images[0]}
                               alt=""
                             ></img>
+                            </Link>
                             <div className="detail-group-shop">
                               <div class="name">{item.moive.name} <div className="span">2D</div> </div>
                               <div class="label">
@@ -86,9 +88,10 @@ const App = (props) => {
                               {item?.time.map((item,index)=>{
                              const time = new Date(item.time)
                             return (
+                              <Link key={index} to ={`/book-ticket/${item._id}`}>
                             <button type="button" key={index} className="btn btn-outline-danger" style={{marginRight: 20}}>
                             { time.getHours() >9 ? time.getHours() :`0${ time.getHours()}`} :  { time.getMinutes() >9 ? time.getMinutes() : `${time.getMinutes()}0`}
-                           </button>
+                           </button> </Link>
                         )
                        })}
                               

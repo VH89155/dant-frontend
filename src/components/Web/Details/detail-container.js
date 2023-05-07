@@ -27,10 +27,10 @@ useEffect(()=>{
         setMoive(response.data.moive);
         setTime(response.data.arayTimeDate);
       })
-     
+      .catch((error) =>console.log(error))     
     }
     catch(err){
-      navigate("/")
+      // navigate("/")
     }
     
   }

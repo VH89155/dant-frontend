@@ -15,19 +15,19 @@ const Container = () => {
   const a1=  axios.get("/api/moive").then((res)=>res.data)
    .then((res)=>{
     setAllMoive(res.moives);
-    console.log(res.moives)
+    // console.log(res.moives)
     return res.moives
    })
-   const a2=  axios.get("/api/show-time").then((res)=>res.data)
-   .then((res)=>{
-    // setAllMoive(res.moives);
-    console.log(res.showTime)
-    return res.showTime;
-   })
-    Promise.all([a1,a2]).then((res)=>{
-      console.log(res)
-      console.log("allMoive", allMoive);
-    }) 
+  //  const a2=  axios.get("/api/show-time").then((res)=>res.data)
+  //  .then((res)=>{
+  //   // setAllMoive(res.moives);
+  //   console.log(res.showTime)
+  //   return res.showTime;
+  //  })
+    // Promise.all([a1,a2]).then((res)=>{
+    //   console.log(res)
+    //   console.log("allMoive", allMoive);
+    // }) 
   },[])
  
   return (

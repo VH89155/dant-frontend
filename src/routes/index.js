@@ -22,6 +22,8 @@ import PayMent from '../pages/Web/paymet';
 
 import DefaultCustom_Acc from '../pages/Web/custom_account/custom_account';
 import Account_edit from '../pages/Web/custom_account/account_edit';
+import Ticket_Acc from '../pages/Web/custom_account/ticket-acc';
+
 
 // Pages Admin
 
@@ -40,6 +42,10 @@ const publicRoutes =[
     {path: '/book-ticket/:showtimeId', component: Book_Ticket, layout: LayoutDefault},
     {path: '/default/custom-account', component: DefaultCustom_Acc, layout: LayoutDefault},
     {path: '/default/custom-account/edit', component: Account_edit, layout: LayoutDefault},
+    {path: '/default/ticket', component: Ticket_Acc, layout: LayoutDefault},
+
+
+
 
     {path: '/default/payment', component: PayMent, layout: LayoutDefault},
 

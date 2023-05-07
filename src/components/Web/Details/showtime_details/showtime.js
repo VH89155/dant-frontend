@@ -1,4 +1,5 @@
 import "./showtime.css";
+import { Link } from 'react-router-dom';
 
 const ShowTimeDetail = (props) => {
   const { times } = props;
@@ -11,7 +12,7 @@ const ShowTimeDetail = (props) => {
   for (let i = date.getDay(); i <= date.getDay() + 6; i++) {
     for (let j = 0; j < times.length; j++) {
       const b = new Date(times[j].time);
-    
+
       if (i > 6) {
         if (b.getDay() == i - 7)
           array.push({ day: b.getDay() + 1, times: times[j] });
@@ -31,115 +32,45 @@ const ShowTimeDetail = (props) => {
           LỊCH CHIẾU
         </div>
 
+        {/* 111111111 */}
 
-{/* 111111111 */}
-        <div className="date_show">
-          <div className="day">
-          {date.getDay()+1 >8 && `Thứ ${date.getDay()+3-7}`}{date.getDay()+1 ==8 && "Chủ nhật"}{date.getDay()+1<=7 && `Thứ ${date.getDay()+1}`} :  {date.getDate()}-{date.getMonth() + 1}-{date.getFullYear()}{" "}
-          </div>
+        {array?.map((item, index) => {
+          const time = new Date(item.times.time);
+          const a= item.times.array   
+          return (
+            <>
+              <div className="date_show">
+                <div className="day">
+                  {time.getDay() + 1 > 8 && `Thứ ${time.getDay() + 3 - 7}`}
+                  {time.getDay() + 1 == 8 && "Chủ nhật"}
+                  {time.getDay() + 1 <= 7 && `Thứ ${time.getDay() + 1}`} :{" "}
+                  {time.getDate()}-{time.getMonth() + 1}-{time.getFullYear()}{" "}
+                </div>
 
-          <div className="times">
-            {array.map((item, index) => {
-               const time = new Date(item.times.time);
-              //  if (item.day == date.getDay() + 1 && time.getDate() == date.getDate()) {
-              //   return (
-              //     <button type="button" key={index} className="btn btn-outline-danger" style={{width:"80px"}}>
-              //       {time.getHours()} : {time.getMinutes()} 
-              //     </button>
-              //   );
-              // }
-              if (date.getDay()+1 >6){
-                if(item.day == date.getDay()+1-7 &&time.getDate() == date.getDate() ) {
-                  console.log(time.getDate() ,date.getDate())
-                  return (
-                    <button type="button" key={index} className="btn btn-outline-danger">
-                      {time.getHours()} : {time.getMinutes()} 
-                    </button>
-                  );
-                }
-               }
-               if(item.day == date.getDay() + 1 && time.getDate() == date.getDate()) {
-                return (
-                  <button type="button" key={index} className="btn btn-outline-danger" style={{width:80}}>
-                    {time.getHours()}:{time.getMinutes()} 
-                  </button>
-                );
-              }
-            })}
-          </div>
-        </div>
+                <div className="times">
+                  {a?.map((item,index)=>{
 
-
-       {/* 222222 */}
-       <div className="date_show">
-          <div className="day">
-          {date.getDay()+2 >8 && `Thứ ${date.getDay()+3-7}`}{date.getDay()+2 ==8 && "Chủ nhật"}{date.getDay()+2<=7 && `Thứ ${date.getDay()+2}`} :  {date.getDate()+1}-{date.getMonth() + 1}-{date.getFullYear()}{" "}
-          </div>
-
-          <div className="times">
-            {array.map((item, index) => {
-               const time = new Date(item.times.time);
-              // if (item.day == date.getDay() + 2 && time.getDate() == date.getDate()+1) {
-               
-              //   return (
-              //     <button type="button" key={index} className="btn btn-outline-danger" style={{width:80}}>
-              //       {time.getHours()}:{time.getMinutes()} 
-              //     </button>
-              //   );
-              // }
-
-              if (date.getDay()+2 >6){
-                if(item.day == date.getDay()+2-7 &&time.getDate() == date.getDate()+1 ) {
-                  console.log(time.getDate() ,date.getDate()+1)
-                  return (
-                    <button type="button" key={index} className="btn btn-outline-danger">
-                      {time.getHours()} : {time.getMinutes()} 
-                    </button>
-                  );
-                }
-               }
-               if(item.day == date.getDay() + 2 && time.getDate() == date.getDate()+1) {
-                return (
-                  <button type="button" key={index} className="btn btn-outline-danger" style={{width:80}}>
-                    {time.getHours()}:{time.getMinutes()} 
-                  </button>
-                );
-              }
-            })}
-          </div>
-        </div>
-
-
-      {/* {333333333333333} */}
-      <div className="date_show">
-          <div className="day">
-          {date.getDay()+3 >8 && `Thứ ${date.getDay()+3-7}`}{date.getDay()+3 ==8 && "Chủ nhật"}{date.getDay()+3<=7 && `Thứ ${date.getDay()+3}`} :  {date.getDate()+2}-{date.getMonth() + 1}-{date.getFullYear()}{" "}
-          </div>
-
-          <div className="times">
-            {array.map((item, index) => {
-               const time = new Date(item.times.time);
-               if (date.getDay()+3 >6){
-                if(item.day == date.getDay()+3-7 &&time.getDate() == date.getDate()+2 ) {
-                  console.log(time.getDate() ,date.getDate()+2)
-                  return (
-                    <button type="button" key={index} className="btn btn-outline-danger">
-                      {time.getHours()} : {time.getMinutes()} 
-                    </button>
-                  );
-                }
-               }
-               if(item.day == date.getDay() + 3 && time.getDate() == date.getDate()+2) {
-                return (
-                  <button type="button" key={index} className="btn btn-outline-danger" style={{width:80}}>
-                    {time.getHours()}:{time.getMinutes()} 
-                  </button>
-                );
-              }
-            })}
-          </div>
-        </div>
+                   const time = new Date(item.time)
+                    return (
+                    <Link key={index} to ={`/book-ticket/${item._id}`}>
+                  <button
+                    type="button"
+                    key={index}
+                    className="btn btn-outline-danger"
+                  >
+                    {time.getHours()} : {time.getMinutes()}
+                  </button></Link>)
+                  }) }
+                
+                </div>
+              </div>
+            </>
+          );
+        })}
       </div>
+
+      
+      
     </>
   );
 };

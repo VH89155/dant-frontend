@@ -15,6 +15,7 @@ const PaymentContent = (props) => {
   const [check,setCheck] = useState(false)
   const [payment, setPayment] = useState("")
   const { data, room, moive, total, chon_combo,showtimeId } = state;
+  
   console.log(showtimeId)
   let { time } = state;
   time = new Date(time);
@@ -35,8 +36,9 @@ const PaymentContent = (props) => {
         user: auth?._id,
         number: data.ghe_chon,
         price: total,
+        payment: payment,
         // payment:setPayment,
-        // combo: chon_combo
+        combo: chon_combo
       }
     ) .then((res)=>{
       console.log(res.data)
