@@ -44,15 +44,7 @@ const AddMoive = () => {
   
   const handleFileUploadImg= async (e) => {
     formik.values.fileImage = e.target.files[0]
-    // console.log(formik.values.fileImage)
-    // const uploadData = new FormData();
-    // uploadData.append("file", formik.values.fileImage,'file')
-    // setTimeout(() =>{ console.log(uploadData)},2000)
-   
-   
-   
-       
-  }
+    }
 
   const handleFileUploadVideo= async (e) => {
     formik.values.video = e.target.files[0]
@@ -132,7 +124,7 @@ const AddMoive = () => {
   const onChangeAge = (value) => {
     console.log("age = ", value);
     formik.values.age = value;
-    // console.log(formik.values.category);
+    
   };
   const onChangeCategory = (values) => {
     formik.values.category = values;

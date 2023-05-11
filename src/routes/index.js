@@ -23,6 +23,7 @@ import PayMent from '../pages/Web/paymet';
 import DefaultCustom_Acc from '../pages/Web/custom_account/custom_account';
 import Account_edit from '../pages/Web/custom_account/account_edit';
 import Ticket_Acc from '../pages/Web/custom_account/ticket-acc';
+import MoivePage from '../pages/Admin/moive-page';
 
 
 // Pages Admin
@@ -30,6 +31,9 @@ import Ticket_Acc from '../pages/Web/custom_account/ticket-acc';
 import HomeAdmin from '../pages/Admin/home';
 import AddMoive from '../pages/Admin/addMoive';
 import AddShowTime from '../pages/Admin/add-show-time';
+import ShowTimePage from '../pages/Admin/showtime';
+import TrashMoive from '../pages/Admin/trash-moive';
+
 
 
 const publicRoutes =[
@@ -58,6 +62,9 @@ const publicRoutes =[
     {path: '/admin', component: HomeAdmin, layout: DashBoardAdmin},
     {path: '/admin/add-moive', component: AddMoive, layout: DashBoardAdmin},
     {path: '/admin/add-show-time', component: AddShowTime, layout: DashBoardAdmin},
+    {path: '/admin/show-time', component: ShowTimePage, layout: DashBoardAdmin},
+    {path: '/admin/moive', component: MoivePage, layout: DashBoardAdmin},
+    {path: '/admin/trash-moive', component: TrashMoive, layout: DashBoardAdmin},
 ];  
 const privateRoutes = [];
 

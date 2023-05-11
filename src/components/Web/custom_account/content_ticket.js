@@ -38,6 +38,7 @@ const Content_Ticket = (props) => {
                     <p>Email: {item.user.email}</p>
                     <p>Số điện thoại: {item.user.phoneNumber}</p>
                     <p>Hình thức thanh toán: {item.payment}</p>
+                    <img src={item.maQR} style={{width: '46%'}}></img>
                     </div>
                 </div>
 

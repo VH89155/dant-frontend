@@ -7,6 +7,7 @@ import axios from "axios"
 
 
 const TicketBooking = () => {
+  const admin =false;
    const [allMoives,setAllMoives] = useState([])
    const [checkMoives,setCheckMoives] = useState('') 
    const [showTimes,setShowTimes] = useState([])
@@ -45,7 +46,7 @@ const TicketBooking = () => {
          <div className="booking-time">
               
               <div className="right_title">RẠP CHIẾU PHIM CSV</div>
-               <Booking_time setTime= {setTime} showTimes={showTimes}></Booking_time>
+               <Booking_time admin={admin} setTime= {setTime} showTimes={showTimes}></Booking_time>
         </div>
          
         </div>

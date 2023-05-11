@@ -1,0 +1,44 @@
+
+.moive-show{
+    display: flex;
+    width: 100%;
+    padding: auto !important;
+    background: url("https://chieuphimquocgia.com.vn/Themes/RapChieuPhim/Content/content.v2/images/bg01.png")repeat left top; ;
+}
+.left-moive-show{
+    width: 30%;
+}
+.moive-show img{
+    width: 100%;
+    height: 400px;
+    margin-top: 50px;
+    padding: 10px;
+}
+.left-moive-show  .group-btn{
+    display: flex;
+    justify-content: center;
+}
+.group-btn .btn{
+    flex: 1;
+    margin-left:10px ;
+}
+
+
+
+
+
+
+.moive-show__content{
+    width: 70%;
+    padding-left: 10%;
+}
+.moive-show__content .name{
+    font-size: 20px;
+    text-align: center;
+    /* background-color: antiquewhite;
+    border: 1px solid #ccc;
+    border-radius: 5px; */
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 10px;
+}
