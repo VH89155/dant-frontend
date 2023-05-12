@@ -1,15 +1,24 @@
 import { useEffect,useState } from "react";
+
+import { Modal } from "antd"
 import "./index.css"
 import axios from "axios";
 import Tickets_ShowTime_Detail from "./tickets";
+import Edit_showtime from "./editShowtime";
 
 const SHowTime_Detail = (props) => {
-    const {showTime,load, setLoad} = props;
+    const {showTime,load, setLoad, edit, setEdit} = props;
     const [moive,setMoive] = useState({})
     const [room,setRoom] = useState({})
     let times = new Date()
     const [time,setTime] = useState(times)
     const [ticket,setTicket] = useState([])
+
+    // const [isModalOpen1 ,setIsModalOpen1] =useState(false)
+    const SetEdit = ()=>{
+      setEdit(!edit)
+    }
+   
    
     // console.log(showTime);
 
@@ -24,22 +33,24 @@ const SHowTime_Detail = (props) => {
                 setRoom(response.data.room);
                 setTime( new Date(response.data.showTime.time))
                 setTicket(response.data.ticket)
-               
+                times = response.data.showTime.time
                 // setTime(response.data.arayTimeDate);
               })
              
             }
             catch(err){
-            //   navigate("/")
+          
             console.log(err)
             }
             
           }
           fetchData();
-    },[showTime])
+    },[showTime,load,edit])
 
     return ( <>
-     <div className="showtime-detail">
+     {
+      !edit ? (
+        <div className="showtime-detail">
         <div className="top">
         <img src={moive?.images}></img>
             <div className="moive">
@@ -55,7 +66,7 @@ const SHowTime_Detail = (props) => {
             <strong>NGÀY CHIẾU:  {time?.getDay()>0 ? `Thứ ${time?.getDay()+1}` :`Chủ nhật`} {time?.getDate()}/{time?.getMonth()+1}/{time?.getFullYear()}</strong>
          </div>
          <div className="group-button">
-            <button className="btn btn-danger" >Chỉnh sửa</button>
+            <button className="btn btn-danger" onClick={SetEdit} >Chỉnh sửa</button>
             {/* <button className="btn btn-success" >Xoá</button> */}
             </div>
 
@@ -64,7 +75,18 @@ const SHowTime_Detail = (props) => {
             <Tickets_ShowTime_Detail ticket={ticket}></Tickets_ShowTime_Detail>
 
         </div>
+       
+          {/* <ShowTime_Edit load={load} setLoad={setLoad} showTime ={showTime}></ShowTime_Edit> */}
+       
+        
+      
     </div>
+      ) :(
+        <Edit_showtime  setEdit={setEdit} times={times} showTime={showTime} load={load} setLoad={setLoad} moive={moive} room ={room} ></Edit_showtime>
+      )
+
+     }
+   
     
     </> );
 }

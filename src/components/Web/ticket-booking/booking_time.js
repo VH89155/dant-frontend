@@ -2,35 +2,74 @@ import "./ticket-booking.css";
 import { useEffect, useState } from "react";
 import { Select } from "antd";
 import { Link } from "react-router-dom";
-
 import { Modal } from "antd";
 import SHowTime_Detail from "../../Admin/showtime/showTime-detail";
+
+
+import { DatePicker, Space } from 'antd';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+dayjs.extend(customParseFormat);
+
+const dateFormat = 'D-M-YYYY';
+
+
+
+
+
+
 const Booking_time = (props) => {
-const { setTime, showTimes, admin, load, setLoad } = props;
+  const [edit,setEdit] = useState(false)
+const { setTime, showTimes, admin, load, setLoad,value } = props;
 const times = new Date();
 const arrayTime = [];
 console.log(showTimes);
   //   console.log("time: Thứ ", (times.getDay() + 1)+ ", " + times.getDate() +  "-" + (times.getMonth()+1), "-",times.getFullYear() )
 
-  for (let i = 0; i < 10; i++) {
-    const time = new Date();
-    time.setDate(times.getDate() + i);
-    if (time.getDay() == 0) {
-      arrayTime.push({
-        key: `${time.getDate()}-${time.getMonth() + 1}-${time.getFullYear()}`,
-        value: `Chủ nhật, ${time.getDate()}-${
-          time.getMonth() + 1
-        }-${time.getFullYear()} `,
-      });
-    } else if (time.getDay() <= 6) {
-      arrayTime.push({
-        key: `${time.getDate()}-${time.getMonth() + 1}-${time.getFullYear()}`,
-        value: `Thứ ${time.getDay() + 1}, ${time.getDate()}-${
-          time.getMonth() + 1
-        }-${time.getFullYear()} `,
-      });
+  if(admin && value === 2){
+    for (let i = 1; i <= 15; i++) {
+      const time = new Date();
+      time.setDate(times.getDate() - i);
+      if (time.getDay() == 0) {
+        arrayTime.push({
+          key: `${time.getDate()}-${time.getMonth() + 1}-${time.getFullYear()}`,
+          value: `Chủ nhật, ${time.getDate()}-${
+            time.getMonth() + 1
+          }-${time.getFullYear()} `,
+        });
+      } else if (time.getDay() <= 6) {
+        arrayTime.push({
+          key: `${time.getDate()}-${time.getMonth() + 1}-${time.getFullYear()}`,
+          value: `Thứ ${time.getDay() + 1}, ${time.getDate()}-${
+            time.getMonth() + 1
+          }-${time.getFullYear()} `,
+        });
+      }
     }
   }
+
+  else if(!admin || (admin && value ===1 )){
+    for (let i = 0; i < 10; i++) {
+      const time = new Date();
+      time.setDate(times.getDate() + i);
+      if (time.getDay() == 0) {
+        arrayTime.push({
+          key: `${time.getDate()}-${time.getMonth() + 1}-${time.getFullYear()}`,
+          value: `Chủ nhật, ${time.getDate()}-${
+            time.getMonth() + 1
+          }-${time.getFullYear()} `,
+        });
+      } else if (time.getDay() <= 6) {
+        arrayTime.push({
+          key: `${time.getDate()}-${time.getMonth() + 1}-${time.getFullYear()}`,
+          value: `Thứ ${time.getDay() + 1}, ${time.getDate()}-${
+            time.getMonth() + 1
+          }-${time.getFullYear()} `,
+        });
+      }
+    }
+  }
+  
   //   console.log(arrayTime)
   const handleChange = (value) => {
     console.log(value);
@@ -46,14 +85,50 @@ console.log(showTimes);
         setIsModalOpen1(true);    
       };      
       const handleOk1 = async() => { 
-        setIsModalOpen1(false);      
+        setIsModalOpen1(false);     
+        setEdit(false)    
+        setLoad(!load) 
       };
       const handleCancel1 = () => {
-        setIsModalOpen1(false);        
+        setIsModalOpen1(false); 
+        setEdit(false)    
+        setLoad(!load)       
       };
-   
+
+
+      const onChangeDate = (date) => {
+        if (date) {
+          console.log('Date: ', date);
+          const time = new Date(date);
+          console.log('Date: ', `${time.getDate()}-${time.getMonth() + 1}-${time.getFullYear()}`);
+          setTime(`${time.getDate()}-${time.getMonth() + 1}-${time.getFullYear()}`)
+
+        } else {
+          console.log('Clear');
+        }
+      };
+      const customFormat = (value) => {
+        const time = new Date(value);
+        if (time.getDay() == 0) { 
+        
+            return`Chủ nhật, ${time.getDate()}-${
+              time.getMonth() + 1
+            }-${time.getFullYear()} `
+         
+        } 
+        else if (time.getDay() <= 6) {
+          
+            return `Thứ ${time.getDay() + 1}, ${time.getDate()}-${
+              time.getMonth() + 1
+            }-${time.getFullYear()} `
+        
+        }
+        
+      // return  `custom format: ${value.format(dateFormat)}`
+      };
   return (
     <>
+    { value !==3 ? (<>
       <Select
         labelInValue
         defaultValue={arrayTime[0]}
@@ -63,6 +138,17 @@ console.log(showTimes);
         onChange={handleChange}
         options={arrayTime}
       />
+    </>)
+    
+    
+    :(<>
+      <DatePicker  style={{
+          width: 300,
+        }} onChange={onChangeDate} defaultValue={dayjs(`${times.getDate()}-${times.getMonth() + 1}-${times.getFullYear()}`, dateFormat)} format={customFormat} />
+    </>)
+
+    }
+      
       <div>
         <div className="moive-time">
           {showTimes && (
@@ -133,7 +219,7 @@ console.log(showTimes);
                 );
               })}
               <Modal width={1000} title="Chi tiết lịch chiếu" open={isModalOpen1} onOk={handleOk1} onCancel={handleCancel1}>
-                <SHowTime_Detail load={load} setLoad={setLoad} showTime ={showTime}></SHowTime_Detail>
+                <SHowTime_Detail edit={edit} setEdit={setEdit} load={load} setLoad={setLoad} showTime ={showTime}></SHowTime_Detail>
               </Modal> 
             </>
           )}

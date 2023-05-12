@@ -26,7 +26,7 @@ const App = (props) => {
                     <a  ><div className="date-show" >Ngày {item.date}</div></a>
                     {  item?.array?.map((item,index)=>{
                        const time = new Date( item.moive.premiere_date);
-                        if(item.time.length >0){
+                        if(item?.arrayTimeDate?.length > 0){
                           return (
                             <div className="item-moive" key={index}>
                               <Link to={`/details/${item.moive._id}`}>
@@ -85,7 +85,7 @@ const App = (props) => {
                               {/* <button type="button" class="btn btn-outline-danger">
                                 9:15
                               </button> */}
-                              {item?.time.map((item,index)=>{
+                              {item?.arrayTimeDate.map((item,index)=>{
                              const time = new Date(item.time)
                             return (
                               <Link key={index} to ={`/book-ticket/${item._id}`}>

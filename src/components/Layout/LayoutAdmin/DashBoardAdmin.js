@@ -1,5 +1,5 @@
 import "./index.css"
-import { FileOutlined, PieChartOutlined, UserOutlined,TeamOutlined } from '@ant-design/icons';
+import { FileOutlined, PieChartOutlined, UserOutlined,TeamOutlined,UserAddOutlined } from '@ant-design/icons';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -37,7 +37,11 @@ const App = ({children}) => {
     getItem('Lịch chiếu', 'sub2', <FieldTimeOutlined />,
      [getItem('Danh sách lịch chiếu', '6', <Link to="/admin/show-time"><FileDoneOutlined /></Link>),
     getItem('Thêm lịch chiếu', '9', <Link to="/admin/add-show-time"><FileAddOutlined /></Link>),
-  ])
+  ]),
+  getItem('Tài khoản', 'sub3', <UserOutlined />,
+  [getItem('Danh sách người dùng', '10', <Link to="/admin/user"><FileDoneOutlined /></Link>),
+ getItem('Thêm người dùng', '11', <Link to=""><UserAddOutlined /></Link>),
+])
 ]
   const [collapsed, setCollapsed] = useState(false);
   const {

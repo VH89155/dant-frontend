@@ -33,7 +33,7 @@ import AddMoive from '../pages/Admin/addMoive';
 import AddShowTime from '../pages/Admin/add-show-time';
 import ShowTimePage from '../pages/Admin/showtime';
 import TrashMoive from '../pages/Admin/trash-moive';
-
+import User_Show from '../pages/Admin/user';
 
 
 const publicRoutes =[
@@ -65,6 +65,10 @@ const publicRoutes =[
     {path: '/admin/show-time', component: ShowTimePage, layout: DashBoardAdmin},
     {path: '/admin/moive', component: MoivePage, layout: DashBoardAdmin},
     {path: '/admin/trash-moive', component: TrashMoive, layout: DashBoardAdmin},
+    {path: '/admin/user', component: User_Show, layout: DashBoardAdmin},
+
+
+
 ];  
 const privateRoutes = [];
 

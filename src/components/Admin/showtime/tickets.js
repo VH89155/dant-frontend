@@ -190,6 +190,7 @@ const Tickets_ShowTime_Detail = (props) => {
   columns={columns}
   expandable={{
    expandedRowRender: (record) => (
+    
      <>
      <p
        style={{
