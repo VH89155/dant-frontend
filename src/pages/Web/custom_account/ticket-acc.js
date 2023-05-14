@@ -17,7 +17,7 @@ const Ticket_Acc = () => {
   useEffect(() => {
     const fetchData = async () =>{
 
-        await  axios.get(`http://localhost:8080/api/ticket/user/${auth?.currentUser?.info._id}`)
+        await  axios.get(`/api/ticket/user/${auth?.currentUser?.info._id}`)
         .then((res)=> {
             console.log(res.data) 
             setTickets(res.data)

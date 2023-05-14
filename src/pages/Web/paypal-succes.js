@@ -45,7 +45,7 @@ const PayPal_succes = () => {
       console.log(res.data)
       if(res.data.success ) {
         message.success("Thanh toán thành công")
-        navigate("/")
+        navigate("/default/ticket")
       }
       
     
@@ -72,7 +72,7 @@ const PayPal_succes = () => {
                     textAlign: "center", marginTop:200}}>Success</h3>
              
         </div>
-        <Link to="/"> <button className="btn">Tiép tục mua vé</button></Link>
+        <Link to="/default/ticket"> <button className="btn">Tiép tục mua vé</button></Link>
     </> );
 }
  

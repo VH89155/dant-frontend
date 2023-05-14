@@ -59,17 +59,6 @@ const FormLogin = (props) => {
   });
 
 
-  const onChange = async () => {
-    
-    axios.post("http://localhost:8080/api/paypal/pay").then((res)=>{
-      // navigate('https://www.npmjs.com/package/passport-facebook-token')
-      return res.data
-    }).then((data)=>{
-      console.log(data.links)
-     
-      window.location.replace(`${data.links[0]}`)
-    })
-  };
   const onChangeForgot = () => {
     setForgot(!forgot);
   };
@@ -86,11 +75,19 @@ const FormLogin = (props) => {
     }
     console.log(user)
 
-    await authLoginGoogle(dispatch, user, navigate)
     
-    await axios.post("/api/auth/auth/google-new",user).then((res) => {
+    
+    await axios.post("/api/auth/auth/google-new",user).then(async(res) => {
       console.log(res.data);
+      if(res.data.success) {
+      await authLoginGoogle(dispatch, user, navigate)
       message.success("Đăng nhập thành công!");
+    }
+    else if(!res.data.success){
+      message.error(res.data.message);
+    }
+      
+   
     })
     .catch(() => {
       message.error("Đăng nhập không thành công!");
@@ -110,9 +107,6 @@ const FormLogin = (props) => {
     })}
 
 
-  
-    
-    
 
   useEffect(() => {}, [auth]);
   return (
@@ -214,7 +208,7 @@ const FormLogin = (props) => {
       </div>
       {/* </div> */}
 
-      <button onClick={onChange}>Thanh toán</button> 
+      
  
     </>
   );

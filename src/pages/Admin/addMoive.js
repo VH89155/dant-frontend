@@ -333,7 +333,7 @@ const AddMoive = () => {
           <Button   htmlType="submit" >Button</Button>
         </Form.Item>
       </Form>    
-      <CKEditor
+      <CKEditor  style={{height:"200px"}}
                     editor={ ClassicEditor }
                     data="<p>Hello from CKEditor 5!</p>"
                     // onReady={ editor => {
@@ -343,6 +343,7 @@ const AddMoive = () => {
                     onChange={ ( event, editor ) => {
                         const data = editor.getData();
                         console.log( { event, editor, data } );
+                        console.log(typeof(data))
                     } }
                     // onBlur={ ( event, editor ) => {
                     //     console.log( 'Blur.', editor );

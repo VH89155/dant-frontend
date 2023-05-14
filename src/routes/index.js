@@ -17,6 +17,7 @@ import Register from '../pages/Web/register';
 import Book_Ticket from '../pages/Web/bookTicket';
 import PayMent from '../pages/Web/paymet';
 import PayPal_succes from '../pages/Web/paypal-succes';
+import News_detail from '../pages/Web/new-detail';
 
 /// Custom -account
 
@@ -34,6 +35,8 @@ import AddShowTime from '../pages/Admin/add-show-time';
 import ShowTimePage from '../pages/Admin/showtime';
 import TrashMoive from '../pages/Admin/trash-moive';
 import User_Show from '../pages/Admin/user';
+import New_Manage from '../pages/Admin/new-page';
+
 
 
 const publicRoutes =[
@@ -47,6 +50,7 @@ const publicRoutes =[
     {path: '/default/custom-account', component: DefaultCustom_Acc, layout: LayoutDefault},
     {path: '/default/custom-account/edit', component: Account_edit, layout: LayoutDefault},
     {path: '/default/ticket', component: Ticket_Acc, layout: LayoutDefault},
+    {path: '/news/:id', component: News_detail, layout: LayoutDefault},
 
 
 
@@ -70,6 +74,7 @@ const publicRoutes =[
     {path: '/admin/moive', component: MoivePage, layout: DashBoardAdmin},
     {path: '/admin/trash-moive', component: TrashMoive, layout: DashBoardAdmin},
     {path: '/admin/user', component: User_Show, layout: DashBoardAdmin},
+    {path: '/admin/news', component: New_Manage, layout: DashBoardAdmin},
 
 
 

@@ -103,11 +103,11 @@ const App = ({ children }) => {
         </Link>
       ),
     ]),
-    getItem("Phòng chiếu", "sub5", <UserOutlined />, [
+    getItem("quản lí page", "sub5", <UserOutlined />, [
       getItem(
-        "Danh sách người dùng",
+        "quản lí tin tức ",
         "12",
-        <Link to="/admin/user">
+        <Link to="/admin/news">
           <FileDoneOutlined />
         </Link>
       ),
@@ -125,17 +125,16 @@ const App = ({ children }) => {
     token: { colorBgContainer },
   } = theme.useToken();
   const navigate = useNavigate()
-  const auth = useSelector((state)=>state.auth?.login)
-  // if(auth?.currentUser?.info?.admin ===false || auth.currentUser === null){
-  //   navigate("/")
-  // }
-  useEffect(()=>{
-    if(auth?.currentUser?.info?.admin ===false || auth.currentUser === null){
-      navigate("/")
-    }
-  },[])
-  return (
-    <Layout>
+  const auth = useSelector((state)=>state.auth?.login?.currentUser.info?.admin)
+  console.log(auth)
+  // useEffect(()=>{
+  //   // if(auth?.currentUser?.info?.admin ===false || auth.currentUser === null){
+  //   //   navigate("/")
+  //   // }
+  // },[])
+  return (<>
+    {auth? (<>
+      <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="logo" />
         <Menu
@@ -173,6 +172,12 @@ const App = ({ children }) => {
         </Content>
       </Layout>
     </Layout>
+      </>): (<>
+        <h1 style={{textAlign:"center", paddingTop:"200" , color:"#222"}}>404</h1>
+    </>)
+
+    }
+  </>
   );
 };
 export default App;

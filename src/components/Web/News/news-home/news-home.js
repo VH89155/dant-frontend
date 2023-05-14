@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
 import "./news-home.css"
 
-const NewsHome = () => {
+const NewsHome = (props) => {
+  const {data} = props
     return (  <div className="container">
       <div className="page-title">
         <div className="title">TIN TỨC </div>
@@ -8,80 +10,33 @@ const NewsHome = () => {
       </div>
 
       <div className="row">
-        <div className="col-lg-6 col-">
-          <div className="item-news">
-            <img src="https://chieuphimquocgia.com.vn/content/images/thumbs/0016822_215.png"></img>
-            <div className="tx-moive">
-              <div className="tx-moive-title">
-              HOT DEAL XI-NÊ, THƯỞNG BOM TẤN SIÊU MÊ - TRUNG TÂM CHIẾU PHIM QUỐC GIA x VNPAY
-              </div>
-              <div className="tx-moive-time">
-                Thời gian: 20 Tháng Ba 2023
-              </div>
-              <button type="button" class="btn btn-outline-danger">Xem chi tiết</button>
-            </div>
-          </div>
-        </div>
+        {
+          data?.map((item,index)=>{
+            const time =new Date(item.time)
+            return (
 
-        <div className="col-lg-6 col-">
-          <div className="item-news">
-            <img src="https://chieuphimquocgia.com.vn/content/images/thumbs/0016822_215.png"></img>
-            <div className="tx-moive">
-              <div className="tx-moive-title">
-              HOT DEAL XI-NÊ, THƯỞNG BOM TẤN SIÊU MÊ - TRUNG TÂM CHIẾU PHIM QUỐC GIA x VNPAY
+              <div className="col-lg-6 col-" key={index}>
+              <div className="item-news">
+                <img src={item.image}></img>
+                <div className="tx-moive">
+                  <div className="tx-moive-title">
+                  {item.name}
+                  </div>
+                  <div className="tx-moive-time">
+                    Thời gian: {time.getDate()}-{time.getMonth()+1}-{time.getFullYear()}
+                  </div>
+               <Link to={`/news/${item._id}`}>  <button type="button" class="btn btn-outline-danger">Xem chi tiết</button></Link> 
+                </div>
               </div>
-              <div className="tx-moive-time">
-                Thời gian: 20 Tháng Ba 2023
-              </div>
-              <button type="button" class="btn btn-outline-danger">Xem chi tiết</button>
             </div>
-          </div>
-        </div>
-
-        <div className="col-lg-6 col-">
-          <div className="item-news">
-            <img src="https://chieuphimquocgia.com.vn/content/images/thumbs/0016822_215.png"></img>
-            <div className="tx-moive">
-              <div className="tx-moive-title">
-              HOT DEAL XI-NÊ, THƯỞNG BOM TẤN SIÊU MÊ - TRUNG TÂM CHIẾU PHIM QUỐC GIA x VNPAY
-              </div>
-              <div className="tx-moive-time">
-                Thời gian: 20 Tháng Ba 2023
-              </div>
-              <button type="button" class="btn btn-outline-danger">Xem chi tiết</button>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-lg-6 col-">
-          <div className="item-news">
-            <img src="https://chieuphimquocgia.com.vn/content/images/thumbs/0016822_215.png"></img>
-            <div className="tx-moive">
-              <div className="tx-moive-title">
-              HOT DEAL XI-NÊ, THƯỞNG BOM TẤN SIÊU MÊ - TRUNG TÂM CHIẾU PHIM QUỐC GIA x VNPAY
-              </div>
-              <div className="tx-moive-time">
-                Thời gian: 20 Tháng Ba 2023
-              </div>
-              <button type="button" class="btn btn-outline-danger">Xem chi tiết</button>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-lg-6 col-">
-          <div className="item-news">
-            <img src="https://chieuphimquocgia.com.vn/content/images/thumbs/0016822_215.png"></img>
-            <div className="tx-moive">
-              <div className="tx-moive-title">
-              HOT DEAL XI-NÊ, THƯỞNG BOM TẤN SIÊU MÊ - TRUNG TÂM CHIẾU PHIM QUỐC GIA x VNPAY
-              </div>
-              <div className="tx-moive-time">
-                Thời gian: 20 Tháng Ba 2023
-              </div>
-              <button type="button" class="btn btn-outline-danger">Xem chi tiết</button>
-            </div>
-          </div>
-        </div>
+    
+            )
+          })
+        }
+       
+     
+        
+        
       </div>
     </div>);
 }
