@@ -29,27 +29,43 @@ const PaymentContent = (props) => {
     setIsModalOpen(true);
   };
   const handleOk = async() => {
-    // setIsModalOpen(false);
-    await axios.post("http://localhost:8080/api/ticket/add-ticket",
-      {
-        time : showtimeId,
-        user: auth?._id,
-        number: data.ghe_chon,
-        price: total,
-        payment: payment,
-        // payment:setPayment,
-        combo: chon_combo
-      }
-    ) .then((res)=>{
-      console.log(res.data)
-      message.success("Thanh toán thành công")
-      setIsModalOpen(false);
-      
-    }).catch(err=>{
-      console.log(err)
-      message.err("Thanh toán thất bại, Lỗi: ",err)
-      setIsModalOpen(false);
+    await axios.post("http://localhost:8080/api/paypal/pay",{
+      time : showtimeId,
+      user: auth?._id,
+      number: data.ghe_chon,
+      price: total,
+      payment: payment,
+      // payment:setPayment,
+      combo: chon_combo
+    }).then((res)=>{
+      // navigate('https://www.npmjs.com/package/passport-facebook-token')
+      return res.data
+    }).then((data)=>{
+      console.log(data.links)
+     
+      window.location.replace(`${data.links[0]}`)
     })
+
+    // await axios.post("http://localhost:8080/api/ticket/add-ticket",
+    //   {
+    //     time : showtimeId,
+    //     user: auth?._id,
+    //     number: data.ghe_chon,
+    //     price: total,
+    //     payment: payment,
+    //     // payment:setPayment,
+    //     combo: chon_combo
+    //   }
+    // ) .then((res)=>{
+    //   console.log(res.data)
+    //   message.success("Thanh toán thành công")
+    //   setIsModalOpen(false);
+      
+    // }).catch(err=>{
+    //   console.log(err)
+    //   message.err("Thanh toán thất bại, Lỗi: ",err)
+    //   setIsModalOpen(false);
+    // })
   };
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -66,6 +82,12 @@ const PaymentContent = (props) => {
       showModal();
     }
   }
+  const navigate = useNavigate()
+  useEffect(()=>{
+    if(!auth){
+      navigate("/login")
+    }
+  },[])
 
   return (
     <>

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { logOut } from "../../../redux/apiRequest";
 const Sidebar = (props) => {
   const { auth, namePage } = props;
-  console.log(auth);
+  // console.log(auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const Click = () => {
@@ -50,12 +50,21 @@ const Sidebar = (props) => {
             <li>
               <a>KHUYẾN MÃI CỦA BẠN</a>
             </li>
-           
+            {auth?.currentUser?.info?.admin && (
+               <li>
+               <a className="logout" href="/admin" >
+                TRANG QUẢN TRỊ 
+               </a>
+             </li>
+            )
+
+            }
             <li>
               <a className="logout" onClick={Click}>
                 THOÁT
               </a>
             </li>
+           
           </ul>
         </div>
       </div>

@@ -1,7 +1,13 @@
+import { useEffect, useState } from "react";
 import FormLogin from "../../components/Web/login/form";
+import Forgot_Pass from "../../components/Web/login/forgot-pass";
 
 
 const Login = () => {
+  const [forgot, setForgot] = useState(false)
+  useEffect(()=>{
+
+  },[forgot])
     return ( <>
     <section className="vh-150">
   <div className="container py-5 h-150"  style={{backgroundColor: "#fff", border: " 1px solid #ccc", marginTop: 50, borderRadius: 10}}>
@@ -11,7 +17,15 @@ const Login = () => {
           className="img-fluid" alt="Phone image"></img>
       </div>
       <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-       <FormLogin></FormLogin>
+      {forgot ? (<>
+       <Forgot_Pass forgot={forgot} setForgot={setForgot}></Forgot_Pass>
+      
+      </>) : (<>
+        <FormLogin forgot={forgot} setForgot={setForgot}></FormLogin>
+      </>)
+
+      }
+      
       </div>
     </div>
   </div>

@@ -1,25 +1,33 @@
-import "./form.css"
+import "./form.css";
 import { useFormik } from "formik";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
+import { Redirect } from 'react-router-dom';
+import FacebookLogin from 'react-facebook-login'
+import jwt_decode from "jwt-decode";
 import axios from "axios";
 import * as Yup from "yup";
 import { message } from "antd";
-import {useNavigate} from "react-router-dom"
-import { useDispatch } from "react-redux";
-import { authLogin } from "../../../redux/apiRequest";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { authLogin, authLoginGoogle } from "../../../redux/apiRequest";
+import { useEffect, useState } from "react";
 
 
-const FormLogin = () => {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+const FormLogin = (props) => {
+  const responseFacebook = (response) => {
+    console.log(response);
+  }
+  const { forgot, setForgot } = props;
+  const auth = useSelector((state) => state?.auth?.login?.currentUser);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
-     
       password: "",
-      email:"",
-      
+      email: "",
     },
     validationSchema: Yup.object({
-     
       email: Yup.string()
         .required("Required")
         .matches(
@@ -32,104 +40,184 @@ const FormLogin = () => {
           /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$/,
           "Password must be 7-19 characters and contain at least one letter, one number and a special character"
         ),
-    
     }),
     onSubmit: async (values) => {
       // window.alert("Form submitted");
       console.log(values);
 
-      // await axios.post("http://localhost:8080/api/auth/signin",values).
-      // then(res=>{
-      //   console.log(res.data) 
-      //   return res.data})
-      //   .then(res=>{
-      //   if(res.success === true){
-      //       message.success('Resgister success');
-      //       // navgate("/login")    
-           
-      //  }
-      //   else {
-      //       message.error('Resgister error');
-      //   }
-      
-      // })
-      // .catch((error)=>{
-      //    message.error('Resgister error');
-      //   console.log(error)
-      // })
-          
-      authLogin(dispatch, values, navigate);
+      await authLogin(dispatch, values, navigate);
+      await axios
+        .post("http://localhost:8080/api/auth/signin", values)
+        .then((res) => {
+          console.log(res);
+          message.success("Đăng nhập thành công!");
+        })
+        .catch(() => {
+          message.error("Đăng nhập không thành công!");
+        });
     },
   });
-      
-    return ( <>
+
+
+  const onChange = async () => {
+    
+    axios.post("http://localhost:8080/api/paypal/pay").then((res)=>{
+      // navigate('https://www.npmjs.com/package/passport-facebook-token')
+      return res.data
+    }).then((data)=>{
+      console.log(data.links)
      
-          <div class="card-body p-5 text-center">
+      window.location.replace(`${data.links[0]}`)
+    })
+  };
+  const onChangeForgot = () => {
+    setForgot(!forgot);
+  };
+  const onSuccess = async(credentialResponse) => {
+    // console.log(credentialResponse.credential);
+    const details = jwt_decode(credentialResponse.credential);
+    console.log(details);
+    const user ={
+      sub: details.sub,
+      email: details.email,
+      image: details.picture,
+      fullName: `${details.family_name} ${details.given_name}`,
+      username: details.email
+    }
+    console.log(user)
 
-            <h3 class="label-form mb-4">Đăng nhập</h3>
-  <form onSubmit={formik.handleSubmit}>
-            <div className="form-outline mb-4">
-            <label className="form-label" for="email">Email </label>
-            <input 
-            type="text"
-            id="email"
-            name="email"
-            value={
-             formik.values.email
-            }
-            onChange={formik.handleChange}
-            placeholder="Enter your email"
-           
-            className="form-control form-control-lg" />
-           
-         
+    await authLoginGoogle(dispatch, user, navigate)
+    
+    await axios.post("/api/auth/auth/google-new",user).then((res) => {
+      console.log(res.data);
+      message.success("Đăng nhập thành công!");
+    })
+    .catch(() => {
+      message.error("Đăng nhập không thành công!");
+    });
+    // console.log(credentialResponse);
+  }
+  const onFailure =(res)=>{
+    console.log("login fail", res)
+  }
+  const handleFacebookLogin = () => {
+    window.FB.login(function(response) {
+      if (response.authResponse) {
+        console.log('Đăng nhập thành công!', response);
+      } else {
+        console.log('Đăng nhập không thành công!');
+      }
+    })}
+
+
+  
+    
+    
+
+  useEffect(() => {}, [auth]);
+  return (
+    <>
+      <div class="card-body p-5 text-center">
+        <h3 class="label-form mb-4">Đăng nhập</h3>
+        <form onSubmit={formik.handleSubmit}>
+          <div className="form-outline mb-4">
+            <label className="form-label" for="email">
+              Email{" "}
+            </label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              placeholder="Enter your email"
+              className="form-control form-control-lg"
+            />
+
             {formik.errors.email && (
-          <p className="errorMsg"> {formik.errors.email} </p>
-        )}
+              <p className="errorMsg"> {formik.errors.email} </p>
+            )}
           </div>
-
 
           <div className="form-outline mb-4">
-          <label className="form-label" for="form1Example23">Mật khẩu</label>
-         
+            <label className="form-label" for="form1Example23">
+              Mật khẩu
+            </label>
+
             <input
-            type="password"
-            id="password"
-            name="password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            placeholder="Enter your password"
-            
-            className="form-control form-control-lg" />
-           
-               {formik.errors.password && (
-          <p className="errorMsg"> {formik.errors.password} </p>
-        )}
+              type="password"
+              id="password"
+              name="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              placeholder="Enter your password"
+              className="form-control form-control-lg"
+            />
+
+            {formik.errors.password && (
+              <p className="errorMsg"> {formik.errors.password} </p>
+            )}
           </div>
 
-          
-            <div className="d-flex justify-content-around align-items-center mb-4">
-   
-            <div className="form-check">
+          <div className="d-flex justify-content-around align-items-center mb-4">
+            {/* <div className="form-check">
               <input className="form-check-input" type="checkbox" value="" id="form1Example3" checked />
               <label className="form-check-label" for="form1Example3"> Remember me </label>
-            </div>
-            <a href="#!">Quên mật khẩu?</a>
+            </div> */}
+            <a href="#!" onClick={onChangeForgot}>
+              Quên mật khẩu?
+            </a>
           </div>
 
-            <button class="btn-login btn btn-primary btn-lg btn-block " type="submit">Đăng nhập</button>
-            </form>
-            <hr class="my-4"></hr>
+          <button
+            class="btn-login btn btn-primary btn-lg btn-block "
+            type="submit"
+          >
+            Đăng nhập
+          </button>
+        </form>
+        <hr class="my-4"></hr>
 
-            <button class="gg btn btn-lg btn-block btn-primary" 
-              type="submit"><i class="fab fa-google me-2"></i> Đăng nhập bằng Google</button>
-            <button class="fb btn btn-lg btn-block btn-primary mb-2" 
-              type="submit"><i class="fab fa-facebook-f me-2"></i>Đăng nhập bằng Facebook</button>
+        <div  style={{textAlign:"center"}} >
+         <GoogleOAuthProvider  clientId="401289267989-9mb2gnrnml6ru7gfjbjq9ete1j5h0ukm.apps.googleusercontent.com">
+          <GoogleLogin
+         
+            onSuccess={onSuccess}
+            onError={() => {
+              console.log("Login Failed");
+            }}
+          
+          />
+        </GoogleOAuthProvider>
+        </div>
+        <button class="fb btn btn-lg btn-block btn-primary mb-2" onClick={handleFacebookLogin}>
+          <i class="fab fa-facebook-f me-2"></i>Đăng nhập bằng Facebook
+        </button>
+        
+        {/* <GoogleLogin  
+        clientId="401289267989-9mb2gnrnml6ru7gfjbjq9ete1j5h0ukm.apps.googleusercontent.com"
+        onSuccess={onSuccess}
+        onFailure={onFailure}
+        cookiePolicy="single_host_origin"
+        isSignedIn={true}
+        /> */}
 
-          </div>
-        {/* </div> */}
-      
-    </> );
-}
+{/* <FacebookLogin
+    appId="1682720185497780"
+    autoLoad={true}
+    fields="name,email,picture"
+    callback={responseFacebook}
+    cssClass="my-facebook-button-class"
+    icon="fa-facebook"
+  /> */}
+       <button onClick={handleFacebookLogin}>Đăng nhập bằng Facebook</button> 
+      </div>
+      {/* </div> */}
+
+      <button onClick={onChange}>Thanh toán</button> 
  
+    </>
+  );
+};
+
 export default FormLogin;

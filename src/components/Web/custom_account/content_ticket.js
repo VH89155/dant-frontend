@@ -28,8 +28,8 @@ const Content_Ticket = (props) => {
                     <strong>{moive.name}</strong>
                     <p style={{color:"#222", fontWeight:"500"}}>Phòng chiếu: {item.showTime.room.name}</p>
                     <p>ID vé : {item.tiketID}</p>
-                    <p>Số ghế: {item.number.map(item=>`${item}, `)}</p>
-                    <p>Combo: {combo.map(item=> `${item.name} - Số lượng : ${item.value} `)}  </p>
+                    <p>Số ghế: {item?.number.map(item=>`${item}, `)}</p>
+                    <p>Combo: {combo?.map(item=> `${item.name} - Số lượng : ${item.value} `)}  </p>
                     <p style={{color:"red"}}><span style={{color:"#222", fontWeight:"500"}}>Tổng số tiền:</span> {item.price/1000}.000 VND</p>
                     
                     </div>

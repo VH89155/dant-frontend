@@ -21,7 +21,7 @@ function App() {
         <Routes>
         
             {publicRoutes.map((route, index) => {
-                let Layout= LayoutDefault ;
+                let Layout= Fragment ;
                 if(route.layout){
                     Layout = route.layout
                 }

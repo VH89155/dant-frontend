@@ -4,12 +4,15 @@ import { useSelector } from "react-redux";
 import { Spin } from "antd";
 import Content_Ticket from "../../../components/Web/custom_account/content_ticket";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Ticket_Acc = () => {
   
   const [load, setLoad] = useState(false);
   const [tickets,setTickets] = useState([])
   const auth = useSelector((state) => state.auth?.login);
+  const navigate = useNavigate()
+  
   const namePage = "ticket";
   useEffect(() => {
     const fetchData = async () =>{
@@ -22,7 +25,9 @@ const Ticket_Acc = () => {
 
     }
     fetchData()
-      
+    if(auth.currentUser ===null){
+      navigate("/")
+  }
   }, [load]);
 
   return (

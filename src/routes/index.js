@@ -16,7 +16,7 @@ import Login from '../pages/Web/login';
 import Register from '../pages/Web/register';
 import Book_Ticket from '../pages/Web/bookTicket';
 import PayMent from '../pages/Web/paymet';
-
+import PayPal_succes from '../pages/Web/paypal-succes';
 
 /// Custom -account
 
@@ -50,9 +50,13 @@ const publicRoutes =[
 
 
 
-
+//  -------------- Pay ment --------
     {path: '/default/payment', component: PayMent, layout: LayoutDefault},
+    {path: '/default/payment-succes', component: PayPal_succes},
 
+    
+
+    
     {path: '/login', component: Login, layout: LayoutDefault},
     {path: '/register', component: Register, layout: LayoutDefault},
 

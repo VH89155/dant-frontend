@@ -19,8 +19,8 @@ const dateFormat = 'D-M-YYYY';
 
 
 const Booking_time = (props) => {
-  const [edit,setEdit] = useState(false)
-const { setTime, showTimes, admin, load, setLoad,value } = props;
+const [edit,setEdit] = useState(false)
+const { setTime,time, showTimes, admin, load, setLoad,value } = props;
 const times = new Date();
 const arrayTime = [];
 console.log(showTimes);
@@ -153,7 +153,12 @@ console.log(showTimes);
         <div className="moive-time">
           {showTimes && (
             <>
-              {showTimes.map((item, index) => {
+              { time ==="" ? (<>
+              
+              </>):
+              
+              (<>
+               {showTimes.map((item, index) => {
                 return (
                   <>
                     {item.time.length !== 0 && (
@@ -218,6 +223,10 @@ console.log(showTimes);
                   </>
                 );
               })}
+              </>) 
+
+              }
+             
               <Modal width={1000} title="Chi tiết lịch chiếu" open={isModalOpen1} onOk={handleOk1} onCancel={handleCancel1}>
                 <SHowTime_Detail edit={edit} setEdit={setEdit} load={load} setLoad={setLoad} showTime ={showTime}></SHowTime_Detail>
               </Modal> 

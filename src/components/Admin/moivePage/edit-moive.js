@@ -85,11 +85,14 @@ const EditMoive = (props) => {
         onSubmit: async(values) => {   
             setLoading(true)
             console.log(values);
-            const uploadData = new FormData();       
-            uploadData.append("file", values.url,'file');  
-            values.images = [];
-            values.images.push(await cloudinaryUpload(uploadData));
-            
+            const uploadData = new FormData(); 
+            if(values.url && moive.images[0] !== fileList[0].url ){
+              uploadData.append("file", values.url,'file');  
+              values.images = [];
+              values.images.push(await cloudinaryUpload(uploadData));
+              
+            }      
+          
             await axios.put("http://localhost:8080/api/moive/edit-moive", values)
             .then(res=>{console.log(res.data)
                 message.success("Lưu thành công!")

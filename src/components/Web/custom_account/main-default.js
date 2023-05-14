@@ -33,6 +33,7 @@ const Main_default = (props) => {
       })
       .then((res) => {
         console.log(res.data);
+        getProfile(dispatch, auth?.token);
         setLoad(!load);
       })
       .catch((err) => console.log(err));
@@ -55,7 +56,7 @@ const Main_default = (props) => {
   console.log(auth);
 
   useEffect(() => {
-    getProfile(dispatch, auth?.token);
+    //
   }, [load]);
 
   return (

@@ -28,8 +28,23 @@ export const authLogin = async (dispatch, user,navigate) => {
         const res = await axios.post("/api/auth/signin",user);
         dispatch(loginSusscess(res.data))
         navigate("/")
+        return true
     }catch(err){
         dispatch(loginFailed())
+        return false
+    }
+
+}
+export const authLoginGoogle = async (dispatch, user,navigate) => {
+    dispatch(loginStart())
+    try{
+        const res = await axios.post("/api/auth/auth/google-new",user);
+        dispatch(loginSusscess(res.data))
+        navigate("/")
+        return true
+    }catch(err){
+        dispatch(loginFailed())
+        return false
     }
 
 }
