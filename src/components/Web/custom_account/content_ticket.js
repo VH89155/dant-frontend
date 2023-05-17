@@ -1,12 +1,89 @@
+import { Button, Modal,message,Input } from 'antd';
 import './index.css'
+import { useState } from 'react'
+import axios from 'axios';
+import Box from '@mui/material/Box';
+import Rating from '@mui/material/Rating';
+import Typography from '@mui/material/Typography';
+import { textFieldClasses } from '@mui/material';
+const { TextArea } = Input;
 
 const Content_Ticket = (props) => {
+  const[ value,setValue] = useState(5)
+  const [ text, setText] = useState("Rất hài lòng! ")
+  const [ ticket,setTicket]= useState({})
+  const{ load,setLoad} = props
   let {tickets} = props
   tickets.sort((a,b)=>{
     if (a.showTime.time > b.showTime.time) return -1;
     if (a.showTime.time < b.showTime.time) return 1;
     return 0;
   })
+  const [ticketID,setTicketID] = useState('')
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen1, setIsModalOpen1] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = async() => {
+       await axios.put(`/api/ticket/ticket-cancel/${ticketID}`).then((res)=>{
+          if(res.data.success) {
+            message.success("Đã gửi yêu cầu hủy vé của bạn")
+            setLoad(!load)
+          }
+          else if(res.data.success) {
+            message.error("Gửi yêu cầu không thành công")
+          }
+      }).catch((err)=>{
+        message.error("Gửi yêu cầu không thành công")
+        console.log(err)
+      
+      })
+      setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  //// Danh gia ------
+  const showModal1 = () => {
+    setIsModalOpen1(true);
+  };
+  const handleOk1 = async() => {
+      
+      setIsModalOpen1(false);
+  };
+  const handleCancel1 = () => {
+    setIsModalOpen1(false);
+  };
+
+  const ClickRating = async () => {
+    await axios.post(`/api/vote`,{
+      user: ticket.user._id,
+      moive: ticket.showTime.moive._id,
+      ticket: ticket.tiketID,
+      star: value,
+      description: text
+
+
+      
+    }).then((res)=>{
+      if(res.data.success) {
+        message.success("Đã gửi đánh giá của bạn thành công.")
+        setLoad(!load)
+      }
+      else if(res.data.success) {
+        message.error("Gửi yêu cầu không thành công")
+      }
+  }).catch((err)=>{
+    message.error("Gửi yêu cầu không thành công")
+    console.log(err)
+  
+  })
+
+  }
+
     return ( 
     <>
       <div className="main-default_acc">
@@ -20,7 +97,53 @@ const Content_Ticket = (props) => {
               const time = new Date(item.showTime.time);
               const combo = item.combo
                return (
-                <div className='item-ticket'>
+                <div className='item-ticket' key={item.tiketID}>
+               
+                 
+                 
+                 { !item.vote && !item.showTime.status ? (<>
+                  {item.cancel  ? <>
+                  
+                  <div className='ticket-cancel load'>Đang chờ hủy</div>
+                </> : <>
+                { item.status ? (<>
+                    <div className='ticket-success'>Đã xác nhận</div>
+                </>) :
+                <><div className='ticket-loadding'>Chờ xử lý</div></>
+
+                }
+               
+                <Button type="primary" className='ticket-cancel' onClick={()=>{
+                  
+                  showModal()
+                  setTicketID(item.tiketID)
+                  
+                  }} danger>Hủy vé</Button>
+                </>
+
+                }
+               
+               
+                 </>):
+
+                 (<>
+                 
+                 
+                 </>)
+
+                 }
+                 {
+                 !item.vote && item.showTime.status && <>
+                    <Button type="primary" className='ticket-cancel' onClick={()=>{
+                  
+                  showModal1()
+                  setTicket(item)
+                  
+                  }} >Đánh giá</Button>
+                  </>
+                 }
+                 
+                 
                     <img src={moive.images} ></img>
                     <div className='block-moive-ticket'>
                    <p><strong>SUẤT CHIẾU: { time.getHours() >9 ? time.getHours() :`0${ time.getHours()}`} :  { time.getMinutes() >9 ? time.getMinutes() : `${time.getMinutes()}0`} - {time.getDay()>0 ? `Thứ ${time.getDay()+1}` :`Chủ nhật`} : {time.getDate()}/{time.getMonth()+1}/{time.getFullYear()}</strong></p> 
@@ -48,6 +171,43 @@ const Content_Ticket = (props) => {
           }
       </div>
       </div>
+      <Modal title="Bạn xác nhận hủy vé chứ ? " open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+        <p>Nếu xác nhận hủy vé, yêu cầu của bạn sẽ được gửi. Bạn hãy theo dõi Email để chờ kết quả phàn hồi từ chúng tôi</p>
+          <p>Trân trọng</p>
+        </Modal>
+        <Modal title="Hãy cho chúng tôi biết về cảm nhận của ban ! " open={isModalOpen1} onOk={handleOk1} onCancel={handleCancel1}>
+        <Box
+      sx={{
+        '& > legend': { mt: 2 },
+      }}
+    >
+      <Typography component="legend">Chất lượng </Typography>
+      <Rating
+        name="simple-controlled"
+        value={value}
+        onChange={(event, newValue) => {
+          setValue(newValue);
+        }}
+       
+      />
+      
+    </Box>
+    
+    <TextArea
+        rows={3}
+        id="description"
+        defaultValue={text}
+        name="description"
+        onChange={(e)=>{
+          setText( e.target.value)
+          
+        }}
+        placeholder="Enter your description"
+       
+      />
+       <Button style={{marginTop:10}} type="primary" onClick={ClickRating}>Gửi</Button>
+        </Modal>
+       
     </> );
 }
  

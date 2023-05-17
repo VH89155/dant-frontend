@@ -4,7 +4,9 @@ import Page_title from "../../components/Web/booki_ticket/page-title";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Booking from "../../components/Web/booki_ticket/booking";
+import { useSelector } from "react-redux";
 
+const timeNow = new Date();
 const Book_Ticket = () => {
     const[ data,setData] = useState({})
     const {showtimeId}= useParams()
@@ -13,6 +15,9 @@ const Book_Ticket = () => {
     const [time,setTime]= useState({})
     const [ticket,setTicket] = useState([])
     const [next,setNext] = useState(true);
+    const auth = useSelector((state)=> state?.auth?.login?. currentUser?.info)
+    const [overTime,setOverTime] = useState(false);
+    
     useEffect(()=>{
         const fetchData = async () =>{
             try{
@@ -24,7 +29,18 @@ const Book_Ticket = () => {
                 setTime(response.data.showTime.time);
                 setTicket(response.data.ticket)
                 // setTime(response.data.arayTimeDate);
-              })
+              }).then(()=>{
+                const timeShow = new Date(time)
+                if(auth?.admin){
+                  console.log(timeShow)
+                  if(timeShow.getTime() +1740000 < timeNow.getTime()) setOverTime(true)
+
+                }
+                if(!auth?.admin){
+                  console.log(timeShow)
+                  if(timeShow.getTime() -1740000  < timeNow.getTime()) setOverTime(true)
+                }
+              }) 
              
             }
             catch(err){
@@ -34,11 +50,15 @@ const Book_Ticket = () => {
             
           }
           fetchData();
-    },[showtimeId,next])
-    console.log(showtimeId)
+    },[showtimeId,next,overTime,auth?.admin,time])
+    
     return ( <>
         <div className="container">
-          { next ?  (
+          {overTime ? (<>
+            <p>Rất tiếc bạn đã vượt quá thời gian để đặt vé online khung giờ này.</p>
+            <p> Trân trọng</p>
+          </>):(<>
+            { next ?  (
             <>
              <Page_title moive={moive} room={room} time={time}></Page_title>
              <Content setData={setData} setNext={setNext} ticket={ticket} moive={moive} room={room} time={time}></Content>
@@ -51,6 +71,13 @@ const Book_Ticket = () => {
           )
           
           }
+          
+          </>)
+
+          }
+
+
+       
        
         </div>
         

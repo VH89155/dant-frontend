@@ -34,6 +34,7 @@ const AddMoive = () => {
     { label: "Hài", value: "Hài " },
   ];
 
+
   
   const handleFileUploadImg= async (e) => {
     formik.values.fileImage = e.target.files[0]
@@ -57,6 +58,7 @@ const AddMoive = () => {
       trailer: "",
       rating: 10,
       origin: "VietNam",
+      display_technology:"2D"
     },
     validationSchema: Yup.object({
       name: Yup.string()
@@ -117,6 +119,11 @@ const AddMoive = () => {
   const onChangeAge = (value) => {
     console.log("age = ", value);
     formik.values.age = value;
+    
+  };
+  const onChangeDisplay = (value) => {
+    console.log("display = ", value);
+    formik.values.display_technology = value;
     
   };
   const onChangeCategory = (values) => {
@@ -233,7 +240,20 @@ const AddMoive = () => {
             <Select.Option value="16+">16+</Select.Option>
             <Select.Option value="18+">18+</Select.Option>
           </Select>
+         
         </Form.Item>
+        <Form.Item label="Loại màn hình: ">
+          <Select
+            defaultValue={{
+              value: "2D",
+            }}
+            onChange={onChangeDisplay}
+          >
+            <Select.Option value="2D">2D</Select.Option>
+            <Select.Option value="3D">3D</Select.Option>
+            
+          </Select>
+          </Form.Item>
         <Form.Item label="Ngày chiếu">
           <DatePicker onChange={onChangeDate} />
           {formik.errors.premiere_date && <p class="errorMsg">{formik.errors.premiere_date}</p>}
@@ -302,18 +322,7 @@ const AddMoive = () => {
           onChange={(e) => handleFileUploadImg(e)}>
          </input>
         </Form.Item>
-        {/* <Form.Item
-          label="Upload Video"
-          // valuePropName="fileList"
-          className="video"
-          // onChange={(e)=>formik.values.images.push(e.target.files[0].name) }
-        >
-         <input 
-          type="file"
-         
-          onChange={(e) => handleFileUploadVideo(e)}>
-         </input>
-        </Form.Item> */}
+       
           <Form.Item label="Description">
           <TextArea
             rows={3}
@@ -330,10 +339,10 @@ const AddMoive = () => {
         </Form.Item>
         
         <Form.Item label="Button">
-          <Button   htmlType="submit" >Button</Button>
+          <Button   htmlType="submit"  type="primary">Thêm </Button>
         </Form.Item>
       </Form>    
-      <CKEditor  style={{height:"200px"}}
+      {/* <CKEditor  style={{height:"200px"}}
                     editor={ ClassicEditor }
                     data="<p>Hello from CKEditor 5!</p>"
                     // onReady={ editor => {
@@ -351,7 +360,7 @@ const AddMoive = () => {
                     // onFocus={ ( event, editor ) => {
                     //     console.log( 'Focus.', editor );
                     // } }
-                />
+                /> */}
     </>
   );
 };

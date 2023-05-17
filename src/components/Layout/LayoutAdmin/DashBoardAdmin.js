@@ -21,6 +21,7 @@ import { Layout, Menu, theme, Breadcrumb } from "antd";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import axios from "axios";
 const { Header, Sider, Content } = Layout;
 
 const App = ({ children }) => {
@@ -118,7 +119,22 @@ const App = ({ children }) => {
           <UserAddOutlined />
         </Link>
       ),
+     
     ]),
+    getItem(
+      "Quản lí vé",
+      "15",
+      <Link to={"/admin/tickets"}>
+        <PieChartOutlined />{" "}
+      </Link>
+    ),
+    getItem(
+      "Quản lí mã giảm giá",
+      "16",
+      <Link to={"/admin/discount"}>
+        <PieChartOutlined />{" "}
+      </Link>
+    ),
   ];
   const [collapsed, setCollapsed] = useState(false);
   const {
@@ -127,11 +143,12 @@ const App = ({ children }) => {
   const navigate = useNavigate()
   const auth = useSelector((state)=>state.auth?.login?.currentUser.info?.admin)
   console.log(auth)
-  // useEffect(()=>{
-  //   // if(auth?.currentUser?.info?.admin ===false || auth.currentUser === null){
-  //   //   navigate("/")
-  //   // }
-  // },[])
+  useEffect(()=>{
+    const fetch = async()=>{
+      await axios.get("/api/show-time")
+    }
+    fetch()
+  },[])
   return (<>
     {auth? (<>
       <Layout>

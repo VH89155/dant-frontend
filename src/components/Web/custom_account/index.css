@@ -201,3 +201,40 @@
     padding-left: 20px;
     padding-top: 20px;
   }
+
+
+
+
+  .item-ticket{
+    position: relative;
+  }
+  .item-ticket .ticket-success,.ticket-loadding{
+    position: absolute;
+     top: 20px;
+     right:10px;
+   border-radius: 4px;
+
+  }
+
+
+  .ticket-success{
+    background-color:rgb(52 203 72);
+    color: #fff;    
+  }
+
+  .ticket-loadding{
+    background-color:rgb(235 55 27);
+    color: #fff;
+  }
+
+  .ticket-cancel{
+    position: absolute;
+     bottom: 20px;
+     right:10px;
+     background-color:rgb(235 55 27);
+  }
+   .item-ticket .load{
+    color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+  }

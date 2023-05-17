@@ -1,13 +1,13 @@
 import { useEffect,useState } from "react";
 
-import { Modal } from "antd"
+import { Modal, message } from "antd"
 import "./index.css"
 import axios from "axios";
 import Tickets_ShowTime_Detail from "./tickets";
 import Edit_showtime from "./editShowtime";
 
 const SHowTime_Detail = (props) => {
-    const {showTime,load, setLoad, edit, setEdit} = props;
+    const {showTime,load, setLoad, edit, setEdit,setIsModalOpen1} = props;
     const [moive,setMoive] = useState({})
     const [room,setRoom] = useState({})
     let times = new Date()
@@ -18,7 +18,17 @@ const SHowTime_Detail = (props) => {
     const SetEdit = ()=>{
       setEdit(!edit)
     }
-   
+   const Xoa =async ()=>{
+    await axios.delete(`/api/show-time/${showTime._id}`).then((res)=>{
+      if(res.data.success){
+        message.success("Xóa thành công")
+        // setIsModalOpen1(false)
+        setLoad(!load)
+      }
+    }).catch((err)=>{
+      message.error("Xóa không thành công")
+    })
+   }
    
     // console.log(showTime);
 
@@ -26,8 +36,7 @@ const SHowTime_Detail = (props) => {
         const fetchData = async () =>{
             try{
               await axios.get(`/api/show-time/show/${showTime._id}`)
-              .then((response) =>{
-              
+              .then((response) =>{             
                 console.log(response.data);
                 setMoive(response.data.moive);
                 setRoom(response.data.room);
@@ -35,8 +44,7 @@ const SHowTime_Detail = (props) => {
                 setTicket(response.data.ticket)
                 times = response.data.showTime.time
                 // setTime(response.data.arayTimeDate);
-              })
-             
+              })            
             }
             catch(err){
           
@@ -66,9 +74,11 @@ const SHowTime_Detail = (props) => {
             <strong>NGÀY CHIẾU:  {time?.getDay()>0 ? `Thứ ${time?.getDay()+1}` :`Chủ nhật`} {time?.getDate()}/{time?.getMonth()+1}/{time?.getFullYear()}</strong>
          </div>
          <div className="group-button">
-            <button className="btn btn-danger" onClick={SetEdit} >Chỉnh sửa</button>
-            {/* <button className="btn btn-success" >Xoá</button> */}
+            <button className="btn btn-danger" style={{marginRight:20}} onClick={SetEdit} >Chỉnh sửa</button>
+            <button className="btn btn-danger" onClick={Xoa} >Xoá</button>
+
             </div>
+            
 
         </div>    
         <div className="bottom">

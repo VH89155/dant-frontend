@@ -58,7 +58,7 @@ const ShowTimeDetail = (props) => {
                     key={index}
                     className="btn btn-outline-danger"
                   >
-                    {time.getHours()} : {time.getMinutes()}
+                    { time.getHours() >9 ? time.getHours() :`0${ time.getHours()}`} :  { time.getMinutes() >9 ? time.getMinutes() : `${time.getMinutes()}0`}
                   </button></Link>)
                   }) }
                 

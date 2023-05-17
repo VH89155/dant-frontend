@@ -1,8 +1,30 @@
-import { useEffect } from "react";
+import { useEffect ,useState} from "react";
+import SHowTime_Detail from "./showTime-detail";
+import { Modal } from "antd";
 
 const ShowTimeAll_Moive = (props) => {
   const { showTimes, load, setLoad } = props;
+  const [edit,setEdit] = useState(false)
   console.log(showTimes);
+
+  const [isModalOpen1 ,setIsModalOpen1] =useState(false)
+
+  const [showTime, setShowTime] = useState({})
+    const showModal1 = () => {
+        setIsModalOpen1(true);    
+      };      
+      const handleOk1 = async() => { 
+        setIsModalOpen1(false);     
+        setEdit(false)    
+        setLoad(!load) 
+      };
+      const handleCancel1 = () => {
+        setIsModalOpen1(false); 
+        setEdit(false)    
+        setLoad(!load)       
+      };
+
+
   useEffect(() => {}, [showTimes]);
   return (
     <>
@@ -27,7 +49,11 @@ const ShowTimeAll_Moive = (props) => {
                             <button
                               type="button"
                               key={index}
-                              onClick={() => {}}
+                              onClick={()=>{
+                                showModal1();
+                                setShowTime(item)
+                              
+                              }}
                               className="btn btn-outline-danger"
                               style={{ marginRight: 20 }}
                             >
@@ -50,6 +76,10 @@ const ShowTimeAll_Moive = (props) => {
           })}
         </>
       )}
+
+    <Modal width={1000} title="Chi tiết lịch chiếu" open={isModalOpen1} onOk={handleOk1} onCancel={handleCancel1}>
+            <SHowTime_Detail edit={edit}  setIsModalOpen1 ={setIsModalOpen1}setEdit={setEdit} load={load} setLoad={setLoad} showTime ={showTime}></SHowTime_Detail>
+    </Modal> 
     </>
   );
 };

@@ -57,6 +57,7 @@ const EditMoive = (props) => {
           trailer: moive.trailer,
           rating: moive.rating,
           origin: moive.origin,
+          display_technology: moive.display_technology,
           url:null,
         },
         validationSchema: Yup.object({
@@ -108,7 +109,11 @@ const EditMoive = (props) => {
       
           },
         });
-
+        
+        const onChangeDisplay = (value) => {
+          console.log("display = ", value);
+          formik.values.display_technology = value;
+        }      
         const onChangeAge = (value) => {
             console.log("age = ", value);
             formik.values.age = value;
@@ -257,6 +262,19 @@ const EditMoive = (props) => {
             <Select.Option value="18+">18+</Select.Option>
           </Select>
         </Form.Item>
+        <Form.Item label="Loại màn hình: ">
+          <Select
+            defaultValue={{
+              value: formik.values.display_technology,
+            }}
+            onChange={onChangeDisplay}
+          >
+            <Select.Option value="2D">2D</Select.Option>
+            <Select.Option value="3D">3D</Select.Option>
+            
+          </Select>
+          </Form.Item>
+        
         <Form.Item label="Ngày chiếu">
           <DatePicker onChange={onChangeDate} 
           onPreview={onPreview}

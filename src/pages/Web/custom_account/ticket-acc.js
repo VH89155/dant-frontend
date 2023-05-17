@@ -36,7 +36,7 @@ const Ticket_Acc = () => {
         <Spin tip="Loading..." spinning={auth?.isFetching}>
           <Sidebar namePage={namePage} setLoad={setLoad} auth={auth}></Sidebar>
 
-        <Content_Ticket tickets={tickets}></Content_Ticket>
+        <Content_Ticket  tickets={tickets} setLoad={setLoad} load={load}></Content_Ticket>
        
         </Spin>
       </div>

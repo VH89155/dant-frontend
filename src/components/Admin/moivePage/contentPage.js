@@ -172,10 +172,22 @@ const Content_pageMoive = (props) => {
           ),
         },
         {
+          title: 'Loại màn hình',
+          dataIndex: 'display_technology',
+          key: 'display_technology',
+          width: '20%',
+          
+          ...getColumnSearchProps('display_technology'),
+          render: (_, record) => (           
+            <div style={{textAlign:"left", fontSize:"20", fontWeight:550,color:"#222"}}
+                 > {record.display_technology} </div>
+          ),
+        },
+        {
             title: 'Hình ảnh',
             dataIndex: 'images',
             key: 'images',
-            width: '20%',
+            width: '10%',
             
             
             render: (_, record) => (

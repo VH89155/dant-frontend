@@ -3,7 +3,7 @@ import { Dayjs } from 'dayjs';
 
 import * as Yup from "yup";
 import axios from "axios";
-import { Button, Form,Radio, Input, Select,DatePicker,message } from "antd";
+import { Button, Form,Radio, Input, Select,DatePicker,message,Spin } from "antd";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import OptionRoom from "../../components/Admin/showtime/optionRoom";
@@ -23,14 +23,19 @@ const AddShowTime = () => {
       time: Yup.date().required("Required Date"),
     }),
     onSubmit: async (values) => {
+      setSpin(true)
       console.log(values);
       await axios.post("http://localhost:8080/api/show-time", values)
       .then((res)=>{
         console.log(res.data)
-        message.success("Thêm thành công")
+        if(res.data.statusError==="")message.success("Thêm thành công")
+        else if(res.data.statusError!=="")  message.error(res.data.statusError)
+        
         setLoad(!load)
-      } ).catch (()=>{
+        setSpin(false)
+      }).catch (()=>{
         message.error("Thêm thất bại")
+        setSpin(false)
       })
     },
   });
@@ -87,6 +92,7 @@ const AddShowTime = () => {
 
 /// check ////////////
 const [check, setCheck] = useState(1);
+const [ spin,setSpin] = useState(false)
 const onChange = (e) => {
   console.log('radio checked', e.target.value);
   if(e.target.value === 1){
@@ -113,6 +119,7 @@ const onChange = (e) => {
   },[load,time,checkMoives,check])
   return (
     <>
+    <Spin size="large" spinning={spin} > 
     <div style={{margin:"auto", display:"flex"}}>
       <Form
         labelCol={{
@@ -168,7 +175,7 @@ const onChange = (e) => {
   </Radio.Group>  
   <br></br>
       {check === 1 ?(<>
-      <ShowTimeAll_Moive showTimes={showTimes}></ShowTimeAll_Moive>
+      <ShowTimeAll_Moive load={load} setLoad={setLoad} showTimes={showTimes}></ShowTimeAll_Moive>
       </>)
 
       :(<>
@@ -178,6 +185,7 @@ const onChange = (e) => {
       </div>
       </div>  
       </div>
+      </Spin>
     </>
   );
 };

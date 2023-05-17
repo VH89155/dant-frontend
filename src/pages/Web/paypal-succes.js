@@ -13,19 +13,25 @@ const PayPal_succes = () => {
   let combo= params.get('combo');
   let price = params.get('price');
   let number = params.get('number');
+  let ma_giam_gia = params.get('giamgia');
 //    console.log(user, user, time, combo, price,number)  
     // console.log(paymentId,PayerID,params)
     console.log(combo, number)
     number = number.split(',,')
     combo = combo.split('-,')
     console.log(combo, number)
-    const comboNew = combo.map((item)=>{
+  
+     
+    
+    const  comboNew = combo.map((item)=>{
         let i = item.split(',')
         return{
             id:i[0],
             value: parseInt(i[1])
         }
     })
+    
+    
     console.log(comboNew)
 
     useEffect(()=>{
@@ -39,7 +45,8 @@ const PayPal_succes = () => {
         price: price,
         payment:"PayPal",
         // payment:setPayment,
-        combo: comboNew
+        combo: comboNew,
+        discount: ma_giam_gia
       }
     ) .then((res)=>{
       console.log(res.data)
@@ -57,6 +64,7 @@ const PayPal_succes = () => {
     }).catch(err=>{
       console.log(err)
       message.err("Thanh toán thất bại, Lỗi: ",err)
+      navigate("/default/ticket")
     //   setIsModalOpen(false);
     })
         }
@@ -72,7 +80,7 @@ const PayPal_succes = () => {
                     textAlign: "center", marginTop:200}}>Success</h3>
              
         </div>
-        <Link to="/default/ticket"> <button className="btn">Tiép tục mua vé</button></Link>
+        {/* <Link to="/default/ticket"> <button className="btn">Tiép tục mua vé</button></Link> */}
     </> );
 }
  

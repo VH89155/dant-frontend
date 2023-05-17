@@ -36,8 +36,8 @@ import ShowTimePage from '../pages/Admin/showtime';
 import TrashMoive from '../pages/Admin/trash-moive';
 import User_Show from '../pages/Admin/user';
 import New_Manage from '../pages/Admin/new-page';
-
-
+import Ticket_page from '../pages/Admin/ticket-page';
+import Discount_page from '../pages/Admin/discount-page';
 
 const publicRoutes =[
     {path: '/', component: Home, layout: LayoutDefault},
@@ -75,6 +75,8 @@ const publicRoutes =[
     {path: '/admin/trash-moive', component: TrashMoive, layout: DashBoardAdmin},
     {path: '/admin/user', component: User_Show, layout: DashBoardAdmin},
     {path: '/admin/news', component: New_Manage, layout: DashBoardAdmin},
+    {path: '/admin/tickets', component: Ticket_page, layout: DashBoardAdmin},
+    {path: '/admin/discount', component: Discount_page, layout: DashBoardAdmin},
 
 
 

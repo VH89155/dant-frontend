@@ -147,7 +147,9 @@ const Tickets_ShowTime_Detail = (props) => {
             // ...getColumnSearchProps('number'),
             render: (_, record) => (
                 <p>{record.combo?.map((item,index)=>{
-                    return  `Tên: ${item.name}, SL: ${item.value}\n `
+                    return (
+                       <p> Tên Combo : {item.name} <p> SL: {item.value}</p>  </p> 
+                    ) 
                 } )} </p>
                 ),
           },

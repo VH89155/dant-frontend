@@ -3,7 +3,6 @@ import { useFormik } from "formik";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleLogin } from "@react-oauth/google";
 import { Redirect } from 'react-router-dom';
-import FacebookLogin from 'react-facebook-login'
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import * as Yup from "yup";
@@ -15,9 +14,7 @@ import { useEffect, useState } from "react";
 
 
 const FormLogin = (props) => {
-  const responseFacebook = (response) => {
-    console.log(response);
-  }
+ 
   const { forgot, setForgot } = props;
   const auth = useSelector((state) => state?.auth?.login?.currentUser);
   const navigate = useNavigate();
@@ -184,7 +181,7 @@ const FormLogin = (props) => {
           />
         </GoogleOAuthProvider>
         </div>
-        <button class="fb btn btn-lg btn-block btn-primary mb-2" onClick={handleFacebookLogin}>
+        <button class="fb btn btn-lg btn-block btn-primary mb-2" >
           <i class="fab fa-facebook-f me-2"></i>Đăng nhập bằng Facebook
         </button>
         
@@ -204,7 +201,7 @@ const FormLogin = (props) => {
     cssClass="my-facebook-button-class"
     icon="fa-facebook"
   /> */}
-       <button onClick={handleFacebookLogin}>Đăng nhập bằng Facebook</button> 
+      
       </div>
       {/* </div> */}
 

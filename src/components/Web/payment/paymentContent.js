@@ -1,5 +1,5 @@
 import "./index.css";
-import { Checkbox, Form, Input, InputNumber, Space, Button ,Radio,Modal,message} from "antd";
+import { Checkbox, Form, Input, InputNumber, Space, Button ,Radio,Modal,message, Spin} from "antd";
 import axios, { Axios } from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,9 +13,16 @@ const PaymentContent = (props) => {
   // }
   const { state } = props;
   const [check,setCheck] = useState(false)
+  const [spin,setSpin] = useState(false)
   const [payment, setPayment] = useState("")
+  const [maGiamGia, setMaGiamGia] = useState("")
+
   const { data, room, moive, total, chon_combo,showtimeId } = state;
-  
+  const [tong, setTong] = useState(total)
+  const [giamgia, setGiamgia] = useState("")
+  const [ma, setMa] = useState("")
+
+
   console.log(showtimeId)
   let { time } = state;
   time = new Date(time);
@@ -36,7 +43,9 @@ const PaymentContent = (props) => {
       price: total,
       payment: payment,
       // payment:setPayment,
-      combo: chon_combo
+      combo: chon_combo,
+      ma_giam_gia : maGiamGia
+      
     }).then((res)=>{
       // navigate('https://www.npmjs.com/package/passport-facebook-token')
       return res.data
@@ -46,26 +55,7 @@ const PaymentContent = (props) => {
       window.location.replace(`${data.links[0]}`)
     })
 
-    // await axios.post("http://localhost:8080/api/ticket/add-ticket",
-    //   {
-    //     time : showtimeId,
-    //     user: auth?._id,
-    //     number: data.ghe_chon,
-    //     price: total,
-    //     payment: payment,
-    //     // payment:setPayment,
-    //     combo: chon_combo
-    //   }
-    // ) .then((res)=>{
-    //   console.log(res.data)
-    //   message.success("Thanh toán thành công")
-    //   setIsModalOpen(false);
-      
-    // }).catch(err=>{
-    //   console.log(err)
-    //   message.err("Thanh toán thất bại, Lỗi: ",err)
-    //   setIsModalOpen(false);
-    // })
+    
   };
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -82,6 +72,40 @@ const PaymentContent = (props) => {
       showModal();
     }
   }
+
+  //////////////// get max
+  const checkMa = async() =>{
+    setSpin(true)
+     await axios.post("/api/discount/get",{ 
+      number: data.ghe_chon, 
+      userID: auth?._id, 
+      total: total, 
+      nameDiscount : ma })
+      .then((res)=>{ 
+        if(res.data.success) 
+        { 
+        console.log(res.data) 
+        console.log(res.data.discount_value)
+        setGiamgia(res.data.discount_value)
+        if(res.data.discount_value.includes("%")){
+          console.log(parseFloat( res.data.discount_value))
+          setTong(( total - total*(parseFloat(res.data.discount_value))/100))
+          setMaGiamGia(res.data._id)
+        
+        }
+        else if(!res.data.discount_value.includes("%")) 
+        setTong(total - res.data.discount_value)
+      } 
+      console.log(res.data) 
+      if(!res.data.success) 
+       message.error(res.data.message)
+    })
+      .catch((err)=>{ console.log(err) })
+      setSpin(false)
+    
+    
+    }
+
   const navigate = useNavigate()
   useEffect(()=>{
     if(!auth){
@@ -102,10 +126,13 @@ const PaymentContent = (props) => {
                 Website đang bảo trì, để sử dụng vui lòng tải/cập nhật ứng dụng
                 CGV mới nhất để tiếp tục
               </p>
+              <Spin spinning={spin}></Spin>
               <Form>
                 <Form.Item style={{ paddingLeft: 20 }} label="Nhập mã giảm giá">
-                  <Input style={{ width: 200, marginRight: 20 }}></Input>
-                  <Button type="primary" htmlType="submit">
+                  <Input style={{ width: 200, marginRight: 20 }} onChange={(e)=>{
+                    setMa(e.target.value);
+                  }}></Input>
+                  <Button type="primary" htmlType="submit" onClick={checkMa}>
                     Áp dụng
                   </Button>
                 </Form.Item>
@@ -117,22 +144,27 @@ const PaymentContent = (props) => {
               <div className="check-out-step">
                 <Radio.Group onChange={onChange} style={{paddingLeft:20}} >
                   <Space direction="vertical">
-                    <Radio value={"ATM"} style={{display:"flex"}}> 
+                    <Radio disabled value={"ATM"} style={{display:"flex"}}> 
                         <img style={{width:"37px", height:"37px", marginRight:10}}
                          src="https://ocwckgy6c1obj.vcdn.cloud/media/catalog/product/placeholder/default/atm_icon.png"></img>
                     ATM card (Thẻ nội địa)</Radio>
-                    <Radio value={"Visa"} style={{display:"flex"}}> 
+                    <Radio  disabled value={"Visa"} style={{display:"flex"}}> 
                         <img style={{width:"37px", height:"37px", marginRight:10}}
                          src="https://ocwckgy6c1obj.vcdn.cloud/media/catalog/product/placeholder/default/visa-mastercard-icon.png"></img>
                    Thẻ quốc tế (Visa, Master, Amex, JCB)</Radio>
-                    <Radio value={"momo"} style={{display:"flex"}}> 
+                    <Radio  disabled value={"MoMo"} style={{display:"flex"}}> 
                         <img style={{width:"37px", height:"37px", marginRight:10}}
                          src="https://ocwckgy6c1obj.vcdn.cloud/media/catalog/product/placeholder/default/momo_icon.png"></img>
                    Ví MoMo</Radio>
-                    <Radio value={"zaloPay"} style={{display:"flex"}}> 
+                   <Radio  disabled value={"ZaloPay"} style={{display:"flex"}}> 
                         <img style={{width:"37px", height:"37px", marginRight:10}}
                          src="https://ocwckgy6c1obj.vcdn.cloud/media/catalog/product/placeholder/default/logo-zalopayt22023.jpg"></img>
                            Ví Zalo Pay</Radio>
+                           <Radio value={"PaylPal"} style={{display:"flex"}}> 
+                        <img style={{width:"37px", height:"37px", marginRight:10}}
+                         src="https://www.payvnn.com/wp-content/uploads/2010/12/Hoi-dap-Paypal.jpg"></img>
+                           PayPal</Radio>
+
                     {/* <Radio value={4}>
                       More...
                       {value === 4 ? (
@@ -200,12 +232,12 @@ const PaymentContent = (props) => {
                 })}{" "}
               </p>
               <p>
-                Giảm giá:{" "}
+                Giảm giá: {giamgia}
                
               </p>
               <p>
                 Tổng tiền:{" "}
-                <span style={{ color: "red" }}>{total / 1000}.000 VND</span>{" "}
+                <span style={{ color: "red" }}>{tong / 1000}.000 VND</span>{" "}
               </p>
             </div>
             <button className="btn-previous" onClick={ThanhToan} style={{marginRight:20}}>
