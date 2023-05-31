@@ -1,5 +1,17 @@
+import { useEffect, useState } from "react";
 import "./ticket_price.css"
+import axios from "axios";
 const Ticket = () => {
+   const [giaVe, setGiaVe] = useState({})
+
+   useEffect(()=>{
+      const fechData = async()=>{
+        await axios.get("/api/new/646b2473bacdd834f63a1882").then((res)=>{
+          setGiaVe(res.data.news)
+        })
+      }
+      fechData()
+   },[giaVe])
     return ( <>
     <div className="container">
       <div className="page-title">
@@ -15,7 +27,9 @@ const Ticket = () => {
     <div className="title-page-2">2. Giá vé xem phim 3D</div>
     <img src="../images/bang-gia-ve-3D.png"></img>
     
-    
+    {giaVe?.data && ( <>
+     <div dangerouslySetInnerHTML={{ __html : giaVe.data }}></div>
+      </>) }
      </div>
     
     </> );

@@ -7,9 +7,10 @@ import Booking from "../../components/Web/booki_ticket/booking";
 import { useSelector } from "react-redux";
 
 const timeNow = new Date();
-const Book_Ticket = () => {
+const Book_Ticket = (props) => {
     const[ data,setData] = useState({})
     const {showtimeId}= useParams()
+  
     const [moive,setMoive] = useState({})
     const [room,setRoom] = useState({})
     const [time,setTime]= useState({})
@@ -25,7 +26,8 @@ const Book_Ticket = () => {
               .then((response) =>{
                 console.log(response.data);
                 setMoive(response.data.moive);
-                setRoom(response.data.room);
+                console.log("moive",response.data.moive)
+              setRoom(response.data.room);
                 setTime(response.data.showTime.time);
                 setTicket(response.data.ticket)
                 // setTime(response.data.arayTimeDate);

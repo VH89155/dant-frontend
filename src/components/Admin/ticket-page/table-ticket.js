@@ -4,19 +4,23 @@ import React, { useRef, useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import TimelineItem from "antd/es/timeline/TimelineItem";
+import CommontUtils from "../../../utils/CommonUtils";
+
 
 const Table_ticket = (props) => {
-  const { tickets, load, setLoad, value,spin, setSpin } = props;
-  console.log("tickets", tickets);
-  const ticketReal = tickets.map((item) => {
-    const time = new Date(item.showTime.time);
+  const { bills, load, setLoad, value,spin, setSpin } = props;
+  console.log("bills", bills);
+ let  billReal = bills.map((item) => {
+    const time = new Date(item?.ticket.showTime.time);
 
     return {
       ...item,
-      nameMoive: item.showTime.moive.name,
+      nameMoive: item?.ticket.showTime.moive.name,
       time: time,
+      number: item?.ticket.number
     };
   });
+  
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
@@ -154,8 +158,8 @@ const Table_ticket = (props) => {
       width: "20%",
       ...getColumnSearchProps("showtime"),
       sorter: (a, b) => {
-        const timea = new Date(a.showTime.time);
-        const timeb = new Date(b.showTime.time);
+        const timea = new Date(a?.ticket.showTime.time);
+        const timeb = new Date(b?.ticket.showTime.time);
         return timea.getTime() - timeb.getTime();
       },
       sortDirections: ["descend", "ascend"],
@@ -244,7 +248,7 @@ const Table_ticket = (props) => {
             type="primary"
             onClick={async()=>{
               setSpin(true)
-               await axios.put(`/api/ticket/ticket-accuracy/${record.tiketID}`).then((res)=>{
+               await axios.put(`/api/ticket/ticket-accuracy/${record._id}`).then((res)=>{
                   if(res.data.success){
                     message.success("Xác nhận thành công")
                     setLoad(!load)
@@ -271,6 +275,9 @@ const Table_ticket = (props) => {
             onClick={(e) => {}}
             className="navbar-register"
           > Xác nhận   </Button>}
+           {value === "4" &&  <>
+            <div> <p style={{textAlign:"center", width:"100%",padding:"10", backgroundColor:"green", color:"#fff"}}>Hoàn thành</p></div>
+           </>}
             {/* {value=== "3" && "Xác nhận"}  */}
        
           {/* <Button type="primary" onClick={(e)=>{
@@ -280,11 +287,35 @@ const Table_ticket = (props) => {
       ),
     },
   ];
+  const handleClickExport = async()=>{
+    const data = billReal.map(item=>{
+      const ghe = item.ticket.number.reduce((number, item)=> number + `${item},` ,"")
+      const combo = item.combo?.reduce((combo,item)=>{
+        return combo + `${item.name} : ${item.value}, `
+      },"")
+   
+      return{
+        ID_VE: item._id,
+        Ten_Phim : item.ticket.showTime.moive.name,
+        So_ghe: ghe ,
+        ThoiGianChieu: `${item.time.getHours()}: ${item.time.getMinutes()}`,
+        NgayChieu: `${item.time.getDate()}/ ${item.time.getMonth()+1}/${item.time.getFullYear()}`,
+        Phong_Chieu: item.ticket.showTime.room.name,
+         combo: combo,
+        Tong_Tien: item.price,
+        email_Khach: item.ticket.user.email,
+        
 
+        
+      }
+    })
+    await CommontUtils.exportExcel(data,"Danh sach ve","DSVe")
+  }
   return (
     <>
+    <Button type="primary" onClick={handleClickExport} >Export Excel</Button>
       <Table
-        rowKey={(record) => record.tiketID}
+        rowKey={(record) => record._id}
         columns={columns}
         expandable={{
           expandedRowRender: (record) => (
@@ -294,34 +325,34 @@ const Table_ticket = (props) => {
                   margin: 0,
                 }}
               >
-                ID Vé: {record.tiketID}
+                ID Vé: {record._id}
               </p>
               <p
                 style={{
                   margin: 0,
                 }}
               >
-                Email người mua: {record.user.email}
+                Email người mua: {record?.ticket.user.email}
               </p>
               <p
                 style={{
                   margin: 0,
                 }}
               >
-                Tên người mua: {record.user.fullName}
+                Tên người mua: {record?.ticket.user.fullName}
               </p>
               <p
                 style={{
                   margin: 0,
                 }}
               >
-                Số điện thoại người mua: {record.user.phoneNumber}
+                Số điện thoại người mua: {record?.ticket.user.phoneNumber}
               </p>
             </>
           ),
         //   rowExpandable: (record) => record.name !== "Not Expandable",
         }}
-        dataSource={ticketReal}
+        dataSource={billReal}
       />
       
     </>

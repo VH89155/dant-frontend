@@ -7,7 +7,7 @@ const Ticket_page = () => {
     const [load, setLoad] = useState(true)
     const [spin, setSpin] = useState(false)
     const [ value, setValue]= useState("0")
-    const [tickets,setTickets] = useState([])
+    const [bills,setBills] = useState([])
     const option =[{
         value:"0",
         label:" Vé chưa xác nhận "
@@ -22,6 +22,9 @@ const Ticket_page = () => {
     },{
         value:"3",
         label:"Vé đã hủy "
+    },{
+        value:"4",
+        label:"Vé đã hoàn thành"
     }
 
 ]
@@ -31,8 +34,8 @@ const Ticket_page = () => {
     useEffect(()=>{
         const fetchData = async()=>{
             await axios.get(`/api/ticket/ticket-all/${value}`).then((res)=>{
-               setTickets(res.data.tickets) 
-               console.log(res.data.tickets)
+               setBills(res.data.bills) 
+               console.log("bills asd", res.data.bills)
             })
         }
         fetchData()
@@ -63,6 +66,14 @@ const Ticket_page = () => {
         <h3 style={{color:"#222", textAlign:"center", marginBottom:50}}>VÉ HỦY</h3>
         
         </> )
+        
+
+        }
+        {value === "4" && (<>
+        <h3 style={{color:"#222", textAlign:"center", marginBottom:50}}>VÉ HOÀN THÀNH</h3>
+        
+        </> )
+        
 
         }
         {value === "1" && (<>
@@ -78,7 +89,7 @@ const Ticket_page = () => {
 
         }
         <Spin spinning={spin}>
-        <Table_ticket spin={spin} setSpin={setSpin} tickets={tickets} value={value} load={load} setLoad={setLoad}></Table_ticket>
+        <Table_ticket spin={spin} setSpin={setSpin} bills={bills} value={value} load={load} setLoad={setLoad}></Table_ticket>
         </Spin>
     
     </> );

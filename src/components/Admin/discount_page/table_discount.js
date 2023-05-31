@@ -301,7 +301,7 @@ const Table_discount = (props) => {
                 className="navbar-register"
                 onClick={(e)=>{
                     e.preventDefault();   
-                    setDiscount(record)            
+                    // setDiscount(record)            
                     showModal1() }}
               > Xóa   </Button>
 
@@ -335,10 +335,11 @@ const Table_discount = (props) => {
      
         setIsModalOpen(false);
         
-       
+        setLoad(!load)
       };
       const handleCancel = () => {
         setIsModalOpen(false);
+        setLoad(!load)
        
       };
 
@@ -375,7 +376,9 @@ const Table_discount = (props) => {
       };
 
 
-   
+  //  useEffect(()=>{
+
+  //  },[discount])
 
     return ( <>
         <Table
@@ -393,7 +396,7 @@ const Table_discount = (props) => {
         dataSource={discountEdit}
       />
       <Modal width={1000} title="Chỉnh sửa mã giảm giá" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <Edit_Discount  load={load} setLoad ={setLoad} discount={discount} ></Edit_Discount>
+        <Edit_Discount   discount={discount} ></Edit_Discount>
       </Modal> 
 
      <Modal width={1000} title="Bạn có muốn xóa mã này ra khỏi danh sách chiếu" open={isModalOpen1} onOk={handleOk1} onCancel={handleCancel1}>

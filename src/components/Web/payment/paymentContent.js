@@ -17,11 +17,11 @@ const PaymentContent = (props) => {
   const [payment, setPayment] = useState("")
   const [maGiamGia, setMaGiamGia] = useState("")
 
-  const { data, room, moive, total, chon_combo,showtimeId } = state;
+  const { data, room, moive, total, chon_combo,showtimeId,ve_chon } = state;
   const [tong, setTong] = useState(total)
   const [giamgia, setGiamgia] = useState("")
   const [ma, setMa] = useState("")
-
+  console.log("ve_chon", data.ve_chon)
 
   console.log(showtimeId)
   let { time } = state;
@@ -44,7 +44,8 @@ const PaymentContent = (props) => {
       payment: payment,
       // payment:setPayment,
       combo: chon_combo,
-      ma_giam_gia : maGiamGia
+      ma_giam_gia : maGiamGia,
+      ve_chon: data.ve_chon
       
     }).then((res)=>{
       // navigate('https://www.npmjs.com/package/passport-facebook-token')

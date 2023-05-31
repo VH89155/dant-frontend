@@ -261,7 +261,7 @@ const Content_pageMoive = (props) => {
   dataSource={allmoives}  />;
 
 
-    <Modal width={1000} title="Chi tiết phim" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+    <Modal width={1000} title="Chỉnh sửa " open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
         <MoiveShow edit={edit} load={load} setLoad ={setLoad} isEdit={isEdit} moiveItem={moiveItem}></MoiveShow>
       </Modal> 
 

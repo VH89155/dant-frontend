@@ -50,7 +50,7 @@ const Content_New = (props) => {
       formik.values.name = name;
       formik.values.data = dataformik;
       const uploadData = new FormData();
-      if (values ===1  ) {
+      if (value ===1  ) {
          if(values.url !=="" ){
           uploadData.append("file", values.url, "file");
           values.image = "";

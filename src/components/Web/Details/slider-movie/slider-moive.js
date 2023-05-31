@@ -1,8 +1,13 @@
 import "./slider-moive.css";
 import { Carousel } from "@trendyol-js/react-carousel";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import Slider from "react-slick"
 
-const SliderMoive = () => {
+const SliderMoive = (props) => {
+   const {moive} = props
+   const allMoive = useSelector(state=>state?.moives?.moives?.allMoives)
+   console.log(allMoive,moive)
     const settings = {
         dots: true,
         infinite: true,
@@ -13,35 +18,22 @@ const SliderMoive = () => {
   return (
     <>
       <div className="slider">
-        <p> Phim đang chiếu </p>
+        <p style={{color:"#ccc", fontSize:"18px", fontWeight:"500"}}> Phim đang chiếu </p>
         
         <Slider {...settings} >
-            <div className="slider-img"> <img
-            src="https://chieuphimquocgia.com.vn/Content/Images/0016820_0.jpeg"
-            alt=""
-          ></img></div>
+            {allMoive?.map((item,index)=>{
+                if(item._id !== moive._id)
+                return (
+                  <div className="slider-img" key={index}>
+                    <Link to={`/details/${item._id}`} > <img
+                  src={item?.images[0]}
+                  alt=""
+                ></img></Link> </div>
+                )
+            })}
+           
          
-         <div className="slider-img"> <img
-            src="https://chieuphimquocgia.com.vn/Content/Images/0016820_0.jpeg"
-            alt=""
-          ></img></div>
-           <div className="slider-img"> <img
-            src="https://chieuphimquocgia.com.vn/Content/Images/0016820_0.jpeg"
-            alt=""
-          ></img></div>
-           <div className="slider-img"> <img
-            src="https://chieuphimquocgia.com.vn/Content/Images/0016820_0.jpeg"
-            alt=""
-          ></img></div>
-           <div className="slider-img"> <img
-            src="https://chieuphimquocgia.com.vn/Content/Images/0016820_0.jpeg"
-            alt=""
-          ></img></div>
-
-<div className="slider-img"> <img
-            src="https://chieuphimquocgia.com.vn/Content/Images/0016820_0.jpeg"
-            alt=""
-          ></img></div>
+       
         </Slider>
       </div>
      

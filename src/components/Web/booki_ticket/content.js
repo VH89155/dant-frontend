@@ -1,18 +1,31 @@
 import { Checkbox, Col, Row } from "antd";
 import Check_ghe from "./check_ghe";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 
 const Content = (props) => {
   const {moive,time,room,ticket,setNext,setData} = props;
   const [Chon_ghe, setChon_ghe] = useState([])
+  const [chonVe, setChonVe]= useState([])
+  const [giaVe,setGiaVe] = useState([])
   const [tong, setTong] = useState(0)
- 
+  console.log(moive)
   useEffect(() =>{
     setData({
       tong: tong,
       ghe_chon: Chon_ghe,
+      ve_chon: chonVe,
     })
+
+    const fetchData = async()=>{
+      await axios.get("/api/price-ticket").then((res)=>{
+        setGiaVe(res.data.priceTicket)
+      })
+    }
+
+    fetchData()
   },[tong,Chon_ghe])
   const Change =()=>{
     
@@ -89,10 +102,10 @@ const Content = (props) => {
             style={{ width: 609, height: 32 }}
           ></img>
 
-     <Check_ghe time={time} setTong={setTong} moive={moive} SelectedChair={SelectedChair} Chon_ghe={Chon_ghe} setChon_ghe={setChon_ghe}></Check_ghe>
+     <Check_ghe chonVe={chonVe} setChonVe={setChonVe} giaVe={giaVe} time={time} setTong={setTong} moive={moive} SelectedChair={SelectedChair} Chon_ghe={Chon_ghe} setChon_ghe={setChon_ghe}></Check_ghe>
         </div>
         <div className="checkmoive_right">
-          <button className="title-moive_check">CHỌN LẠI PHIM</button>
+        <Link to={"/ticket-booking"}> <button className="title-moive_check">CHỌN LẠI PHIM</button></Link> 
           <img
             src={moive.images}
             style={{ width: 176, height: 260 }}

@@ -21,10 +21,12 @@ const Edit_Discount = (props) => {
     const {discount, load, setLoad} = props
     const timeStart = new Date(discount.start_time)
     const timeEnd = new Date(discount.end_time)
+    const [discountChon,setDiscount] = useState(discount)
+    const [name,setName] = useState(discount.name)
     const formik = useFormik({
         initialValues: {
           id: discount._id,
-          name: discount.name,
+          name: name,
           discount_value: discount.discount_value,
           start_time:(discount.start_time),
           end_time: ( discount.end_time),
@@ -42,15 +44,15 @@ const Edit_Discount = (props) => {
         }),
         onSubmit: async (values) => {
           console.log(values);
-            await axios.put(`/api/discount/edit`, values)
-            .then((res)=>{
-              console.log(res.data)
-              if(res.data.success)message.success("Sửa thành công")
-              else if(!res.data.success)  message.error("Không thành công")   
-              setLoad(!load)
-            }).catch (()=>{
-              message.error("Sửa thất bại")
-            })
+            // await axios.put(`/api/discount/edit`, values)
+            // .then((res)=>{
+            //   console.log(res.data)
+            //   if(res.data.success)message.success("Sửa thành công")
+            //   else if(!res.data.success)  message.error("Không thành công")   
+            //   setLoad(!load)
+            // }).catch (()=>{
+            //   message.error("Sửa thất bại")
+            // })
         },
       });
     
@@ -64,7 +66,10 @@ const Edit_Discount = (props) => {
         formik.values.end_time = value[1]
       };
    
-   
+   useEffect(()=>{
+    setDiscount(discount)
+    setName(discount.name)
+   },[discount])
     return ( 
 
         <>
@@ -87,12 +92,13 @@ const Edit_Discount = (props) => {
             type="text"
             id="name"
             name="name"
-            defaultValue={formik.values.name}
+            placeholder={discount.name}
+            // defaultValue={formik.values.name}
             // value={formik.values.name}
             onChange={(e) => {
               formik.values.name = e.target.value;
             }}
-            placeholder="Enter your name"
+            // placeholder="Enter your name"
           />
           {formik.errors.name && <p class="errorMsg">{formik.errors.name}</p>}
         </Form.Item>
@@ -160,6 +166,7 @@ const Edit_Discount = (props) => {
             // }}
             // format="YYYY-MM-DD HH:mm"
             onChange={onChangeDate}
+
             defaultValue={[dayjs(`${timeStart.getFullYear()}-${timeStart.getMonth()+1} -${timeStart.getDate()}}`, dateFormat), dayjs(`${timeEnd.getFullYear()}-${timeEnd.getMonth()+1} -${timeEnd.getDate()}}`, dateFormat)]}
             onOk={onOk}
           />

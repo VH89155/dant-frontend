@@ -36,19 +36,24 @@ const App = ({ children }) => {
   }
   const items = [
     getItem(
-      "Option 1",
-      "1",
-      <Link>
+      "Tổng quan",
+      "0",
+      <Link to="/admin">
         <PieChartOutlined />{" "}
       </Link>
     ),
-    getItem(
-      "Option 2",
-      "2",
-      <Link to="">
-        <DesktopOutlined />
-      </Link>
-    ),
+    getItem("Thống kê chung", "sub6", <PieChartOutlined />, [
+      getItem(
+        "Thống kê phim",
+        "1",
+        <Link to="/admin/statistical">
+          <PieChartOutlined />{" "}
+        </Link>
+      ),
+      
+    ]),
+   
+   
     getItem("Phim", "sub1", <VideoCameraOutlined />, [
       getItem(
         "Danh sách phim",
@@ -87,6 +92,13 @@ const App = ({ children }) => {
           <FileAddOutlined />
         </Link>
       ),
+      getItem(
+        "Lịch chiếu hoàn tất",
+        "20",
+        <Link to="/admin/show-time-success">
+          <FileAddOutlined />
+        </Link>
+      ),
     ]),
     getItem("Tài khoản", "sub3", <UserOutlined />, [
       getItem(
@@ -119,6 +131,7 @@ const App = ({ children }) => {
           <UserAddOutlined />
         </Link>
       ),
+    
      
     ]),
     getItem(
@@ -135,6 +148,16 @@ const App = ({ children }) => {
         <PieChartOutlined />{" "}
       </Link>
     ),
+    getItem("Combo đồ ăn", "sub10", <Link to="/admin/add-combo">
+    <FileDoneOutlined />
+  </Link>),
+    getItem(
+      "Quản lí phòng chiếu",
+      "22",
+      <Link to={"/admin/room"}>
+        <PieChartOutlined />{" "}
+      </Link>
+    ),
   ];
   const [collapsed, setCollapsed] = useState(false);
   const {
@@ -148,6 +171,10 @@ const App = ({ children }) => {
       await axios.get("/api/show-time")
     }
     fetch()
+    const scrollToTop = () => {
+      window.scrollTo(0, 0);
+    };
+    scrollToTop()
   },[])
   return (<>
     {auth? (<>

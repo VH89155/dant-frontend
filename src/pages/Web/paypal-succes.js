@@ -10,6 +10,7 @@ const PayPal_succes = () => {
     const PayerID = params.get('PayerID');
    const user = params.get('user');
    const time= params.get('time');
+   let veChon = params.get('veChon');
   let combo= params.get('combo');
   let price = params.get('price');
   let number = params.get('number');
@@ -19,6 +20,8 @@ const PayPal_succes = () => {
     console.log(combo, number)
     number = number.split(',,')
     combo = combo.split('-,')
+   
+    veChon = veChon.split('-,')
     console.log(combo, number)
   
      
@@ -30,7 +33,15 @@ const PayPal_succes = () => {
             value: parseInt(i[1])
         }
     })
-    
+    veChon = veChon.map((item)=>{
+      let i = item.split(',')
+      return{
+          id:i[0],
+          name:  i[1],
+          price: parseInt(i[2])
+      }
+  })
+  console.log("veChon",veChon);
     
     console.log(comboNew)
 
@@ -46,7 +57,8 @@ const PayPal_succes = () => {
         payment:"PayPal",
         // payment:setPayment,
         combo: comboNew,
-        discount: ma_giam_gia
+        discount: ma_giam_gia,
+        veChon:veChon
       }
     ) .then((res)=>{
       console.log(res.data)

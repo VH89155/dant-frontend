@@ -15,11 +15,11 @@ const Content_Ticket = (props) => {
   const{ load,setLoad} = props
   let {tickets} = props
   tickets.sort((a,b)=>{
-    if (a.showTime.time > b.showTime.time) return -1;
-    if (a.showTime.time < b.showTime.time) return 1;
+    if (a.ticket.showTime.time > b.ticket.showTime.time) return -1;
+    if (a.ticket.showTime.time < b.ticket.showTime.time) return 1;
     return 0;
   })
-  const [ticketID,setTicketID] = useState('')
+  const [billID,setBillID] = useState('')
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpen1, setIsModalOpen1] = useState(false);
@@ -27,7 +27,7 @@ const Content_Ticket = (props) => {
     setIsModalOpen(true);
   };
   const handleOk = async() => {
-       await axios.put(`/api/ticket/ticket-cancel/${ticketID}`).then((res)=>{
+       await axios.put(`/api/ticket/ticket-cancel/${billID}`).then((res)=>{
           if(res.data.success) {
             message.success("Đã gửi yêu cầu hủy vé của bạn")
             setLoad(!load)
@@ -93,20 +93,20 @@ const Content_Ticket = (props) => {
             tickets.map((item,index)=>
              
             {
-              const moive = item.showTime.moive;
-              const time = new Date(item.showTime.time);
+              const moive = item.ticket.showTime.moive;
+              const time = new Date(item.ticket.showTime.time);
               const combo = item.combo
                return (
-                <div className='item-ticket' key={item.tiketID}>
+                <div className='item-ticket' key={item.ticket.tiketID}>
                
                  
                  
-                 { !item.vote && !item.showTime.status ? (<>
+                 { !item.ticket.vote && !item.ticket.showTime.status ? (<>
                   {item.cancel  ? <>
                   
                   <div className='ticket-cancel load'>Đang chờ hủy</div>
                 </> : <>
-                { item.status ? (<>
+                { item.status && !item.ticket.showTime.status ? (<>
                     <div className='ticket-success'>Đã xác nhận</div>
                 </>) :
                 <><div className='ticket-loadding'>Chờ xử lý</div></>
@@ -116,7 +116,7 @@ const Content_Ticket = (props) => {
                 <Button type="primary" className='ticket-cancel' onClick={()=>{
                   
                   showModal()
-                  setTicketID(item.tiketID)
+                  setBillID(item._id)
                   
                   }} danger>Hủy vé</Button>
                 </>
@@ -133,15 +133,30 @@ const Content_Ticket = (props) => {
 
                  }
                  {
-                 !item.vote && item.showTime.status && <>
+                 !item.ticket.vote && item.ticket.showTime.status ? <>
                     <Button type="primary" className='ticket-cancel' onClick={()=>{
                   
                   showModal1()
-                  setTicket(item)
+                  setTicket(item.ticket)
                   
                   }} >Đánh giá</Button>
+                  </> :
+                  <>
+                 
                   </>
                  }
+                  {
+                    item.ticket.vote &&  item.ticket.showTime.status ? <>
+                    <Button type="primary" className='ticket-cancel' onClick={()=>{
+                  
+                  
+                  }} >Đã đánh giá</Button>
+                  </> :
+                  <>
+                 
+                  </>
+                 }
+              
                  
                  
                     <img src={moive.images} ></img>
@@ -149,19 +164,19 @@ const Content_Ticket = (props) => {
                    <p><strong>SUẤT CHIẾU: { time.getHours() >9 ? time.getHours() :`0${ time.getHours()}`} :  { time.getMinutes() >9 ? time.getMinutes() : `${time.getMinutes()}0`} - {time.getDay()>0 ? `Thứ ${time.getDay()+1}` :`Chủ nhật`} : {time.getDate()}/{time.getMonth()+1}/{time.getFullYear()}</strong></p> 
 
                     <strong>{moive.name}</strong>
-                    <p style={{color:"#222", fontWeight:"500"}}>Phòng chiếu: {item.showTime.room.name}</p>
+                    <p style={{color:"#222", fontWeight:"500"}}>Phòng chiếu: {item.ticket.showTime.room.name}</p>
                     <p>ID vé : {item.tiketID}</p>
-                    <p>Số ghế: {item?.number.map(item=>`${item}, `)}</p>
+                    <p>Số ghế: {item?.ticket?.number?.map(item=>`${item}, `)}</p>
                     <p>Combo: {combo?.map(item=> `${item.name} - Số lượng : ${item.value} `)}  </p>
                     <p style={{color:"red"}}><span style={{color:"#222", fontWeight:"500"}}>Tổng số tiền:</span> {item.price/1000}.000 VND</p>
                     
                     </div>
                     <div className='block-moive-ticket'> 
-                    <p>Tài khoản: {item.user.username}</p>
-                    <p>Email: {item.user.email}</p>
-                    <p>Số điện thoại: {item.user.phoneNumber}</p>
+                    <p>Tài khoản: {item.ticket.user.username}</p>
+                    <p>Email: {item.ticket.user.email}</p>
+                    <p>Số điện thoại: {item.ticket.user.phoneNumber}</p>
                     <p>Hình thức thanh toán: {item.payment}</p>
-                    <img src={item.maQR} style={{width: '46%'}}></img>
+                    <img src={item.ticket.maQR} style={{width: '46%'}}></img>
                     </div>
                 </div>
 

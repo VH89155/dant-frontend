@@ -167,22 +167,22 @@ const Tickets_ShowTime_Detail = (props) => {
           },
       
         
-        {
-          title: 'Action',
-          key: 'action',
-          render: (_, record) => (
-            <Space size="middle">
+        // {
+        //   title: 'Action',
+        //   key: 'action',
+        //   render: (_, record) => (
+        //     <Space size="middle">
               
-            <Button type="primary" onClick={(e)=>{
+        //     <Button type="primary" onClick={(e)=>{
                
-            }}  className="navbar-register" >
-            Khôi phục </Button>
-            <Button type="primary" onClick={(e)=>{
+        //     }}  className="navbar-register" >
+        //     Khôi phục </Button>
+        //     <Button type="primary" onClick={(e)=>{
                
-            }} danger >Xóa</Button>
-            </Space>
-          ),
-        },
+        //     }} danger >Xóa</Button>
+        //     </Space>
+        //   ),
+        // },
       ];
     return ( <>
      <h3 style={{textAlign:"center", margin:20}}>Vé đã mua </h3>

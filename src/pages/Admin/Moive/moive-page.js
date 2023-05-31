@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import Content_pageMoive from "../../components/Admin/moivePage/contentPage";
+import Content_pageMoive from "../../../components/Admin/moivePage/contentPage";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllMoive } from "../../redux/apiRequest";
+import { getAllMoive } from "../../../redux/apiRequest";
 import axios from "axios";
 
 const MoivePage = () => {

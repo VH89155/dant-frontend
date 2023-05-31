@@ -12,6 +12,7 @@ const Discount_page = () => {
         const fetch = async() =>{
             axios.get("/api/discount").then((res)=>res.data)
             .then((data)=>{
+                console.log(data.discounts)
            setDiscounts(data.discounts)
            } )
     

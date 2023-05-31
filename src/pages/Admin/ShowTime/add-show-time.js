@@ -6,9 +6,9 @@ import axios from "axios";
 import { Button, Form,Radio, Input, Select,DatePicker,message,Spin } from "antd";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import OptionRoom from "../../components/Admin/showtime/optionRoom";
-import Booking_time from "../../components/Web/ticket-booking/booking_time";
-import ShowTimeAll_Moive from "../../components/Admin/showtime/showTime-moive";
+import OptionRoom from "../../../components/Admin/showtime/optionRoom";
+import Booking_time from "../../../components/Web/ticket-booking/booking_time";
+import ShowTimeAll_Moive from "../../../components/Admin/showtime/showTime-moive";
 
 const AddShowTime = () => {
   const formik = useFormik({

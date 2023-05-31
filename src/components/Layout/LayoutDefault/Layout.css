@@ -192,9 +192,9 @@ Header Style
 .banner-qc{
   
   position: absolute;
-  left: 400px;
-  width: 700px;
-  height: 70px;
+  left: 350px;
+  width: 50%;
+  height: 10vh;
    
 }
 
@@ -640,7 +640,7 @@ Footer Style
 */
 footer{
   
-  background: url(	https://chieuphimquocgia.com.vn/Themes/RapChieuPhim/Content/content.v2/images/banner_bg.jpg) repeat left top;
+  background: url("https://chieuphimquocgia.com.vn/Themes/RapChieuPhim/Content/content.v2/images/banner_bg.jpg") repeat left top;
 }
 
 footer .container{
@@ -649,7 +649,7 @@ footer .container{
 
 
 footer p {
-  text-align: center;
+  /* text-align: center; */
   padding: 30px 0px;
   color: #fff;
   font-weight: 300;
@@ -692,4 +692,8 @@ footer p a:hover {
     display: none;
   }
  
+}
+
+.footer{
+  background: url("https://chieuphimquocgia.com.vn/Themes/RapChieuPhim/Content/content.v2/images/bg01.png" ) repeat left top;
 }

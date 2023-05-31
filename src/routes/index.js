@@ -24,25 +24,35 @@ import News_detail from '../pages/Web/new-detail';
 import DefaultCustom_Acc from '../pages/Web/custom_account/custom_account';
 import Account_edit from '../pages/Web/custom_account/account_edit';
 import Ticket_Acc from '../pages/Web/custom_account/ticket-acc';
-import MoivePage from '../pages/Admin/moive-page';
+
 
 
 // Pages Admin
 
-import HomeAdmin from '../pages/Admin/home';
-import AddMoive from '../pages/Admin/addMoive';
-import AddShowTime from '../pages/Admin/add-show-time';
-import ShowTimePage from '../pages/Admin/showtime';
+import MoivePage from '../pages/Admin/Moive/moive-page';
+import HomeAdmin from '../pages/Admin/statistical/home';
+import AddMoive from '../pages/Admin/Moive/addMoive';
+import AddShowTime from '../pages/Admin/ShowTime/add-show-time';
+import ShowTimePage from '../pages/Admin/ShowTime/showtime';
 import TrashMoive from '../pages/Admin/trash-moive';
 import User_Show from '../pages/Admin/user';
 import New_Manage from '../pages/Admin/new-page';
 import Ticket_page from '../pages/Admin/ticket-page';
 import Discount_page from '../pages/Admin/discount-page';
+import ShowTimeSuccess from '../pages/Admin/ShowTime/showtime-success';
+import AddCombo from '../pages/Admin/Combo/add-combo';
+import Room_page from '../pages/Admin/room-page';
+import HomPage_statistical from '../pages/Admin/statistical/homePage';
+import Statistical from '../pages/Admin/statistical/statistical';
+
+
+
 
 const publicRoutes =[
     {path: '/', component: Home, layout: LayoutDefault},
     {path: '/details/:moiveId', component: Details, layout: LayoutDefault},
     {path: '/show-time', component: ShowTimes, layout: LayoutDefault},
+   
     {path: '/news', component: News, layout: LayoutDefault},
     {path: '/ticket-price', component: TicketPrice, layout: LayoutDefault},
     {path: '/ticket-booking', component: TicketBooking, layout: LayoutDefault},
@@ -77,7 +87,11 @@ const publicRoutes =[
     {path: '/admin/news', component: New_Manage, layout: DashBoardAdmin},
     {path: '/admin/tickets', component: Ticket_page, layout: DashBoardAdmin},
     {path: '/admin/discount', component: Discount_page, layout: DashBoardAdmin},
-
+    {path: '/admin/show-time-success', component: ShowTimeSuccess, layout: DashBoardAdmin},
+    {path: '/admin/add-combo', component: AddCombo, layout: DashBoardAdmin},
+    {path: '/admin/room', component:Room_page, layout: DashBoardAdmin},
+    {path: '/admin/today', component:HomPage_statistical, layout: DashBoardAdmin},
+    {path: '/admin/statistical', component:Statistical, layout: DashBoardAdmin},
 
 
 ];  

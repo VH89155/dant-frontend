@@ -1,4 +1,4 @@
-import Content_pageShow from "../../components/Admin/showtime/contentPageShow";
+import Content_pageShow from "../../../components/Admin/showtime/contentPageShow";
 
 
 

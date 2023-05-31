@@ -93,7 +93,8 @@ const Container = () => {
                             <br></br>
                             Khởi chiếu: {time.getDate()}/{time.getMonth()+1}/{time.getFullYear()}
                           </p>
-                          <Link  className="btn-datve">ĐẶT VÉ</Link>
+                          <Link to ={`/ticket-booking?moiveID=${moive._id}`}  className="btn-datve">ĐẶT VÉ</Link>
+                     
                       </div>
                       </div>
                       

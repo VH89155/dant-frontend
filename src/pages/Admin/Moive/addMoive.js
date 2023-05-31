@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import cloudinaryUpload from "../../service/upload";
+import cloudinaryUpload from "../../../service/upload";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 

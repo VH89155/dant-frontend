@@ -9,20 +9,34 @@ import axios from "axios"
 const TicketBooking = () => {
   const admin =false;
    const [allMoives,setAllMoives] = useState([])
-   const [checkMoives,setCheckMoives] = useState('') 
+
    const [showTimes,setShowTimes] = useState([])
+   const params = new URLSearchParams(window.location.search)
+    const moiveID = params.get('moiveID');
+   
+    console.log(moiveID)
+    // if(moiveID){
+    //   setCheckMoives(moiveID)
+    // }
+    const [checkMoives,setCheckMoives] = useState(moiveID ? moiveID : "") 
    const timeNow = new Date()
    const [time,setTime] = useState(`${timeNow.getDate()}-${timeNow.getMonth()+1}-${timeNow.getFullYear()}`)
    useEffect(()=>{
+   
     axios.get("/api/moive").then((res)=>res.data)
     .then((res)=>{ setAllMoives(res.moives)
     })
-    if(checkMoives !==""){
+    // if(moiveID){
+    //   axios.post(`/api/moive/moive-time?moives=${moiveID}&time=${time}`).then((res)=>{      
+    //     setShowTimes(res.data)
+    // } )
+    // }
+     if(checkMoives !==""){
         axios.post(`/api/moive/moive-time?moives=${checkMoives}&time=${time}`).then((res)=>{      
             setShowTimes(res.data)
         } )
        }
-       if(checkMoives ===""){
+     if(checkMoives ===""){
         axios.post(`/api/moive/moive-time?moives=&time=${time}`).then((res)=>{      
             setShowTimes(res.data)
         } )
@@ -41,7 +55,7 @@ const TicketBooking = () => {
         <div className="content-booking">
           <div className="check-mov">
             <div className="right_title"> CHỌN PHIM</div>
-              <Form_Check  allMoives ={allMoives} setCheckMoives={setCheckMoives}></Form_Check>
+              <Form_Check moiveID={moiveID}  allMoives ={allMoives} setCheckMoives={setCheckMoives} checkMoives={checkMoives}></Form_Check>
          </div>
          <div className="booking-time">
               

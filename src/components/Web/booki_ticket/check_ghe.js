@@ -2,116 +2,370 @@ import { Checkbox, Col, Row } from "antd";
 import { useEffect, useState } from "react";
 
 
-const TongGiaVe = (array, time) =>{
+const TongGiaVe = (array, time,giaVe) =>{
+  let arrayVeChon = []
   console.log(time)
   time = new Date(time);
   let total = 0;
   if( time.getDate()+1 >=6 || time.getDate() ===0){    
     array.map(item=>{
       if(item.startsWith("A") || item.startsWith("B")  || item.startsWith("C")|| item.startsWith("J")){
+         let gia  ;
+         let idVe;
+         let nameVe;
+         giaVe.map(item =>{
+            if(item.name ==="Standard6-CN"){
+                gia = item.price_time
+                idVe = item._id
+                nameVe =item.name
+               
+
+            }
+         })
+        
         if(time.getHours()+1 < 12){
-          total = total + 65000
+          // total = total + 65000
+          total = total + gia[0].price
+          arrayVeChon.push({
+            _id: idVe,
+            name:nameVe,
+            price:gia[0].price
+
+          })
         }
         else if(time.getHours()+1 >=12 && time.getHours() +1<17){
-          total = total + 75000
+          // total = total + 75000
+          total = total +gia[1].price
+          arrayVeChon.push({
+            _id: idVe,
+            name:nameVe,
+            price:gia[1].price
+
+          })
         }
         else if(time.getHours()+1 >=17 && time.getHours()+1<23){
-          total = total + 85000
+          // total = total + 85000
+          total = total +gia[2].price
+          arrayVeChon.push({
+            _id: idVe,
+            name:nameVe,
+            price:gia[2].price
+
+          })
         }
         else if(time.getHours()+1 >=23){
-          total = total + 70000
+          // total = total + 70000
+          total = total +gia[3].price
+          arrayVeChon.push({
+            _id: idVe,
+            name:nameVe,
+            price:gia[3].price
+
+          })
         }
       }
       else if(item.startsWith("D") || item.startsWith("E")  || item.startsWith("F")|| item.startsWith("G") || item.startsWith("H")|| item.startsWith("I")){
+       
+        let gia ;
+        let idVe;
+        let nameVe;
+        giaVe.map(item =>{
+           if(item.name ==="Vip6-CN"){
+               gia = item.price_time
+               idVe = item._id
+               nameVe = item.name
+           }
+        })
+       
         if(time.getHours()+1 < 12){
-          total = total + 75000
+          // total = total + 65000
+          total = total + gia[0].price
+          arrayVeChon.push({
+            _id: idVe,
+            name:nameVe,
+            price:gia[0].price
+
+          })
         }
         else if(time.getHours()+1 >=12 && time.getHours() +1<17){
-          total = total + 80000
+          // total = total + 75000
+          total = total +gia[1].price
+          arrayVeChon.push({
+            _id: idVe,
+            name:nameVe,
+            price:gia[1].price
+
+          })
         }
         else if(time.getHours()+1 >=17 && time.getHours()+1<23){
-          total = total + 90000
+          // total = total + 85000
+          total = total +gia[2].price
+          arrayVeChon.push({
+            _id: idVe,
+            name:nameVe,
+            price:gia[2].price
+
+          })
         }
         else if(time.getHours()+1 >=23){
-          total = total + 75000
+          // total = total + 70000
+          total = total +gia[3].price
+          arrayVeChon.push({
+            _id: idVe,
+            name:nameVe,
+            price:gia[3].price
+
+          })
         }
       }
       else if(item.startsWith("K") ){
+        let gia ;
+       
+        let idVe;
+        let nameVe;
+        giaVe.map(item =>{
+           if(item.name ==="Swettbox6-CN"){
+               gia = item.price_time
+               idVe =item.idVe
+               nameVe = item.name
+           }
+        })
+     
         if(time.getHours()+1 < 12){
-          total = total + 160000
+          // total = total + 65000
+          total = total + gia[0].price
+          arrayVeChon.push({
+            _id: idVe,
+            name:nameVe,
+            price:gia[0].price
+
+          })
         }
         else if(time.getHours()+1 >=12 && time.getHours() +1<17){
-          total = total + 170000
+          // total = total + 75000
+          total = total +gia[1].price
+          arrayVeChon.push({
+            _id: idVe,
+            name:nameVe,
+            price:gia[1].price
+
+          })
         }
         else if(time.getHours()+1 >=17 && time.getHours()+1<23){
-          total = total + 190000
+          // total = total + 85000
+          total = total +gia[2].price
+          arrayVeChon.push({
+            _id: idVe,
+            name:nameVe,
+            price:gia[2].price
+
+          })
         }
         else if(time.getHours()+1 >=23){
-          total = total + 160000
+          // total = total + 70000
+          total = total +gia[3].price
+          arrayVeChon.push({
+            _id: idVe,
+            name:nameVe,
+            price:gia[3].price
+
+          })
         }
       }
     
     })
     console.log(total)
-    return total
+    return {total: total, arrayVeChon: arrayVeChon}
   }
   if( time.getDate()+1 <6 || time.getDate() !==0){    
     array.map(item=>{
+     
       if(item.startsWith("A") || item.startsWith("B")  || item.startsWith("C")|| item.startsWith("J")){
-        if(time.getHours()+1 < 12){
-          total = total + 50000
-        }
-        else if(time.getHours()+1 >=12 && time.getHours() +1<17){
-          total = total + 65000
-        }
-        else if(time.getHours()+1 >=17 && time.getHours()+1<23){
-          total = total + 75000
-        }
-        else if(time.getHours()+1 >=23){
-          total = total + 60000
-        }
-      }
-      else if(item.startsWith("D") || item.startsWith("E")  || item.startsWith("F")|| item.startsWith("G") || item.startsWith("H")|| item.startsWith("I")){
-        if(time.getHours()+1 < 12){
-          total = total + 60000
-        }
-        else if(time.getHours()+1 >=12 && time.getHours() +1<17){
-          total = total + 70000
-        }
-        else if(time.getHours()+1 >=17 && time.getHours()+1<23){
-          total = total + 80000
-        }
-        else if(time.getHours()+1 >=23){
-          total = total + 65000
-        }
-      }
-      else if(item.startsWith("K") ){
-        if(time.getHours()+1 < 12){
-          total = total + 130000
-        }
-        else if(time.getHours()+1 >=12 && time.getHours() +1<17){
-          total = total + 150000
-        }
-        else if(time.getHours()+1 >=17 && time.getHours()+1<23){
-          total = total + 170000
-        }
-        else if(time.getHours()+1 >=23){
-          total = total + 140000
-        }
-      }
+        let gia ; 
+        let idVe;
+        let nameVe;
+        giaVe.map(item =>{
+           if(item.name ==="Standard2-5"){
+               gia = item.price_time
+               idVe = item._id
+               nameVe=item.name
+           }
+        })
+       
+       if(time.getHours()+1 < 12){
+         // total = total + 65000
+         total = total + gia[0].price
+         arrayVeChon.push({
+          _id: idVe,
+          name:nameVe,
+          price:gia[0].price
+
+        })
+       }
+       else if(time.getHours()+1 >=12 && time.getHours() +1<17){
+         // total = total + 75000
+         total = total +gia[1].price
+         arrayVeChon.push({
+          _id: idVe,
+          name:nameVe,
+          price:gia[1].price
+
+        })
+       }
+       else if(time.getHours()+1 >=17 && time.getHours()+1<23){
+         // total = total + 85000
+         total = total +gia[2].price
+         arrayVeChon.push({
+          _id: idVe,
+          name:nameVe,
+          price:gia[2].price
+
+        })
+       }
+       else if(time.getHours()+1 >=23){
+         // total = total + 70000
+         total = total +gia[3].price
+         arrayVeChon.push({
+          _id: idVe,
+          name:nameVe,
+          price:gia[3].price
+
+        })
+       }
+     }
+     else if(item.startsWith("D") || item.startsWith("E")  || item.startsWith("F")|| item.startsWith("G") || item.startsWith("H")|| item.startsWith("I")){
+      
+       let gia ;
+       let idVe;
+       let nameVe;
+       giaVe.map(item =>{
+          if(item.name ==="Vip2-5"){
+              gia = item.price_time
+              idVe = item._id
+              nameVe = item.name
+          }
+       })
+       // if(time.getHours()+1 < 12){
+       //   total = total + 75000
+       // }
+       // else if(time.getHours()+1 >=12 && time.getHours() +1<17){
+       //   total = total + 80000
+       // }
+       // else if(time.getHours()+1 >=17 && time.getHours()+1<23){
+       //   total = total + 90000
+       // }
+       // else if(time.getHours()+1 >=23){
+       //   total = total + 75000
+       // }
+       if(time.getHours()+1 < 12){
+         // total = total + 65000
+         total = total + gia[0].price
+         arrayVeChon.push({
+          _id: idVe,
+          name:nameVe,
+          price:gia[0].price
+
+        })
+       }
+       else if(time.getHours()+1 >=12 && time.getHours() +1<17){
+         // total = total + 75000
+         total = total +gia[1].price
+         arrayVeChon.push({
+          _id: idVe,
+          name:nameVe,
+          price:gia[1].price
+
+        })
+       }
+       else if(time.getHours()+1 >=17 && time.getHours()+1<23){
+         // total = total + 85000
+         total = total +gia[2].price
+         arrayVeChon.push({
+          _id: idVe,
+          name:nameVe,
+          price:gia[2].price
+
+        })
+       }
+       else if(time.getHours()+1 >=23){
+         // total = total + 70000
+         total = total +gia[3].price
+         arrayVeChon.push({
+          _id: idVe,
+          name:nameVe,
+          price:gia[3].price
+
+        })
+       }
+     }
+     else if(item.startsWith("K") ){
+       let gia ;
+       let idVe;
+       let nameVe;
+       giaVe.map(item =>{
+          if(item.name ==="Swettbox2-5"){
+              gia = item.price_time
+              idVe = item._id
+              nameVe = item.name
+          }
+       })
+     
+       if(time.getHours()+1 < 12){
+       
+         total = total + gia[0].price
+         arrayVeChon.push({
+          _id: idVe,
+          name:nameVe,
+          price:gia[0].price
+
+        })
+       }
+       else if(time.getHours()+1 >=12 && time.getHours() +1<17){
+         // total = total + 75000
+         total = total +gia[1].price
+         arrayVeChon.push({
+          _id: idVe,
+          name:nameVe,
+          price:gia[1].price
+
+        })
+       }
+       else if(time.getHours()+1 >=17 && time.getHours()+1<23){
+         // total = total + 85000
+         total = total +gia[2].price
+         arrayVeChon.push({
+          _id: idVe,
+          name:nameVe,
+          price:gia[2].price
+
+        })
+       }
+       else if(time.getHours()+1 >=23){
+         // total = total + 70000
+         total = total +gia[3].price
+         arrayVeChon.push({
+          _id: idVe,
+          name:nameVe,
+          price:gia[3].price
+
+        })
+       }
+     }
     
     })
-    // console.log(total)
-    return total
+    console.log(total)
+    console.log(arrayVeChon)
+    return{ total:total, arrayVeChon:arrayVeChon}
   }
 
 }
 
 const Check_ghe = (props) => {
+  const {giaVe, setChonVe,chonVe} = props
   let A = [];let B = [];let C = [];let D = [];let E = [];let F= [];
   let K = [];let G = [];let H = [];let I = [] ;let J = [];
   for(let i=0;i<13;i++){
-    console.log("asd")
+    console.log("gia Ve", giaVe)
    A.push({value: `A${i+1}`,label: i+1,status: false,check: false})
    B.push({value: `B${i+1}`,label: i+1,status: false,check: false})
    C.push({value: `C${i+1}`,label: i+1,status: false,check: false})
@@ -202,13 +456,14 @@ const Check_ghe = (props) => {
    const onChange = (checkedValues) => {
     console.log("checked = ", checkedValues);
     setChon_ghe(checkedValues)
-    setTong(TongGiaVe(checkedValues,time))
-
+    const {total, arrayVeChon} = {...TongGiaVe(checkedValues,time,giaVe)}
+    setTong(total);
+    setChonVe(arrayVeChon)  
   
      }
    useEffect(()=>{
     console.log(Chon_ghe)
-    
+    console.log(chonVe)
    
    },[A,B,C,D,E,F,G,H,I,J,K,Chon_ghe,SelectedChair])
 

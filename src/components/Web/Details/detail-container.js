@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
 import "./detail-container.css";
+import { Link } from "react-router-dom";
+// import { useHistory } from 'react-router-dom';
 import ShowTimeDetail from "./showtime_details/showtime";
 import SliderMoive from "./slider-movie/slider-moive";
 import { useNavigate, useParams } from "react-router-dom";
+import Box from '@mui/material/Box';
+import Rating from '@mui/material/Rating';
+import Typography from '@mui/material/Typography';
 import axios from "axios";
 const DetailContainer = () => {
 const onChange = (key) => {
@@ -11,11 +16,17 @@ const onChange = (key) => {
 
 // ];
 
+
+// const history = useHistory();
+
+
+
 const {moiveId} = useParams();
 const navigate = useNavigate()
 console.log(moiveId);
 const [moive,setMoive] =useState({})
 const [times,setTime] =useState({})
+const [votes,setVotes] = useState([])
 const [openTrailer,setOpenTrailer]= useState(false)
 
 useEffect(()=>{
@@ -26,6 +37,7 @@ useEffect(()=>{
         console.log(response.data);
         setMoive(response.data.moive);
         setTime(response.data.arayTimeDate);
+        setVotes(response.data.votes)
       })
       .catch((error) =>console.log(error))     
     }
@@ -35,6 +47,16 @@ useEffect(()=>{
     
   }
   fetchData();
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+  scrollToTop()
+
+  // history.listen(scrollToTop);
+
+  // return () => {
+  //   history.unlisten(scrollToTop);
+  // };
 
  
 },[moiveId,navigate])
@@ -63,9 +85,10 @@ return (
                 >
                   Trailer
                 </button>
-                <button type="button" class="btn btn-danger" >
+             <Link to ={`/ticket-booking?moiveID=${moiveId}`} >  <button type="button" class="btn btn-danger" >
                   Đặt vé
                 </button>
+                </Link> 
               </div>
             {openTrailer && ( 
             <iframe id="video-moive" width="650" height="345" src="https://res.cloudinary.com/duytmd7ue/video/upload/v1682960052/WW2_-_OverSimplified_Part_1_wuxtit.mp4" alt={moive?.trailer}>
@@ -126,10 +149,38 @@ return (
             <ShowTimeDetail times ={times}>
 
             </ShowTimeDetail>
-        
-            <SliderMoive></SliderMoive>
+            
+         <div className="comment_moive" >
+                  <div className="title-comment">Đánh giá từ khách hàng xem phim</div>  
+                  {
+              votes?.map((item,index)=>{
+                const time = new Date(item.createdAt)
 
-        
+
+                return(
+                  <>
+                  <div className="group-user" key={index}>
+                <img src={item?.user.avatar}></img>
+                <div className="text" >
+                  <div style={{display:"flex"}}>
+                  <p>{item.user.username}   </p>
+                   <Rating style={{color:"yellow"}} value={item.star} readOnly />
+                  
+                   <span className="span-text">Ngày: {time.getDate()}-{time.getMonth()+1}-{time.getFullYear()} </span>
+                  </div>
+                
+                <p style={{color:"#af8f8f", borderBottom:"1px soild red"}}>{item.description}</p>
+                </div>
+                  </div>
+                  </>
+                )
+              })
+            }
+                 
+         </div>
+            <SliderMoive moive = {moive}></SliderMoive>
+
+         
       </div>
     </>
   );

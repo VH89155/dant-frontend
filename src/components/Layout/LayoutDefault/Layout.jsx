@@ -3,11 +3,20 @@ import { Layout, Row, Col, Image, Input } from "antd";
 import { Link } from "react-router-dom";
 import Nav from "./nav";
 import { useSelector } from "react-redux";
+import Map from "./Map";
+import { useEffect } from "react";
+import Footer_layout from "./Footer";
 const { Header, Footer, Sider, Content } = Layout;
 
+
 const DasBoardPage = ({ children }) => {
+  const key ="AIzaSyBRNmmbPd4Xdl1svuvYg84m75mSMo5vEyY"
  const auth = useSelector((state)=>state.auth?.login?.currentUser)
  console.log(auth)
+ const scrollToTop = () => {
+  window.scrollTo(0, 0);
+};
+scrollToTop()
   return (
      
 
@@ -26,29 +35,15 @@ const DasBoardPage = ({ children }) => {
       
       
       
-     
-     
+    
 <Footer>
-      <footer>
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12">
-              <p>
-                Copyright © 2036 <a href="#">Cyborg Gaming</a> Company. All
-                rights reserved.
-                <br></br>Design:{" "}
-                <a
-                  href="https://templatemo.com"
-                  target="_blank"
-                  title="free CSS templates"
-                >
-                  TemplateMo
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
+      
+       
+          <Footer_layout>
+
+            
+          </Footer_layout>
+      
       </Footer>
       </Layout>
   );

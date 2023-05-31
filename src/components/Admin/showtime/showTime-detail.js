@@ -25,6 +25,11 @@ const SHowTime_Detail = (props) => {
         // setIsModalOpen1(false)
         setLoad(!load)
       }
+      if(!res.data.success){
+        message.warning(res.data.status)
+        // setIsModalOpen1(false)
+        setLoad(!load)
+      }
     }).catch((err)=>{
       message.error("Xóa không thành công")
     })
