@@ -94,7 +94,7 @@ const EditMoive = (props) => {
               
             }      
           
-            await axios.put("http://localhost:8080/api/moive/edit-moive", values)
+            await axios.put("https://project-datn.herokuapp.com/api/moive/edit-moive", values)
             .then(res=>{console.log(res.data)
                 message.success("Lưu thành công!")
                 setLoading(false)

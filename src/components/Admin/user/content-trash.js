@@ -35,7 +35,7 @@ const Content_trash = (props) => {
       
     };
     const handleOk1 = async() => {
-      await axios.patch(`/api/auth/restore/${userItem._id}`).then((res)=>{
+      await axios.patch(`https://project-datn.herokuapp.com/api/auth/restore/${userItem._id}`).then((res)=>{
         console.log(res.data)
         setIsModalOpen1(false);
         setLoad(!load)     

@@ -195,7 +195,7 @@ const App = ({ children }) => {
   console.log(auth?.currentUser.info?.admin)
   useEffect(()=>{
     const fetch = async()=>{
-      await axios.get("/api/show-time")
+      await axios.get("https://project-datn.herokuapp.com/api/show-time")
     }
     fetch()
     const scrollToTop = () => {

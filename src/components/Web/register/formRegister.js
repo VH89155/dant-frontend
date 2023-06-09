@@ -45,7 +45,7 @@ const FormRegister = () => {
       // window.alert("Form submitted");
       console.log(values);
 
-      await axios.post("http://localhost:8080/api/auth/signup",values).then(res=>res.data).then(res=>{
+      await axios.post("https://project-datn.herokuapp.com/api/auth/signup",values).then(res=>res.data).then(res=>{
         if(res.success === true){
             message.success('Đăng ký thành công');
             navigate("/login")      
@@ -84,7 +84,7 @@ const FormRegister = () => {
 
     
     
-    await axios.post("/api/auth/auth/google-new",user).then(async(res) => {
+    await axios.post("https://project-datn.herokuapp.com/api/auth/auth/google-new",user).then(async(res) => {
       console.log(res.data);
       if(res.data.success) {
       await authLoginGoogle(dispatch, user, navigate)

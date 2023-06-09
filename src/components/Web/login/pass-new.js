@@ -37,7 +37,7 @@ const Pass_new = (props) => {
         onSubmit: async (values) => {
           // window.alert("Form submitted");
           console.log(values);
-          await axios.post("http://localhost:8080/api/auth/forgot-pass/pass-new",values).then((res)=>{
+          await axios.post("https://project-datn.herokuapp.com/api/auth/forgot-pass/pass-new",values).then((res)=>{
           console.log(res.data)      
            if(res.data.success ===true){
                 message.info(`Đổi mật khẩu thành công!`)

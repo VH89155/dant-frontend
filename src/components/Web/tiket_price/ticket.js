@@ -6,7 +6,7 @@ const Ticket = () => {
 
    useEffect(()=>{
       const fechData = async()=>{
-        await axios.get("/api/new/646b2473bacdd834f63a1882").then((res)=>{
+        await axios.get("https://project-datn.herokuapp.com/api/new/646b2473bacdd834f63a1882").then((res)=>{
           setGiaVe(res.data.news)
         })
       }

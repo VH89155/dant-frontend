@@ -11,7 +11,7 @@ import { getProfileUpdate, loginSusscess, loginStart,loginFailed,logOutFailed,lo
 export const getAllMoive = async (dispatch)=>{
     dispatch(getMoivesStart());
     try{
-        const res = await axios.get(`/api/moive`)
+        const res = await axios.get(`https://project-datn.herokuapp.com/api/moive`)
         dispatch(getMoivesSuccsess(res.data));
     }
     catch(err){
@@ -25,7 +25,7 @@ export const getAllMoive = async (dispatch)=>{
 export const authLogin = async (dispatch, user,navigate) => {
     dispatch(loginStart())
     try{
-        const res = await axios.post("/api/auth/signin",user);
+        const res = await axios.post("https://project-datn.herokuapp.com/api/auth/signin",user);
         dispatch(loginSusscess(res.data))
         navigate("/")
         return true
@@ -38,7 +38,7 @@ export const authLogin = async (dispatch, user,navigate) => {
 export const authLoginGoogle = async (dispatch, user,navigate) => {
     dispatch(loginStart())
     try{
-        const res = await axios.post("/api/auth/auth/google-new",user);
+        const res = await axios.post("https://project-datn.herokuapp.com/api/auth/auth/google-new",user);
         dispatch(loginSusscess(res.data))
         navigate("/")
         return true
@@ -51,7 +51,7 @@ export const authLoginGoogle = async (dispatch, user,navigate) => {
 export const getProfile = async (dispatch,token) => {
     dispatch(loginStart())
     try{
-        const res = await axios.get("/api/auth/secret",{
+        const res = await axios.get("https://project-datn.herokuapp.com/api/auth/secret",{
             headers:{
                 Authorization:  `Bearer ${token}`
             }
@@ -66,7 +66,7 @@ export const getProfile = async (dispatch,token) => {
 export const logOut = async(dispatch,navigate,token)=>{
     dispatch(logOutStart());
     try{
-        await axios.delete("http://localhost:8080/api/auth/logout",{
+        await axios.delete("https://project-datn.herokuapp.com/api/auth/logout",{
             headers:{
                 Authorization:  `Bearer ${token}`
             }

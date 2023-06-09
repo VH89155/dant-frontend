@@ -22,7 +22,7 @@ const Book_Ticket = (props) => {
     useEffect(()=>{
         const fetchData = async () =>{
             try{
-              await axios.get(`/api/show-time/show/${showtimeId}`)
+              await axios.get(`https://project-datn.herokuapp.com/api/show-time/show/${showtimeId}`)
               .then((response) =>{
                 console.log(response.data);
                 setMoive(response.data.moive);

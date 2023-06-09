@@ -56,7 +56,7 @@ const Content_New = (props) => {
           values.image = "";
           values.image = await cloudinaryUpload(uploadData);
         
-            await axios.post("http://localhost:8080/api/new/add", values)
+            await axios.post("https://project-datn.herokuapp.com/api/new/add", values)
               .then((res) => {
                 console.log(res.data);
                 message.success("Lưu thành công!");

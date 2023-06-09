@@ -6,7 +6,7 @@ const ShowTimes = () => {
     const [data,setData] = useState([])
     useEffect(() =>{
         
-        axios.post("http://localhost:8080/api/moive/moive-time")
+        axios.post("https://project-datn.herokuapp.com/api/moive/moive-time")
         .then((res)=> {
             // console.log(res.data)
             setData(res.data)

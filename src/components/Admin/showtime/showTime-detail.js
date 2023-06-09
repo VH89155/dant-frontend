@@ -19,7 +19,7 @@ const SHowTime_Detail = (props) => {
       setEdit(!edit)
     }
    const Xoa =async ()=>{
-    await axios.delete(`/api/show-time/${showTime._id}`).then((res)=>{
+    await axios.delete(`https://project-datn.herokuapp.com/api/show-time/${showTime._id}`).then((res)=>{
       if(res.data.success){
         message.success("Xóa thành công")
         // setIsModalOpen1(false)
@@ -40,7 +40,7 @@ const SHowTime_Detail = (props) => {
     useEffect(()=>{
         const fetchData = async () =>{
             try{
-              await axios.get(`/api/show-time/show/${showTime._id}`)
+              await axios.get(`https://project-datn.herokuapp.com/api/show-time/show/${showTime._id}`)
               .then((response) =>{             
                 console.log(response.data);
                 setMoive(response.data.moive);

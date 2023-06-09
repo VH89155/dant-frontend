@@ -11,7 +11,7 @@ const News_detail = () => {
 
     useEffect(()=>{
        const fechData = async()=>{
-        axios.get(`/api/new/${id}`).then((res)=>{
+        axios.get(`https://project-datn.herokuapp.com/api/new/${id}`).then((res)=>{
             console.log(res.data);
             setData(res.data.news)
            

@@ -36,7 +36,7 @@ const PaymentContent = (props) => {
     setIsModalOpen(true);
   };
   const handleOk = async() => {
-    await axios.post("http://localhost:8080/api/paypal/pay",{
+    await axios.post("https://project-datn.herokuapp.com/api/paypal/pay",{
       time : showtimeId,
       user: auth?._id,
       number: data.ghe_chon,

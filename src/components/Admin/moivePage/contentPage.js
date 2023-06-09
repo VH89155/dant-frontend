@@ -42,7 +42,7 @@ const Content_pageMoive = (props) => {
       isEdit(true)
     };
     const handleOk1 = async() => {
-      await axios.delete(`/api/moive/${moiveItem._id}`).then((res)=>{
+      await axios.delete(`https://project-datn.herokuapp.com/api/moive/${moiveItem._id}`).then((res)=>{
         console.log(res.data)
         setIsModalOpen1(false);
         setLoad(!load)

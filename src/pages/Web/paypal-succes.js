@@ -47,7 +47,7 @@ const PayPal_succes = () => {
 
     useEffect(()=>{
         const fetchData = async()=>{
-            await axios.post("http://localhost:8080/api/ticket/add-ticket",
+            await axios.post("https://project-datn.herokuapp.com/api/ticket/add-ticket",
       {
         paymentId:paymentId,
         time : time,

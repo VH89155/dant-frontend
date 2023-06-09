@@ -15,7 +15,7 @@ const Container = () => {
 
    const fetchData = async()=>{
     
-    await  axios.get("/api/moive").then((res)=>res.data)
+    await  axios.get("https://project-datn.herokuapp.com/api/moive").then((res)=>res.data)
     .then((res)=>{
      setAllMoive(res.moives);
      // console.log(res.moives)

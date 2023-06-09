@@ -25,7 +25,7 @@ const From_Room = (props) => {
     onSubmit: async (values) => {
       console.log(values);
       if(!edit){
-        await axios.post("http://localhost:8080/api/room", values)
+        await axios.post("https://project-datn.herokuapp.com/api/room", values)
         .then((res)=>{
           console.log(res.data)
           if(res.data.success)message.success("Thêm thành công")
@@ -37,7 +37,7 @@ const From_Room = (props) => {
         })
       }
      else  if(edit){
-      await axios.put("http://localhost:8080/api/room", values)
+      await axios.put("https://project-datn.herokuapp.com/api/room", values)
       .then((res)=>{
         console.log(res.data)
         if(res.data.success)message.success("Sửa thành công")

@@ -264,7 +264,7 @@ const Table_ticket = (props) => {
             type="primary"
             onClick={async()=>{
               setSpin(true)
-               await axios.put(`/api/ticket/ticket-accuracy/${record._id}`).then((res)=>{
+               await axios.put(`https://project-datn.herokuapp.com/api/ticket/ticket-accuracy/${record._id}`).then((res)=>{
                   if(res.data.success){
                     message.success("Xác nhận thành công")
                     setLoad(!load)

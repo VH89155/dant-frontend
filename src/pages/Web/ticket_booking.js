@@ -23,7 +23,7 @@ const TicketBooking = () => {
    const [time,setTime] = useState(`${timeNow.getDate()}-${timeNow.getMonth()+1}-${timeNow.getFullYear()}`)
    useEffect(()=>{
    
-    axios.get("/api/moive").then((res)=>res.data)
+    axios.get("https://project-datn.herokuapp.com/api/moive").then((res)=>res.data)
     .then((res)=>{ setAllMoives(res.moives)
     })
     // if(moiveID){
@@ -32,12 +32,12 @@ const TicketBooking = () => {
     // } )
     // }
      if(checkMoives !==""){
-        axios.post(`/api/moive/moive-time?moives=${checkMoives}&time=${time}`).then((res)=>{      
+        axios.post(`https://project-datn.herokuapp.com/api/moive/moive-time?moives=${checkMoives}&time=${time}`).then((res)=>{      
             setShowTimes(res.data)
         } )
        }
      if(checkMoives ===""){
-        axios.post(`/api/moive/moive-time?moives=&time=${time}`).then((res)=>{      
+        axios.post(`https://project-datn.herokuapp.com/api/moive/moive-time?moives=&time=${time}`).then((res)=>{      
             setShowTimes(res.data)
         } )
        }

@@ -33,7 +33,7 @@ const Add_Discount = (props) => {
     }),
     onSubmit: async (values) => {
       console.log(values);
-        await axios.post("http://localhost:8080/api/discount/add", values)
+        await axios.post("https://project-datn.herokuapp.com/api/discount/add", values)
         .then((res)=>{
           console.log(res.data)
           if(res.data.success)message.success("Thêm thành công")

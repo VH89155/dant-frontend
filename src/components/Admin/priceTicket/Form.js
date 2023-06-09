@@ -31,7 +31,7 @@ const From_PriceTicket = (props) => {
     onSubmit: async (values) => {
       console.log(values);
       if(!edit){
-        await axios.post("/api/price-ticket", {
+        await axios.post("https://project-datn.herokuapp.com/api/price-ticket", {
             "name": values.name,
             "price_time":[
                 {

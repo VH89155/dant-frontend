@@ -24,7 +24,7 @@ const Forgot_Pass = (props) => {
       // window.alert("Form submitted");
       console.log(values);
       await axios
-        .post("http://localhost:8080/api/auth/forgot-pass/sendemail", values)
+        .post("https://project-datn.herokuapp.com/api/auth/forgot-pass/sendemail", values)
         .then((res) => {
           console.log(res.data);
           if (res.data.success === true) {

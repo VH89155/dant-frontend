@@ -42,7 +42,7 @@ const User_Detail = (props) => {
     </div>
   );
   const onChange = async ()=>{
-    await axios.put('/api/auth/edit-admin',{
+    await axios.put('https://project-datn.herokuapp.com/api/auth/edit-admin',{
       _id: user._id,
       admin: !user.admin,
     }).then((res)=>{
@@ -58,7 +58,7 @@ const User_Detail = (props) => {
   }
   useEffect(() => {
     const fetchData = async () => {
-      await axios.get(`/api/ticket/user/${user._id}`).then((res) => {
+      await axios.get(`https://project-datn.herokuapp.com/api/ticket/user/${user._id}`).then((res) => {
         setTickets(res.data);
       });
     };

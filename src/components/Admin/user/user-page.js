@@ -271,7 +271,7 @@ const UserPage = (props) => {
 
 
   const handleOk1 = async() => {
-    await axios.delete(`/api/auth/${user._id}`).then(res=>{
+    await axios.delete(`https://project-datn.herokuapp.com/api/auth/${user._id}`).then(res=>{
       if(res.data.success){
         message.success("Khóa thành công")
         setLoad(!load)

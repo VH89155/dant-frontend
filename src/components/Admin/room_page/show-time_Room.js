@@ -31,7 +31,7 @@ const Show_time_room = (props) => {
       };
    useEffect(()=>{
     const fetchData = async ()=>{
-        await axios.get(`/api/room/showtime-room?room=${room._id}`).then(res=>{
+        await axios.get(`https://project-datn.herokuapp.com/api/room/showtime-room?room=${room._id}`).then(res=>{
             if(res.data.success){
                 console.log(res.data.showTime)
                 setShowTimes(res.data.showTime)

@@ -32,7 +32,7 @@ const [openTrailer,setOpenTrailer]= useState(false)
 useEffect(()=>{
   const fetchData = async () =>{
     try{
-      await axios.get(`/api/moive/${moiveId}`)
+      await axios.get(`https://project-datn.herokuapp.com/api/moive/${moiveId}`)
       .then((response) =>{
         console.log(response.data);
         setMoive(response.data.moive);

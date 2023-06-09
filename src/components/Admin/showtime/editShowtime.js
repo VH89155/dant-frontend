@@ -26,7 +26,7 @@ const Edit_showtime = (props) => {
     }),
     onSubmit: async (values) => {
       console.log(values);
-        await axios.put("http://localhost:8080/api/show-time", values)
+        await axios.put("https://project-datn.herokuapp.com/api/show-time", values)
         .then((res)=>{
             if(res.data.statusError !== "")
             message.error(`Không thành công : ${res.data.statusError}`)
@@ -67,7 +67,7 @@ const Edit_showtime = (props) => {
   };
  useEffect(() => {
     const fetchData = async () => {
-      const data = await axios.get("/api/room").then((res) => res.data.room);
+      const data = await axios.get("https://project-datn.herokuapp.com/api/room").then((res) => res.data.room);
       setRoom(
         data.map((item) => {
           return {

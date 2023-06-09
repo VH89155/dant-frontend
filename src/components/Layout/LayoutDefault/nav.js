@@ -9,7 +9,7 @@ const Nav = (props) => {
     const [width, setWidth] = useState(window.innerWidth);
     useEffect(() => {
       const fetchData = async ()=>{
-        await axios.get('/api/banner').then(res=>{
+        await axios.get('https://project-datn.herokuapp.com/api/banner').then(res=>{
             
                 console.log(res.data.banner[0])
                 setBanner(res.data.banner[0])

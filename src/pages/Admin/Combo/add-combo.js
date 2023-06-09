@@ -58,7 +58,7 @@ const AddCombo = () => {
               
                 
           
-            await axios.post("http://localhost:8080/api/combo/add", values)
+            await axios.post("https://project-datn.herokuapp.com/api/combo/add", values)
             .then(res=>{console.log(res.data)
                 message.success("Lưu thành công!")
                 setLoading(false)
@@ -108,7 +108,7 @@ const AddCombo = () => {
 
     useEffect(()=>{
       const fetchData = async()=>{
-          await axios.get(`/api/combo`).then((res)=>{
+          await axios.get(`https://project-datn.herokuapp.com/api/combo`).then((res)=>{
              setCombo(res.data.combo) 
              console.log("combo asd", res.data.combo)
           })
