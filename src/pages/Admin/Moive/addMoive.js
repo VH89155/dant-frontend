@@ -12,6 +12,7 @@ import {
   Input,
   InputNumber,
   Select,
+  message,
  
 } from "antd";
 import { useState } from "react";
@@ -97,7 +98,10 @@ const AddMoive = () => {
       // values.trailer= await cloudinaryUpload(uploadData1);
 
       await axios.post("http://localhost:8080/api/moive/add-moive",values)
-      .then(res=>console.log(res.data)).catch((err)=>console.log(err))
+      .then(res=>{
+        console.log(res.data)
+        message.success("Thêm thành công !")
+      } ).catch((err)=>console.log(err))
       ;
 
       

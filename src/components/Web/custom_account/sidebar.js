@@ -47,9 +47,16 @@ const Sidebar = (props) => {
                 <a href="/default/ticket">VÉ CỦA BẠN</a>
               </li>
             )}
-            <li>
-              <a>KHUYẾN MÃI CỦA BẠN</a>
-            </li>
+              {namePage === "transaction" ? (
+              <li className="current">
+                <a href="/default/transaction-history">LỊCH SỬ GIAO DỊCH</a>
+              </li>
+            ) : (
+              <li>
+                <a href="/default/transaction-history">LỊCH SỬ GIAO DỊCH</a>
+              </li>
+            )}
+            
             {auth?.currentUser?.info?.admin && (
                <li>
                <a className="logout" href="/admin" >

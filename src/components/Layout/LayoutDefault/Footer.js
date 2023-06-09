@@ -47,9 +47,9 @@ export default function App() {
               <Map
      
      googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${key}`}
-     loadingElement={<div style={{width:"300px", height: `100%` }} />}
-     containerElement={<div style={{ width:"300px", height: `50vh`, margin: `auto`, border: '2px solid black' }} />}
-     mapElement={<div style={{ width:"300px", height: `100%` }} />}
+     loadingElement={<div style={{width:"240px", height: `100%` }} />}
+     containerElement={<div style={{ width:"240px", height: `50vh`, margin: `auto`, border: '2px solid black' }} />}
+     mapElement={<div style={{ width:"240px", height: `100%` }} />}
      >
 
 

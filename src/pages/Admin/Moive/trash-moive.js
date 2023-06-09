@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Content_trash from "../../components/Admin/moivePage/content-trash";
+import Content_trash from "../../../components/Admin/moivePage/content-trash";
 import axios from "axios";
 
 const TrashMoive = () => {

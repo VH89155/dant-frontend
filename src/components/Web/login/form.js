@@ -181,9 +181,9 @@ const FormLogin = (props) => {
           />
         </GoogleOAuthProvider>
         </div>
-        <button class="fb btn btn-lg btn-block btn-primary mb-2" >
+        {/* <button class="fb btn btn-lg btn-block btn-primary mb-2" >
           <i class="fab fa-facebook-f me-2"></i>Đăng nhập bằng Facebook
-        </button>
+        </button> */}
         
         {/* <GoogleLogin  
         clientId="401289267989-9mb2gnrnml6ru7gfjbjq9ete1j5h0ukm.apps.googleusercontent.com"

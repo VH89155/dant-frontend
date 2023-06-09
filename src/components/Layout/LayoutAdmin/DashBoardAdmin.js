@@ -6,8 +6,7 @@ import {
   UserOutlined,
   TeamOutlined,
   UserAddOutlined,
-} from "@ant-design/icons";
-import {
+  FundOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   UploadOutlined,
@@ -16,16 +15,20 @@ import {
   FileDoneOutlined,
   FileAddOutlined,
   FieldTimeOutlined,
+  LockOutlined,
+  PictureOutlined
 } from "@ant-design/icons";
-import { Layout, Menu, theme, Breadcrumb } from "antd";
+
+import { Layout, Menu, theme, Breadcrumb, Button,Avatar } from "antd";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { logOut } from "../../../redux/apiRequest";
 const { Header, Sider, Content } = Layout;
 
 const App = ({ children }) => {
-  
+  const dispatch = useDispatch()
   function getItem(label, key, icon, children) {
     return {
       key,
@@ -35,11 +38,10 @@ const App = ({ children }) => {
     };
   }
   const items = [
-    getItem(
-      "Tổng quan",
+    getItem( "Tổng quan",
       "0",
       <Link to="/admin">
-        <PieChartOutlined />{" "}
+        <FundOutlined />{" "}
       </Link>
     ),
     getItem("Thống kê chung", "sub6", <PieChartOutlined />, [
@@ -100,6 +102,64 @@ const App = ({ children }) => {
         </Link>
       ),
     ]),
+   
+  
+    getItem("Vé",
+      "sub10",
+      <FileDoneOutlined />,
+      [
+        getItem(
+          "Quản lý Vé ",
+          "15",
+          <Link to={"/admin/tickets"}>
+        <PieChartOutlined />{" "}
+       </Link>
+        ),
+        getItem(
+          "Gía vé ",
+          "25",
+          <Link to={"/admin/price-ticket"}>
+            <PieChartOutlined />{" "}
+          </Link>
+        ),
+      ]
+
+     
+    ),
+    getItem(
+      "Mã giảm giá",
+      "16",
+      <Link to={"/admin/discount"}>
+        <FileDoneOutlined />{" "}
+      </Link>
+    ),
+    getItem("Combo đồ ăn", "sub10", <Link to="/admin/add-combo">
+    <FileDoneOutlined />
+  </Link>),
+    getItem("Phòng chiếu",
+      "22",
+      <Link to={"/admin/room"}>
+        <FileDoneOutlined />{" "}
+      </Link>
+    ),
+      getItem("quản lí page", "sub5", <FileDoneOutlined />, [
+      getItem(
+        "quản lí tin tức ",
+        "12",
+        <Link to="/admin/news">
+          <FileDoneOutlined />
+        </Link>
+      ),
+      getItem(
+        "Quản lý banner quảng cáo",
+        "13",
+        <Link to="/admin/banner-page">
+          <PictureOutlined />
+        </Link>
+      ),
+    
+     
+    ]),
     getItem("Tài khoản", "sub3", <UserOutlined />, [
       getItem(
         "Danh sách người dùng",
@@ -111,61 +171,28 @@ const App = ({ children }) => {
       getItem(
         "Thêm người dùng",
         "11",
-        <Link to="">
+        <Link to="/admin/user/add">
           <UserAddOutlined />
         </Link>
       ),
-    ]),
-    getItem("quản lí page", "sub5", <UserOutlined />, [
       getItem(
-        "quản lí tin tức ",
-        "12",
-        <Link to="/admin/news">
-          <FileDoneOutlined />
-        </Link>
-      ),
-      getItem(
-        "Thêm người dùng",
-        "13",
-        <Link to="">
-          <UserAddOutlined />
+        "Tài khoản đã khóa",
+        "55",
+        <Link to="/admin/user/trash">
+           <LockOutlined />
         </Link>
       ),
     
-     
     ]),
-    getItem(
-      "Quản lí vé",
-      "15",
-      <Link to={"/admin/tickets"}>
-        <PieChartOutlined />{" "}
-      </Link>
-    ),
-    getItem(
-      "Quản lí mã giảm giá",
-      "16",
-      <Link to={"/admin/discount"}>
-        <PieChartOutlined />{" "}
-      </Link>
-    ),
-    getItem("Combo đồ ăn", "sub10", <Link to="/admin/add-combo">
-    <FileDoneOutlined />
-  </Link>),
-    getItem(
-      "Quản lí phòng chiếu",
-      "22",
-      <Link to={"/admin/room"}>
-        <PieChartOutlined />{" "}
-      </Link>
-    ),
+   
   ];
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
   const navigate = useNavigate()
-  const auth = useSelector((state)=>state.auth?.login?.currentUser.info?.admin)
-  console.log(auth)
+  const auth = useSelector((state)=>state.auth?.login)
+  console.log(auth?.currentUser.info?.admin)
   useEffect(()=>{
     const fetch = async()=>{
       await axios.get("/api/show-time")
@@ -175,9 +202,9 @@ const App = ({ children }) => {
       window.scrollTo(0, 0);
     };
     scrollToTop()
-  },[])
+  },[auth])
   return (<>
-    {auth? (<>
+    {auth?.currentUser.info?.admin? (<>
       <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="logo" />
@@ -193,6 +220,7 @@ const App = ({ children }) => {
           style={{
             paddingLeft: 40,
             background: colorBgContainer,
+            position:"relative",
           }}
         >
           {React.createElement(
@@ -202,6 +230,14 @@ const App = ({ children }) => {
               onClick: () => setCollapsed(!collapsed),
             }
           )}
+          <div style={{position:"absolute" ,top: 0, right:50}}>
+          <img src={auth?.currentUser.info?.avatar} style={{borderRadius:"50%", width:"30px"}}></img> 
+           <Button type="text" danger onClick={()=>{
+             console.log("hello", auth?.token);
+             logOut(dispatch, navigate, auth?.token);
+           }} >Đăng xuất</Button>
+           
+            </div>
         </Header>
         
         <Content

@@ -37,7 +37,8 @@ const App = (props) => {
                             ></img>
                             </Link>
                             <div className="detail-group-shop">
-                              <div class="name">{item.moive.name} <div className="span">2D</div> </div>
+                              <div class="name">{item.moive.name} <div className="span">{item.moive.display_technology
+}</div> </div>
                               <div class="label">
                                 Đạo diễn: <span> {item.moive.director}</span>
                               </div>

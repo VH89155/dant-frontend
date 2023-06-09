@@ -8,9 +8,13 @@ import User_Detail from "./user-detail";
 const UserPage = (props) => {
   const { users, load, setLoad } = props;
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen1, setIsModalOpen1] = useState(false);
   const [user,setUser] = useState({});
   const showModal = () => {
     setIsModalOpen(true);
+  };
+  const showModal1 = () => {
+    setIsModalOpen1(true);
   };
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
@@ -224,7 +228,7 @@ const UserPage = (props) => {
     },
 
     {
-      title: "Action",
+      title: "Hành động",
       key: "action",
       render: (_, record) => (
         <Space size="middle">
@@ -244,12 +248,12 @@ const UserPage = (props) => {
             type="primary"
             onClick={(e) => {
               e.preventDefault();
-              // setMoiveItem(record)
-            //   showModal1();
+              setUser(record)
+              showModal1();
             }}
             danger
           >
-            Xóa
+            Khóa tài khoản
           </Button>
         </Space>
       ),
@@ -262,6 +266,25 @@ const UserPage = (props) => {
   };
   const handleCancel = () => {
     setIsModalOpen(false);
+  
+  };
+
+
+  const handleOk1 = async() => {
+    await axios.delete(`/api/auth/${user._id}`).then(res=>{
+      if(res.data.success){
+        message.success("Khóa thành công")
+        setLoad(!load)
+        setIsModalOpen1(false);
+      }
+      else{
+        message.success("Khóa không thành công")
+      }
+    })
+   
+  };
+  const handleCancel1 = () => {
+    setIsModalOpen1(false);
   
   };
   return <>
@@ -290,6 +313,10 @@ const UserPage = (props) => {
 
 <Modal width={1000} title="Chi tiết tài khoản" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
        <User_Detail load={load} user={user} setLoad ={setLoad}></User_Detail>
+</Modal> 
+
+<Modal width={1000} title="Bạn có muốn khóa tài khoản này không" open={isModalOpen1} onOk={handleOk1} onCancel={handleCancel1}>
+     
 </Modal> 
   
   </>;

@@ -1,12 +1,19 @@
 import "./register.css"
 import { useFormik } from "formik";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
 import * as Yup from "yup";
 import { message } from "antd";
 import {useNavigate} from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux";
+import { authLoginGoogle } from "../../../redux/apiRequest";
+
 
 const FormRegister = () => {
-  const navgate = useNavigate()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -40,16 +47,17 @@ const FormRegister = () => {
 
       await axios.post("http://localhost:8080/api/auth/signup",values).then(res=>res.data).then(res=>{
         if(res.success === true){
-            message.success('Resgister success');
-            navgate("/login")      
+            message.success('Đăng ký thành công');
+            navigate("/login")      
        }
+     
         else {
-            message.error('Resgister error');
+            message.error(`Đăng ký thất bại ! ${res.message}`);
         }
       
       })
       .catch((error)=>{
-         message.error('Resgister error');
+         message.error('Đăng ký thất bại !');
         console.log(error)
       })
       
@@ -57,7 +65,45 @@ const FormRegister = () => {
 
       
     },
+
+   
   });
+
+  const onSuccess = async(credentialResponse) => {
+    // console.log(credentialResponse.credential);
+    const details = jwt_decode(credentialResponse.credential);
+    console.log(details);
+    const user ={
+      sub: details.sub,
+      email: details.email,
+      image: details.picture,
+      fullName: `${details.family_name} ${details.given_name}`,
+      username: details.email
+    }
+    console.log(user)
+
+    
+    
+    await axios.post("/api/auth/auth/google-new",user).then(async(res) => {
+      console.log(res.data);
+      if(res.data.success) {
+      await authLoginGoogle(dispatch, user, navigate)
+      message.success("Đăng nhập thành công!");
+    }
+    else if(!res.data.success){
+      message.error(res.data.message);
+    }
+      
+   
+    })
+    .catch(() => {
+      message.error("Đăng nhập không thành công!");
+    });
+    // console.log(credentialResponse);
+  }
+  const onFailure =(res)=>{
+    console.log("login fail", res)
+  }
     return ( <>
      
           <div class="card-body p-5 text-center">
@@ -74,7 +120,7 @@ const FormRegister = () => {
              formik.values.email
             }
             onChange={formik.handleChange}
-            placeholder="Enter your email"
+            // placeholder="Nhập địa chỉ email"
            
             className="form-control form-control-lg" />
            
@@ -91,7 +137,7 @@ const FormRegister = () => {
             name="username"
             value={formik.values.username}
             onChange={formik.handleChange}
-            placeholder="Enter your name"
+            // placeholder="Nhập tên tài khoản"
             className="form-control form-control-lg" />
           
             {formik.errors.username && (
@@ -108,7 +154,7 @@ const FormRegister = () => {
             name="password"
             value={formik.values.password}
             onChange={formik.handleChange}
-            placeholder="Enter your password"
+            // placeholder="Enter your password"
             
             className="form-control form-control-lg" />
            
@@ -128,7 +174,7 @@ const FormRegister = () => {
                formik.values.confirmedPassword
             }
             onChange={formik.handleChange}
-            placeholder="Confirm your password"
+            // placeholder="Confirm your password"
             className="form-control form-control-lg" />
           
             {formik.errors.confirmedPassword && (
@@ -151,10 +197,18 @@ const FormRegister = () => {
             </form>
             <hr class="my-4"></hr>
 
-            <button class="gg btn btn-lg btn-block btn-primary" 
-              type="submit"><i class="fab fa-google me-2"></i> Đăng nhập bằng Google</button>
-            <button class="fb btn btn-lg btn-block btn-primary mb-2" 
-              type="submit"><i class="fab fa-facebook-f me-2"></i>Đăng nhập bằng Facebook</button>
+            {/* <button class="gg btn btn-lg btn-block btn-primary" 
+              type="submit"><i class="fab fa-google me-2"></i> Đăng nhập bằng Google</button> */}
+           <GoogleOAuthProvider  clientId="401289267989-9mb2gnrnml6ru7gfjbjq9ete1j5h0ukm.apps.googleusercontent.com">
+          <GoogleLogin
+         
+            onSuccess={onSuccess}
+            onError={() => {
+              console.log("Login Failed");
+            }}
+          
+          />
+        </GoogleOAuthProvider>
 
           </div>
         {/* </div> */}

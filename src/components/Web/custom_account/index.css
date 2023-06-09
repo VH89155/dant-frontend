@@ -182,7 +182,7 @@
     width: 100%;
     display:  flex;
     padding: 10px;
-    height: 300px;
+    min-height: 100px;
     background-color: #fff;
     color: #222;
     border: 1px solid #ccc;

@@ -2,15 +2,16 @@ import "./index.css"
 import { useFormik } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
-import { message } from "antd";
+import { message,Button,Modal } from "antd";
 import {useNavigate} from "react-router-dom"
 import { useDispatch } from "react-redux";
 import { getProfile } from "../../../redux/apiRequest";
 import { useEffect, useState } from "react";
+import FormEditPass from"./formEditPass";
 const EditAccContent = (props) => {
   
 let {auth,setLoad,load} =props;
-
+const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const formik = useFormik({
@@ -44,6 +45,18 @@ let {auth,setLoad,load} =props;
       }, [load]);
     
 
+
+      const showModal = () => {
+        setIsModalOpen(true);
+      };
+      const handleOk = async() => {
+         
+          setIsModalOpen(false);
+      };
+      const handleCancel = () => {
+        setIsModalOpen(false);
+      };
+    
     return ( <>
           <div className="main-default_acc">
         <div className="my_account">
@@ -124,7 +137,14 @@ let {auth,setLoad,load} =props;
 
 
           </div>
+          <Button style={{marginTop:50}} type="default" onClick={()=>{
+            setIsModalOpen(true);
+          }}>Thay đổi mật khẩu</Button>
+        
           </div>
+          <Modal  width={1000} title="Thay đổi mật khẩu" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+            <FormEditPass auth={auth} load={load} setLoad={setLoad} ></FormEditPass>
+          </Modal>
     
     </> );
 }

@@ -25,7 +25,7 @@ const HomPage_statistical = () => {
         labels: moives.map(item=> item.name),
         datasets:[
             {
-                label: "Doanh thu các phim năm 2023",
+                label: "Doanh thu các phim đang chiếu ",
                 data: moives.map(item=> item.tongTienVe),
                 backgroundColor: [
                     "rgba(75,192,192,1)",

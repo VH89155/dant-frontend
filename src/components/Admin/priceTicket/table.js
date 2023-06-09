@@ -3,32 +3,13 @@ import { SearchOutlined } from "@ant-design/icons";
 import { Button, Input, Space, Table, Image, message, Modal } from "antd";
 import React, { useRef, useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import Show_time_room from "./show-time_Room";
 
 
 
 
-
-const Table_room = (props) => {
-    const { rooms, load, setLoad,setStatus,setName, setEdit,  setId,setCategory } = props;
-    const [isModalOpen1 ,setIsModalOpen1] =useState(false)
-    const  [room,setRoom] = useState({})
-
-    const showModal1 = () => {
-        setIsModalOpen1(true);    
-      };      
-    const handleOk1 = async() => { 
-        setIsModalOpen1(false);     
-        setEdit(false)    
-        setLoad(!load) 
-      };
-    const handleCancel1 = () => {
-        setIsModalOpen1(false); 
-        setEdit(false)    
-        setLoad(!load)       
-      };
-
+const Table_priceTicket = (props) => {
+    const { priceTicket,setStatus,setName, setEdit,  setId,setPriceTime12,setPriceTime12_17,setPriceTime17_23,setPriceTime23 } = props;
+   
     const [searchText, setSearchText] = useState("");
     const [searchedColumn, setSearchedColumn] = useState("");
     const searchInput = useRef(null);
@@ -139,7 +120,7 @@ const Table_room = (props) => {
     const columns = [
     
         {
-          title: "Tên phòng chiếu",
+          title: "Tên vé",
           dataIndex: "name",
           key:"name",  
           width: "20%",
@@ -160,13 +141,10 @@ const Table_room = (props) => {
           ),
         },
         {
-          title: "Loại màn hình chiếu :",
-          dataIndex: "category",
-          key: "category",
-          width: "20%",
-         
-         
-        
+          title: "Giá tiền: Trước 12h",
+        //   dataIndex: "category",
+        //   key: "category",
+          width: "15%",
         render: (_,record)=>(
             <div
               style={{
@@ -177,55 +155,76 @@ const Table_room = (props) => {
               }}
             >
               {" "}
-              {record.category}{" "}
+              {record?.price_time[0].price/1000}.000 VND{" "}
             </div>
         )
     },
     {
-        title: "Trạng thái phòng :",
-        dataIndex: "end_time",
-        key: "end_time",
-        width: "20%",
-       
-      
-      
+        title: "Giá tiền: 12h - 17h",
+      //   dataIndex: "category",
+      //   key: "category",
+        width: "15%",
       render: (_,record)=>(
-          <>
-          {record.status ? (<>
-          <Button type="dashed"  >Hoạt động</Button>
-          </>):
-
-          (<>
-            <Button type="primary" danger > Không hoạt động</Button> 
-          </>)
-
-          }
-              
-          <p></p>
-          </>
+          <div
+            style={{
+              textAlign: "left",
+              fontSize: "20",
+              fontWeight: 550,
+              color: "#222",
+            }}
+          >
+            {" "}
+            {record?.price_time[1].price/1000}.000 VND{" "}
+          </div>
       )
-  },
+  },    {
+    title: "Giá tiền: 17h - 23h",
+  //   dataIndex: "category",
+  //   key: "category",
+    width: "15%",
+   render: (_,record)=>(
+      <div
+        style={{
+          textAlign: "left",
+          fontSize: "20",
+          fontWeight: 550,
+          color: "#222",
+        }}
+      >
+        {" "}
+        {record?.price_time[2].price/1000}.000 VND{" "}
+      </div>
+  )
+},
+{
+    title: "Giá tiền: Sau 23h",
+  //   dataIndex: "category",
+  //   key: "category",
+    width: "15%",
+  render: (_,record)=>(
+      <div
+        style={{
+          textAlign: "left",
+          fontSize: "20",
+          fontWeight: 550,
+          color: "#222",
+        }}
+      >
+        {" "}
+        {record?.price_time[3].price/1000}.000 VND{" "}
+      </div>
+  )
+},
     
+
         {
           title: "Hành động",
           key: "action",
-          width: "20%",
+          width: "10%",
           render: (_, record) => (
             <Space size="middle">
+             
               
-              <Button
-                type="primary"
-               
-                className="navbar-register"
-                onClick={(e)=>{
-                    e.preventDefault();
-                    setRoom(record)
-                    showModal1()
-                     }} >
-              Lịch chiếu  
-               </Button>
-    
-
                  <Button
                 type="primary"
                 danger
@@ -241,15 +240,22 @@ const Table_room = (props) => {
                 className="navbar-register"
                 onClick={(e)=>{
                     e.preventDefault();
-                    setCategory(record.category)
-                    setName(record.name)
-                    setStatus(record.status)
                     setId(record._id)
                     setEdit(true)
-                     }} >
-              Sửa   </Button>
-
-             
+                    setPriceTime12(record?.price_time[0].price)
+                    setPriceTime12_17(record?.price_time[1].price)
+                    setPriceTime17_23(record?.price_time[2].price)
+                    setPriceTime23(record?.price_time[3].price)
+                    setName(record.name)
+                    setStatus(record.status)
+                  
+                     }} 
+                     
+                     >
+              Sửa  
+              
+               </Button>
+    
                
             </Space>
           ),
@@ -266,13 +272,10 @@ const Table_room = (props) => {
         rowKey={(record) => record._id}
         columns={columns}
       
-        dataSource={rooms}
+        dataSource={priceTicket}
       />
-     <Modal width={1000} title={`Lịch chiếu phòng ${room.name} `} open={isModalOpen1} onOk={handleOk1} onCancel={handleCancel1}>
-       <Show_time_room room={room}></Show_time_room>
-
-     </Modal>
+     
     </> );
 }
  
-export default Table_room;
+export default Table_priceTicket;

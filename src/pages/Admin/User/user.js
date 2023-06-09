@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import Content_pageMoive from "../../components/Admin/moivePage/contentPage";
+import Content_pageMoive from "../../../components/Admin/moivePage/contentPage";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import UserPage from "../../components/Admin/user/user-page";
+import UserPage from "../../../components/Admin/user/user-page";
 
 
 const User_Show = () => {

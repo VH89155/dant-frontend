@@ -9,7 +9,7 @@ const NewsHome = (props) => {
         <img src="https://chieuphimquocgia.com.vn/Themes/RapChieuPhim/Content/content.v2/images/img40.png"></img>
       </div>
 
-      <div className="row">
+      <div className="row" >
         {
           data?.map((item,index)=>{
             const time =new Date(item.time)

@@ -1,7 +1,7 @@
 import { useEffect,useState } from "react";
 import Sidebar from "../../../components/Web/custom_account/sidebar";
 import { useSelector } from "react-redux";
-import { Spin } from 'antd';
+import { Button, Modal, Spin } from 'antd';
 import EditAccContent from "../../../components/Web/custom_account/edti-acc";
 import { useNavigate } from "react-router-dom";
 
@@ -29,9 +29,11 @@ const Account_edit = () => {
 
             </Sidebar>
             <EditAccContent setLoad={setLoad} load={load} auth ={auth}>
-
+        
             </EditAccContent>
+         
             </Spin>
+          
         </div>
           
         

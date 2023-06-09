@@ -109,10 +109,10 @@ const Ticket_User = (props) => {
           key: 'ticketID',
           width: '20%',
           
-          ...getColumnSearchProps('ticketID'),
+          ...getColumnSearchProps('_id'),
           render: (_, record) => (           
             <div style={{textAlign:"left", fontSize:"20", fontWeight:550,color:"#222"}}
-                 > {record.tiketID} </div>
+                 > {record._id} </div>
           ),
         },
         {
@@ -123,7 +123,7 @@ const Ticket_User = (props) => {
             
             // ...getColumnSearchProps('number'),
             render: (_, record) => (
-                <div>{record.showTime.moive.name} </div>
+                <div>{record.ticket.showTime.moive.name} </div>
                 ),
           },
 
@@ -136,10 +136,10 @@ const Ticket_User = (props) => {
             
             ...getColumnSearchProps('number'),
             render: (_, record) => (
-                <div>{record.number?.map((item,index)=>{
-                    if(index === record.number.length -1)
+                <div>{record.ticket.number?.map((item,index)=>{
+                    if(index === record.ticket.number.length -1)
                     return `${item}. `
-                    else if(index !== record.number.length -1)
+                    else if(index !== record.ticket.number.length -1)
                     return `${item}, `
                 } )} </div>
                 ),
@@ -194,7 +194,7 @@ const Ticket_User = (props) => {
      <h3 style={{textAlign:"center", margin:20}}>Vé đã mua </h3>
          <Table
 
- rowKey={record => record.tiketID}
+ rowKey={record => record._id}
   columns={columns}
   expandable={{
    expandedRowRender: (record) => (    
@@ -206,15 +206,15 @@ const Ticket_User = (props) => {
          fontWeight:500
        }}
      >
-      Lịch chiếu:  {`${new Date(record.showTime.time).getDate()}-${new Date(record.showTime.time).getMonth()+1}-${new Date(record.showTime.time).getFullYear()} ` }
+      Lịch chiếu:  {`${(new Date(record?.ticket?.showTime?.time)).getDate()}-${(new Date(record.ticket.showTime.time)).getMonth()+1}-${(new Date(record.ticket.showTime.time)).getFullYear()} ` }
        <span  style={{
          marginLeft: 50,
         
-       }}>Thời gian:  {`${new Date(record.showTime.time).getHours()}:${new Date(record.showTime.time).getMinutes()} ` }</span>
+       }}>Thời gian:  {`${(new Date(record.ticket.showTime.time)).getHours()}:${(new Date(record.ticket.showTime.time)).getMinutes()} ` }</span>
      <span  style={{
          marginLeft: 50,
         
-       }}>Phòng chiếu:  {record.showTime.room.name}</span>
+       }}>Phòng chiếu:  {record.ticket.showTime.room.name}</span>
          <span  style={{
          marginLeft: 50,
         

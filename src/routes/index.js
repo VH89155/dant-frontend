@@ -24,7 +24,7 @@ import News_detail from '../pages/Web/new-detail';
 import DefaultCustom_Acc from '../pages/Web/custom_account/custom_account';
 import Account_edit from '../pages/Web/custom_account/account_edit';
 import Ticket_Acc from '../pages/Web/custom_account/ticket-acc';
-
+import TransactionHistory from '../pages/Web/custom_account/transaction-history';
 
 
 // Pages Admin
@@ -34,9 +34,9 @@ import HomeAdmin from '../pages/Admin/statistical/home';
 import AddMoive from '../pages/Admin/Moive/addMoive';
 import AddShowTime from '../pages/Admin/ShowTime/add-show-time';
 import ShowTimePage from '../pages/Admin/ShowTime/showtime';
-import TrashMoive from '../pages/Admin/trash-moive';
-import User_Show from '../pages/Admin/user';
-import New_Manage from '../pages/Admin/new-page';
+import TrashMoive from '../pages/Admin/Moive/trash-moive';
+import User_Show from '../pages/Admin/User/user';
+import New_Manage from '../pages/Admin/PageManage/new-page';
 import Ticket_page from '../pages/Admin/ticket-page';
 import Discount_page from '../pages/Admin/discount-page';
 import ShowTimeSuccess from '../pages/Admin/ShowTime/showtime-success';
@@ -44,9 +44,10 @@ import AddCombo from '../pages/Admin/Combo/add-combo';
 import Room_page from '../pages/Admin/room-page';
 import HomPage_statistical from '../pages/Admin/statistical/homePage';
 import Statistical from '../pages/Admin/statistical/statistical';
-
-
-
+import PriceTicket_page from '../pages/Admin/price-ticket';
+import FormAddUser from '../pages/Admin/User/addUser';
+import TrashUser from '../pages/Admin/User/trash-user';
+import Banner from '../pages/Admin/PageManage/bannerPage';
 
 const publicRoutes =[
     {path: '/', component: Home, layout: LayoutDefault},
@@ -60,6 +61,7 @@ const publicRoutes =[
     {path: '/default/custom-account', component: DefaultCustom_Acc, layout: LayoutDefault},
     {path: '/default/custom-account/edit', component: Account_edit, layout: LayoutDefault},
     {path: '/default/ticket', component: Ticket_Acc, layout: LayoutDefault},
+    {path: '/default/transaction-history', component: TransactionHistory, layout: LayoutDefault},
     {path: '/news/:id', component: News_detail, layout: LayoutDefault},
 
 
@@ -92,6 +94,10 @@ const publicRoutes =[
     {path: '/admin/room', component:Room_page, layout: DashBoardAdmin},
     {path: '/admin/today', component:HomPage_statistical, layout: DashBoardAdmin},
     {path: '/admin/statistical', component:Statistical, layout: DashBoardAdmin},
+    {path: '/admin/price-ticket', component:PriceTicket_page, layout: DashBoardAdmin},
+    {path: '/admin/user/add', component:FormAddUser, layout: DashBoardAdmin},
+    {path: '/admin/user/trash', component:TrashUser, layout: DashBoardAdmin},
+    {path: '/admin/banner-page', component:Banner, layout: DashBoardAdmin},
 
 
 ];  

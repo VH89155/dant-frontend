@@ -1,13 +1,22 @@
 import { Avatar } from "antd";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import axios from "axios";
 const Nav = (props) => {
     const [menu,isMenu] = useState(false);
     const {auth} = props
-    
+    const [banner,setBanner] = useState({})
     const [width, setWidth] = useState(window.innerWidth);
     useEffect(() => {
+      const fetchData = async ()=>{
+        await axios.get('/api/banner').then(res=>{
+            
+                console.log(res.data.banner[0])
+                setBanner(res.data.banner[0])
+           
+        })
+    }
+    fetchData()
       const handleWindowResize = () => setWidth(window.innerWidth);
       window.addEventListener("resize", handleWindowResize);
       return () => window.removeEventListener("resize", handleWindowResize);
@@ -42,8 +51,8 @@ const Nav = (props) => {
          
        
       </div>
-      <div className="hotline">Hotline: <span>0368474925</span></div>
-     <img className="banner-qc" src="https://advserver.cgv.vn/www/images/4071dd3a3df0579d220dad28e9c08679.jpg"></img>
+      <div className="hotline">Hotline: <span>0998989999</span></div>
+     <img className="banner-qc" src={banner.qcTop}></img>
    
     </div>
         <div class="container">

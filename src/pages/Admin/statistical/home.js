@@ -1,21 +1,53 @@
 import { useState,useEffect } from "react";
 import axios from "axios";
+import { InputNumber } from 'antd';
+import LineChart from "../../../components/Admin/Chart/LineChart";
+
 
 const HomeAdmin = () => {
     const [dataToday,setDataToday] = useState({})
-
+    const [fullMonth,setfullMonth] = useState([])
+    const [month,setMonth] =useState(6)
     useEffect(()=>{
         const fecth = async()=>{
             await axios.get("/api/statistical").then((res)=>{
               setDataToday(res.data)
             })
+            await axios.get(`/api/statistical//total-month/${month}`).then((res)=>{
+                setfullMonth(res.data)
+              })
           
         }
         fecth()
     
-    },[])
+    },[month])
+    const onChange = (value) => {
+        console.log('changed', value);
+        setMonth(value)
+      };
+    const DataMonth ={
+        labels:fullMonth.map(item=> item.day),
+        datasets: [
+            
+                {
+                    data: fullMonth.map(item=>item.total.TotalVe),
+                    label:"Tổng tiền vé thu được",
+                    borderColor: "#3cba9f",
+                    fill:false,
+
+                },
+                {
+                    data: fullMonth.map(item=>item.total.Total),
+                    label:"Tổng tiền vé + combo thu được",
+                    borderColor: "#8e5ea2",
+                    fill:false,
+
+                }
+            
+        ]
+    }
     return ( <>
-    <h3 className="" style={{textAlign:"center" ,color:"#d11414"}}>THU NHẬP HÔM NAY</h3>
+    <h3 className="" style={{textAlign:"center" ,color:"#d11414"}}>DOANH THU HÔM NAY</h3>
     <div style={{display:"flex", justifyContent:"space-between" ,padding:"50px 200px"}}>
 
         <div style={{width:"30%",border:"1px solid #cccccc",borderRadius:"10px", padding:"20px", textAlign:"center",boxShadow:"0 3px 9px rgba(0,0,0,.5)", minHeight:"100px"}}> 
@@ -40,6 +72,9 @@ const HomeAdmin = () => {
         </div>
 
     </div>
+    <h3 className="" style={{textAlign:"center" ,color:"#d11414"}}>DOANH THU THÁNG {month} </h3>
+    <InputNumber min={1} max={12} defaultValue={month} onChange={onChange} />
+    <LineChart chartData={DataMonth}></LineChart>
     </> );
 }
  

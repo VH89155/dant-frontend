@@ -32,8 +32,9 @@ const Content_Ticket = (props) => {
             message.success("Đã gửi yêu cầu hủy vé của bạn")
             setLoad(!load)
           }
-          else if(res.data.success) {
-            message.error("Gửi yêu cầu không thành công")
+          else if(!res.data.success) {
+            console.log(res.data.message)
+            message.error(res.data.message)
           }
       }).catch((err)=>{
         message.error("Gửi yêu cầu không thành công")

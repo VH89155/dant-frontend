@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 
 import axios from "axios";
-import Content_New from "../../components/Admin/Page-manege/content-new";
+import Content_New from "../../../components/Admin/Page-manege/content-new";
 
 
 const New_Manage = () => {
