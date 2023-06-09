@@ -202,7 +202,7 @@ const ShowTimeSuccess = () => {
 
     useEffect(()=>{
         const fetchData = async()=>{
-            await axios.get("/api/show-time/show-time/success").then((res)=>{
+            await axios.get("https://project-datn.herokuapp.com/api/show-time/show-time/success").then((res)=>{
                 setShowTime(res.data)
                 console.log(res.data)
             })

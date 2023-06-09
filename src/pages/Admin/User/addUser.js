@@ -39,7 +39,7 @@ const FormAddUser = (props) => {
       // window.alert("Form submitted");
       console.log(values);
 
-      await axios.post("http://localhost:8080/api/auth/signup",values).then(res=>res.data).then(res=>{
+      await axios.post("https://project-datn.herokuapp.com/api/auth/signup",values).then(res=>res.data).then(res=>{
         if(res.success === true){
             message.success('Thêm tài khoản thành công');
          

@@ -19,7 +19,7 @@ const PriceTicket_page = () => {
  
     useEffect(()=>{
         const fetch = async() =>{
-            axios.get("/api/price-ticket").then((res)=>res.data)
+            axios.get("https://project-datn.herokuapp.com/api/price-ticket").then((res)=>res.data)
             .then((data)=>{
                 console.log(data.priceTicket)
                 setPriceTicket(data.priceTicket)

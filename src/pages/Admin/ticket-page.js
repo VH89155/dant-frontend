@@ -33,7 +33,7 @@ const Ticket_page = () => {
     }
     useEffect(()=>{
         const fetchData = async()=>{
-            await axios.get(`/api/ticket/ticket-all/${value}`).then((res)=>{
+            await axios.get(`https://project-datn.herokuapp.com/api/ticket/ticket-all/${value}`).then((res)=>{
                setBills(res.data.bills) 
                console.log("bills asd", res.data.bills)
             })

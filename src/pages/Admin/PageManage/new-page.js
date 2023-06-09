@@ -14,7 +14,7 @@ const New_Manage = () => {
  
   useEffect(() => {
     const fechData = async () => {
-      await axios.get("/api/new").then((res) => {
+      await axios.get("https://project-datn.herokuapp.com/api/new").then((res) => {
         console.log(res.data);
         setData(res.data.new);
       });

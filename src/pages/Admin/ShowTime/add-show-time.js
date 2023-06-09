@@ -25,7 +25,7 @@ const AddShowTime = () => {
     onSubmit: async (values) => {
       setSpin(true)
       console.log(values);
-      await axios.post("http://localhost:8080/api/show-time", values)
+      await axios.post("https://project-datn.herokuapp.com/api/show-time", values)
       .then((res)=>{
         console.log(res.data)
         if(res.data.statusError==="")message.success("Thêm thành công")
@@ -50,7 +50,7 @@ const AddShowTime = () => {
   const [isRoom,setRoom] =useState([])
   useEffect(() => {
     const fetchData = async () => {
-      const data = await axios.get("/api/room").then((res) => res.data.room);
+      const data = await axios.get("https://project-datn.herokuapp.com/api/room").then((res) => res.data.room);
       setRoom(data.map((item) => {
       return {
         label: item.name,
@@ -107,12 +107,12 @@ const onChange = (e) => {
 
   useEffect(()=>{
     if(checkMoives !==""){
-      axios.post(`/api/moive/moive-time?moives=${checkMoives}&time=${time}`).then((res)=>{      
+      axios.post(`https://project-datn.herokuapp.com/api/moive/moive-time?moives=${checkMoives}&time=${time}`).then((res)=>{      
           setShowTimes(res.data)
       } )
      }
      if(checkMoives ===""){
-      axios.post(`/api/moive/moive-time?moives=&time=${time}`).then((res)=>{      
+      axios.post(`https://project-datn.herokuapp.com/api/moive/moive-time?moives=&time=${time}`).then((res)=>{      
           setShowTimes(res.data)
       } )
      }

@@ -16,7 +16,7 @@ const Room_page = () => {
  
     useEffect(()=>{
         const fetch = async() =>{
-            axios.get("/api/room").then((res)=>res.data)
+            axios.get("https://project-datn.herokuapp.com/api/room").then((res)=>res.data)
             .then((data)=>{
                 console.log(data.room)
            setRooms(data.room)

@@ -10,7 +10,7 @@ const Discount_page = () => {
 
     useEffect(()=>{
         const fetch = async() =>{
-            axios.get("/api/discount").then((res)=>res.data)
+            axios.get("https://project-datn.herokuapp.com/api/discount").then((res)=>res.data)
             .then((data)=>{
                 console.log(data.discounts)
            setDiscounts(data.discounts)

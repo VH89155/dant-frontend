@@ -11,10 +11,10 @@ const HomPage_statistical = () => {
 
     useEffect(()=>{
         const fecth = async()=>{
-            await axios.get("/api/statistical/moive/totalAll").then((res)=>{
+            await axios.get("https://project-datn.herokuapp.com/api/statistical/moive/totalAll").then((res)=>{
                setmoives(res.data)
             })
-            await axios.get("/api/statistical/fullMonth").then((res)=>{
+            await axios.get("https://project-datn.herokuapp.com/api/statistical/fullMonth").then((res)=>{
                 setfullMonth(res.data)
             }
             )

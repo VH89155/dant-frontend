@@ -97,7 +97,7 @@ const AddMoive = () => {
      
       // values.trailer= await cloudinaryUpload(uploadData1);
 
-      await axios.post("http://localhost:8080/api/moive/add-moive",values)
+      await axios.post("https://project-datn.herokuapp.com/api/moive/add-moive",values)
       .then(res=>{
         console.log(res.data)
         message.success("Thêm thành công !")

@@ -11,7 +11,7 @@ const TrashUser = () => {
    
     useEffect(()=>{
         const fetch = async() =>{
-         axios.get("/api/auth/trash/trash-user").then((res)=>res.data)
+         axios.get("https://project-datn.herokuapp.com/api/auth/trash/trash-user").then((res)=>res.data)
          .then((res)=>{
           console.log(res)
           setUsers(res);

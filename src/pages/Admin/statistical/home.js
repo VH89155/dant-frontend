@@ -10,10 +10,10 @@ const HomeAdmin = () => {
     const [month,setMonth] =useState(6)
     useEffect(()=>{
         const fecth = async()=>{
-            await axios.get("/api/statistical").then((res)=>{
+            await axios.get("https://project-datn.herokuapp.com/api/statistical").then((res)=>{
               setDataToday(res.data)
             })
-            await axios.get(`/api/statistical//total-month/${month}`).then((res)=>{
+            await axios.get(`https://project-datn.herokuapp.com/api/statistical//total-month/${month}`).then((res)=>{
                 setfullMonth(res.data)
               })
           
