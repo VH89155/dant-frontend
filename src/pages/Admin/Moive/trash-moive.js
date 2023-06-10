@@ -10,7 +10,7 @@ const TrashMoive = () => {
    
     useEffect(()=>{
         const fetch = async() =>{
-         axios.get("/api/moive/trash/trash-moive").then((res)=>res.data)
+         axios.get("https://project-datn.herokuapp.com/api/moive/trash/trash-moive").then((res)=>res.data)
          .then((res)=>{
           
           setMoives(res);

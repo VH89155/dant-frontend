@@ -1,5 +1,5 @@
 {
-  "homepage": "https://vh89155.github.io/dant-frontend",
+   "homepage": "https://vh89155.github.io/dant-frontend",
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
@@ -82,5 +82,5 @@
     "babel-plugin-module-resolver": "^4.1.0",
     "eslint-plugin-react-hooks": "^4.6.0"
   },
-  "proxy": "https://project-datn.herokuapp.com"
+  "proxy": "https://project-datn.herokuapp.com/"
 }

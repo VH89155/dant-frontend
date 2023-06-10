@@ -12,7 +12,7 @@ const User_Show = () => {
     
     useEffect(()=>{
         const fetch = async() =>{
-            axios.get("/api/user").then((res)=>res.data)
+            axios.get("https://project-datn.herokuapp.com/api/user").then((res)=>res.data)
             .then((res)=>{
            setUsers(res)
            } )

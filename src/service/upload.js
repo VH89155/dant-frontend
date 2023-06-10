@@ -1,5 +1,5 @@
 import axios from 'axios'
-const API_URL = "http://localhost:8080"
+const API_URL = "https://project-datn.herokuapp.com"
 
 const cloudinaryUpload = async (fileToUpload) => {
     console.log("fileUploasd",fileToUpload)
