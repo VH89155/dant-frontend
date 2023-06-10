@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/dant-frontend/static/css/main.0aee4d80.css",
-    "main.js": "/dant-frontend/static/js/main.3db9f6ef.js",
+    "main.js": "/dant-frontend/static/js/main.7c3c8a45.js",
     "index.html": "/dant-frontend/index.html",
     "main.0aee4d80.css.map": "/dant-frontend/static/css/main.0aee4d80.css.map",
-    "main.3db9f6ef.js.map": "/dant-frontend/static/js/main.3db9f6ef.js.map"
+    "main.7c3c8a45.js.map": "/dant-frontend/static/js/main.7c3c8a45.js.map"
   },
   "entrypoints": [
     "static/css/main.0aee4d80.css",
-    "static/js/main.3db9f6ef.js"
+    "static/js/main.7c3c8a45.js"
   ]
 }
